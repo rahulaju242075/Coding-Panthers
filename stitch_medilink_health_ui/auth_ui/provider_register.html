@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Registration | MediLink Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: "#003d9b", secondary: "#006b5f" },
+                    fontFamily: { headline: ["Manrope"], body: ["Inter"] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(24px); }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen font-body relative overflow-hidden py-12">
+    <!-- Background accents -->
+    <div class="absolute top-0 right-0 w-full h-96 bg-secondary/10 rounded-b-[4rem] -z-10"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -z-10"></div>
+
+    <div class="glass-card p-10 rounded-3xl shadow-2xl w-full max-w-lg mx-4">
+        <a href="../landing_page/landing_page.html" class="flex items-center gap-2 mb-6 text-secondary hover:underline">
+            <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Home
+        </a>
+        <h2 class="text-3xl font-headline font-extrabold text-gray-900 mb-2">Provider Registration</h2>
+        <p class="text-gray-500 mb-8 text-sm">Join the clinical network as a Doctor or Pharmacy.</p>
+
+        <!-- Tabs -->
+        <div class="flex p-1 bg-gray-100 rounded-xl mb-8">
+            <button id="tabDoctor" onclick="switchTab('doctor')" class="flex-1 py-2 text-sm font-bold bg-white shadow rounded-lg text-secondary transition-all">Doctor</button>
+            <button id="tabPharmacy" onclick="switchTab('pharmacy')" class="flex-1 py-2 text-sm font-bold text-gray-500 hover:text-gray-700 rounded-lg transition-all">Pharmacy Store</button>
+        </div>
+
+        <!-- Doctor Form -->
+        <form id="doctorForm" class="space-y-4">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
+                <input type="text" id="docName" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition-all">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Medical Degree</label>
+                    <input type="text" id="docDegree" required placeholder="e.g. MD, DO, MBBS" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Years Experience</label>
+                    <input type="number" id="docExp" required min="0" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none">
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+                <input type="email" id="docEmail" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
+                <input type="password" id="docPassword" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none">
+            </div>
+            <p id="docErrorMsg" class="text-red-500 text-sm hidden"></p>
+            <button type="submit" class="w-full py-4 mt-6 bg-secondary text-white rounded-xl font-bold text-lg shadow-lg hover:opacity-90">
+                Apply as Doctor
+            </button>
+        </form>
+
+        <!-- Pharmacy Form -->
+        <form id="pharmacyForm" class="space-y-4 hidden">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Store / Establishment Name</label>
+                <input type="text" id="pharmName" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Drug License Number</label>
+                <input type="text" id="pharmLicense" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Store Email Address</label>
+                <input type="email" id="pharmEmail" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Account Password</label>
+                <input type="password" id="pharmPassword" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none">
+            </div>
+            <div class="p-4 bg-yellow-50 text-yellow-800 rounded-xl text-sm mt-2 flex items-start gap-2">
+                <span class="material-symbols-outlined text-yellow-600">info</span>
+                <p>Pharmacy accounts require administrative verification of drug licenses before dispensing features are unlocked.</p>
+            </div>
+            <p id="pharmErrorMsg" class="text-red-500 text-sm hidden"></p>
+            <button type="submit" class="w-full py-4 mt-6 bg-primary text-white rounded-xl font-bold text-lg shadow-lg hover:opacity-90">
+                Register Pharmacy Store
+            </button>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-gray-500">
+            Already registered? <a href="login.html" class="text-secondary font-bold hover:underline">Login to Portal</a>
+        </p>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            if (tab === 'doctor') {
+                document.getElementById('doctorForm').classList.remove('hidden');
+                document.getElementById('pharmacyForm').classList.add('hidden');
+                
+                document.getElementById('tabDoctor').classList.add('bg-white', 'shadow', 'text-secondary');
+                document.getElementById('tabDoctor').classList.remove('text-gray-500', 'hover:text-gray-700');
+                
+                document.getElementById('tabPharmacy').classList.remove('bg-white', 'shadow', 'text-primary');
+                document.getElementById('tabPharmacy').classList.add('text-gray-500', 'hover:text-gray-700');
+            } else {
+                document.getElementById('pharmacyForm').classList.remove('hidden');
+                document.getElementById('doctorForm').classList.add('hidden');
+                
+                document.getElementById('tabPharmacy').classList.add('bg-white', 'shadow', 'text-primary');
+                document.getElementById('tabPharmacy').classList.remove('text-gray-500', 'hover:text-gray-700');
+                
+                document.getElementById('tabDoctor').classList.remove('bg-white', 'shadow', 'text-secondary');
+                document.getElementById('tabDoctor').classList.add('text-gray-500', 'hover:text-gray-700');
+            }
+        }
+
+        document.getElementById('doctorForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                full_name: document.getElementById('docName').value,
+                degree: document.getElementById('docDegree').value,
+                experience_years: parseInt(document.getElementById('docExp').value),
+                email: document.getElementById('docEmail').value,
+                password: document.getElementById('docPassword').value
+            };
+            
+            try {
+                const res = await fetch('/api/auth/register/doctor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await res.json();
+                if (!res.ok) {
+                    document.getElementById('docErrorMsg').textContent = data.detail || 'Registration failed';
+                    document.getElementById('docErrorMsg').classList.remove('hidden');
+                } else {
+                    localStorage.setItem('medilink_token', data.access_token);
+                    localStorage.setItem('medilink_role', data.role);
+                    window.location.href = '../doctor_dashboard/doctor_dashboard.html';
+                }
+            } catch (err) {
+                document.getElementById('docErrorMsg').textContent = 'An error occurred connecting to the server.';
+                document.getElementById('docErrorMsg').classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('pharmacyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                store_name: document.getElementById('pharmName').value,
+                drug_license_number: document.getElementById('pharmLicense').value,
+                email: document.getElementById('pharmEmail').value,
+                password: document.getElementById('pharmPassword').value
+            };
+            
+            try {
+                const res = await fetch('/api/auth/register/pharmacy', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await res.json();
+                if (!res.ok) {
+                    document.getElementById('pharmErrorMsg').textContent = data.detail || 'Registration failed';
+                    document.getElementById('pharmErrorMsg').classList.remove('hidden');
+                } else {
+                    localStorage.setItem('medilink_token', data.access_token);
+                    localStorage.setItem('medilink_role', data.role);
+                    window.location.href = '../pharmacy_dashboard/pharmacy_dashboard.html';
+                }
+            } catch (err) {
+                document.getElementById('pharmErrorMsg').textContent = 'An error occurred connecting to the server.';
+                document.getElementById('pharmErrorMsg').classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

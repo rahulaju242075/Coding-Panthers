@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediLink | Secure Digital Health Identity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#0b6f63",
+                      "on-primary-container": "#c4d2ff",
+                      "inverse-primary": "#b2c5ff",
+                      "inverse-surface": "#2d3133",
+                      "on-tertiary-fixed": "#002107",
+                      "surface-tint": "#0c56d0",
+                      "primary-container": "#0052cc",
+                      "primary": "#003d9b",
+                      "outline-variant": "#c3c6d6",
+                      "outline": "#737685",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#dae2ff",
+                      "on-secondary-fixed-variant": "#005047",
+                      "surface-container-low": "#f2f4f6",
+                      "surface-variant": "#e0e3e5",
+                      "on-error": "#ffffff",
+                      "tertiary-container": "#006a26",
+                      "background": "#f7f9fb",
+                      "secondary-fixed": "#9ff2e2",
+                      "secondary-container": "#9cefdf",
+                      "secondary-fixed-dim": "#83d5c6",
+                      "tertiary-fixed-dim": "#53e16f",
+                      "on-surface": "#191c1e",
+                      "surface-container-high": "#e6e8ea",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface": "#f7f9fb",
+                      "primary-fixed-dim": "#b2c5ff",
+                      "on-tertiary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-secondary-fixed": "#00201c",
+                      "tertiary": "#004f1b",
+                      "secondary": "#006b5f",
+                      "on-tertiary-fixed-variant": "#00531c",
+                      "on-background": "#191c1e",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-container": "#62ee7a",
+                      "on-primary-fixed-variant": "#0040a2",
+                      "on-primary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed": "#001848",
+                      "surface-dim": "#d8dadc",
+                      "surface-bright": "#f7f9fb",
+                      "surface-container": "#eceef0",
+                      "tertiary-fixed": "#72fe88",
+                      "on-surface-variant": "#434654"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+        }
+        .vital-bloom-glow {
+            box-shadow: 0 0 40px rgba(12, 86, 208, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar from JSON -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl flex justify-between items-center px-6 py-3 w-full shadow-sm">
+<div class="flex items-center gap-8">
+<a href="../landing_page/landing_page.html" class="text-xl font-extrabold tracking-tight text-blue-700">MediLink</a>
+<div class="hidden md:flex items-center space-x-6">
+<a class="text-blue-700 font-bold border-b-2 border-blue-700 text-sm py-1" href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Home</a>
+<a class="text-slate-500 hover:bg-slate-100 transition-colors px-3 py-1 rounded-lg text-sm" href="#features" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'}); return false;">Features</a>
+<a class="text-slate-500 hover:bg-slate-100 transition-colors px-3 py-1 rounded-lg text-sm" href="#solutions" onclick="document.getElementById('solutions').scrollIntoView({behavior: 'smooth'}); return false;">Solutions</a>
+<a class="text-slate-500 hover:bg-slate-100 transition-colors px-3 py-1 rounded-lg text-sm" href="#about" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'}); return false;">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-slate-200 overflow-hidden">
+<img alt="User healthcare profile" data-alt="Close up portrait of a professional healthcare provider in a clean clinic setting, soft natural window lighting, high-end medical professional aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY7e2Q9ny6D8e_RTrR59xFyuJlJNCfL5_w9prl5ByF5C_srcOFA2sAF4vN9inW9dK6Q-PSktY_34sQtnV-l0B8pLA9WC837WnDtkFSJG46SoLWZuEQL1O6NXpdRL-saoJ0WSIp_oR6DwtL9CSb7Hy0boeh_-AHNQWdeFOHhoDwYlKiDstKruyG1llBddHoHpsD8OQ96r_9d5adKVSDBlbddDhwEWBcQ6I3Rj8IMQgABP5Mu86Q0FBKsAlvVMOcu-n69FeDF195_QY"/>
+</div>
+</div>
+</nav>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative px-6 py-20 md:py-32 overflow-hidden">
+<div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+<div class="z-10">
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl text-on-surface leading-[1.1] mb-6 tracking-tight">
+                        Secure Digital Health <span class="text-primary">Identity</span> for Smarter Healthcare
+                    </h1>
+<p class="text-lg md:text-xl text-on-surface-variant mb-10 max-w-lg leading-relaxed">
+                        Provider-Verified Medical Records, Instant QR Access, and Affordable Medicine Intelligence.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button onclick="window.location.href='../auth_ui/patient_register.html'" class="px-8 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-lg font-semibold text-lg shadow-lg hover:scale-95 transition-transform duration-150">
+                            Register as Patient
+                        </button>
+<button onclick="window.location.href='../auth_ui/provider_register.html'" class="px-8 py-4 bg-surface-container-high text-on-primary-fixed-variant rounded-lg font-semibold text-lg hover:bg-surface-container-highest transition-colors">
+                            Register as Provider
+                        </button>
+</div>
+<div class="mt-8 flex items-center gap-2">
+<a class="text-primary font-semibold hover:underline flex items-center gap-1 cursor-pointer" onclick="window.location.href='../auth_ui/login.html'">
+                            Login to your account <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary/5 rounded-3xl blur-2xl group-hover:bg-primary/10 transition-colors"></div>
+<div class="relative bg-surface-container-lowest rounded-3xl p-4 shadow-xl border border-outline-variant/20 overflow-hidden">
+<img alt="Digital health records visualization" class="rounded-2xl" data-alt="Minimalist high-tech medical tablet displaying organized patient data and vital signs in a soft clinical workspace with blue accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZv0I3marwCUFXQhRId7kcZTvp9pAJBC9Pk-lDbq5utdtr7bnF3D_In8TejW6H1ctqt1KLCvKwjLXDa5ti9243WN7DcdSHgSxVgTnLJlevhCcgi2qjOOEA5m5pCHvplZlOYNjiBRsVlfn3pP871OL7Orqxuzmv2Q0ED8FznWLWCBHENfavv7ppl2S94kMUIaUaV6_m9JFiVd_BfzeLSlLSp7RVo7LoyE6CXzo4j-n1qDssUbE5BrSMol5-PSJUrBKYZkBQCT0VY6Q"/>
+<!-- Floating Glass Metric -->
+<div class="absolute bottom-10 -left-6 bg-white/70 backdrop-blur-xl p-6 rounded-2xl shadow-lg border border-white/50 vital-bloom-glow">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant" data-icon="monitor_heart">monitor_heart</span>
+</div>
+<div>
+<p class="text-xs font-label text-on-surface-variant uppercase tracking-wider">Live Vitals</p>
+<p class="text-xl font-headline font-bold text-primary">72 BPM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="bg-surface-container-low py-16">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="text-center">
+<p class="font-headline font-extrabold text-4xl text-primary mb-1">1.2M+</p>
+<p class="text-sm font-label text-outline uppercase tracking-widest">Verified Patients</p>
+</div>
+<div class="text-center">
+<p class="font-headline font-extrabold text-4xl text-secondary mb-1">5k+</p>
+<p class="text-sm font-label text-outline uppercase tracking-widest">Hospitals Joined</p>
+</div>
+<div class="text-center">
+<p class="font-headline font-extrabold text-4xl text-tertiary-container mb-1">99.9%</p>
+<p class="text-sm font-label text-outline uppercase tracking-widest">Data Uptime</p>
+</div>
+<div class="text-center">
+<p class="font-headline font-extrabold text-4xl text-on-secondary-container mb-1">24/7</p>
+<p class="text-sm font-label text-outline uppercase tracking-widest">Global Support</p>
+</div>
+</div>
+</section>
+<!-- Bento Grid Features -->
+<section id="features" class="py-24 px-6 max-w-7xl mx-auto">
+<div class="mb-16 text-center max-w-2xl mx-auto">
+<span class="text-primary font-bold tracking-widest uppercase text-xs">Our Ecosystem</span>
+<h2 class="font-headline font-extrabold text-4xl mt-4 text-on-surface">Precision Healthcare Infrastructure</h2>
+<p class="text-on-surface-variant mt-4">We've built the foundation for a truly integrated medical experience, where data moves securely between providers and patients.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[700px]">
+<!-- Featured: QR Health Card -->
+<div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-3xl flex flex-col justify-between hover:bg-slate-50 transition-colors border border-outline-variant/10 group">
+<div>
+<div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="qr_code_2">qr_code_2</span>
+</div>
+<h3 class="font-headline font-bold text-2xl mb-3">QR Health Card</h3>
+<p class="text-on-surface-variant max-w-md">Instantly share your medical history with any licensed provider using a unique, encrypted QR code. No more manual form filling.</p>
+</div>
+<div class="mt-8 overflow-hidden rounded-xl h-48">
+<img alt="QR Code medical scan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Elegant close up of a digital health passport on a modern smartphone screen held by a patient in a bright medical lobby" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgn59aaJSm_EJPHMlAl2K-CsbzamsE9fx-G7ZWZoAy6WPwePZxv6yiKC06QJF7ue1KVXoufpEYjNc9CTMZSGkXNAC022qniFVDctbxQ4_R7FzLCM0WDolYPk7LhLy7rgZ8YjoisBrxXfIMqo8SxPQZQ4zxdqjjysBOz5YTzyVfgn2MTq0Kq0lB6ZNVK03l9shvh3VyHy6CRDI72Wq0u3rnXzUvp6bCekp_uJeh7R8xgnzurGdt1BRuSxqvcelrZvD5OxXXJsobEDo"/>
+</div>
+</div>
+<!-- Secure Consent -->
+<div class="bg-tertiary-fixed p-8 rounded-3xl flex flex-col justify-between hover:opacity-90 transition-opacity">
+<div>
+<span class="material-symbols-outlined text-tertiary text-4xl mb-4" data-icon="verified_user">verified_user</span>
+<h3 class="font-headline font-bold text-xl mb-3">Secure Consent-Based Sharing</h3>
+<p class="text-on-tertiary-fixed-variant text-sm leading-relaxed">You own your data. Grant and revoke access to your medical records in real-time with atomic consent controls.</p>
+</div>
+<div class="mt-6 flex items-center gap-2 text-tertiary font-bold cursor-pointer" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'});">
+                        Learn about security <span class="material-symbols-outlined text-sm">chevron_right</span>
+</div>
+</div>
+<!-- Pharmacy Finder -->
+<div class="bg-secondary-container p-8 rounded-3xl flex flex-col justify-between hover:opacity-90 transition-opacity">
+<div>
+<span class="material-symbols-outlined text-on-secondary-container text-4xl mb-4" data-icon="local_pharmacy">local_pharmacy</span>
+<h3 class="font-headline font-bold text-xl mb-3">Nearby Pharmacy Finder</h3>
+<p class="text-on-secondary-container text-sm leading-relaxed">Locate verified pharmacies near you and check medication availability before you travel.</p>
+</div>
+<div class="h-20 w-full bg-white/20 rounded-xl mt-4 border border-white/30 overflow-hidden">
+<img alt="Map view" class="w-full h-full object-cover grayscale opacity-50" data-alt="Abstract minimalist map view of an urban area with soft blue and grey tones and circular markers for locations" data-location="New York" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmSTm5fAXzDaxRJsI-2M_SWyxHqejvle_AOIBuqSny87sF2sUUSdhU0kbEghnlxE3-7ZR1kjmVexw8F2o5tFQ_TSs_tU3ekf_FYJvN3ENDpRUr_QCMWM89Nt9Chs1xXFiJGaJwEAC0o2LwiAmB4hvC3awEoc26sNv3UJEQoJV7FeIFKc-W6pVb4D71jV8yuU0Qk-8IgZTEeB3YXF76SPgA1zvy60WYb67_xzTNCzCQXD3yGH7IxM9fb4sJQgGexCRjlsJ7yobIxLw"/>
+</div>
+</div>
+<!-- Telemedicine & Affordable Meds -->
+<div class="md:col-span-2 bg-surface-container-high p-8 rounded-3xl grid md:grid-cols-2 gap-8 border border-outline-variant/10">
+<div class="flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="videocam">videocam</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-2">Telemedicine Support</h3>
+<p class="text-on-surface-variant text-sm">Consult with world-class specialists from the comfort of your home with integrated health record access.</p>
+</div>
+<button onclick="window.location.href='../telemedicine_consultation/telemedicine_consultation.html'" class="mt-6 text-primary font-bold flex items-center gap-1 text-sm">
+                            View Specialist Network <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+<div class="flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="savings">savings</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-2">Affordable Medicine Intelligence</h3>
+<p class="text-on-surface-variant text-sm">Compare prices across manufacturers and find the most cost-effective verified generics for your prescription.</p>
+</div>
+<button onclick="window.location.href='../medicine_intelligence/medicine_intelligence.html'" class="mt-6 text-secondary font-bold flex items-center gap-1 text-sm">
+                            Price Comparison Tool <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section id="about" class="py-24 bg-white overflow-hidden">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid md:grid-cols-2 gap-16 items-center">
+<div>
+<span class="text-secondary font-bold tracking-widest uppercase text-xs">Patient Stories</span>
+<h2 class="font-headline font-extrabold text-4xl mt-4 text-on-surface mb-8">Trust is the foundation of our care model.</h2>
+<div class="relative">
+<span class="text-9xl font-serif absolute -top-12 -left-8 text-primary/5 select-none">“</span>
+<blockquote class="relative z-10">
+<p class="text-2xl font-medium text-on-surface leading-snug italic mb-8">
+                                    "MediLink saved my life during an emergency abroad. The hospital could access my allergies and history instantly via my QR card. It's the healthcare utility I didn't know I needed."
+                                </p>
+<div class="flex items-center gap-4">
+<div class="h-14 w-14 rounded-full bg-slate-100 border-2 border-primary-fixed overflow-hidden">
+<img alt="Testimonial User" data-alt="Portrait of a healthy man in his 40s with a warm and confident expression, soft outdoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9M2MzdCDLivB-fR-9S7PlXPqwvKxjeXGTM09Ip_jo1UbXkpq5tbmopUTIeOXqTr2FbMW5VV6sxfNl9PMmKn3RdW_19DUwKPbm8t-zSSGipJJ5OB_gipq5IJiwzf7lGJEvc2lLglOVNWiKrqyL51Tk4JmrVsJigWpyZEOiOGS-a5y7FbjpbO4qzgwAl63CkFALXKRTw1iJgQIuGYBpjuyYONGAm_w--LW4LUgvuNnowI0FpIOblDzF92mA7spx16VDFTB3HEUjXf4"/>
+</div>
+<div>
+<p class="font-bold text-on-surface">James Arrington</p>
+<p class="text-sm text-outline">Software Architect &amp; Patient</p>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<div class="relative flex justify-center">
+<div class="w-full max-w-md aspect-square bg-primary-fixed/30 rounded-full flex items-center justify-center p-8 border border-primary-fixed">
+<div class="w-full h-full bg-surface-container-lowest rounded-3xl shadow-2xl overflow-hidden relative rotate-3 hover:rotate-0 transition-transform duration-500">
+<img alt="Hospital Interior" class="w-full h-full object-cover" data-alt="High-end clean surgical corridor with bright soft overhead lighting and medical staff in professional scrubs walking in the distance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ2xnVffOSZt3t3QqM-ELnbbF0O7qQe70LaM28486KoighH0qKvqAkUL2VhZCIx8GQOMNOkoi77YUzKW_HEnuTngUTlc8oqQhtGvjSqTeLkIhnRu2QKx262RX8uMpun8X9SpgehWmFI9DjI_QuFg43BYAPr1GQBtZbMiWrT4BNASx094BExz1lxxh3aom-wZu57RtJ02rVPm2zkaZ_d5sQvkTVRIJ0kmVQocMeQM0WL6uFyQ1GF-FwE6bxzJiShJup6Q1vvWfUk14"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-6">
+<p class="text-white font-headline font-bold text-lg">Joined 500+ Top Hospitals</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 px-6">
+<div class="max-w-5xl mx-auto bg-primary rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary-container/20 rounded-full blur-3xl -mr-48 -mt-48"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-on-tertiary-container/10 rounded-full blur-3xl -ml-48 -mb-48"></div>
+<div class="relative z-10">
+<h2 class="font-headline font-extrabold text-4xl md:text-5xl text-white mb-6">Ready for a Healthier Identity?</h2>
+<p class="text-on-primary-container text-lg mb-12 max-w-xl mx-auto">Join the clinical sanctuary where your medical data works for you, not against you.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button onclick="window.location.href='../auth_ui/patient_register.html'" class="px-10 py-5 bg-white text-primary rounded-xl font-bold text-lg hover:bg-primary-fixed transition-colors">
+                            Start Free Registration
+                        </button>
+<button onclick="window.location.href='../auth_ui/provider_register.html'" class="px-10 py-5 border-2 border-white/30 text-white rounded-xl font-bold text-lg hover:bg-white/10 transition-colors">
+                            Contact Sales for Providers
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer from JSON -->
+<footer class="w-full py-8 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex flex-col items-center justify-center space-y-4">
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-xs font-medium Inter text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-xs font-medium Inter text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-xs font-medium Inter text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Help Center</a>
+<a class="text-xs font-medium Inter text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Contact Support</a>
+</div>
+<p class="text-xs font-medium Inter text-slate-400">© 2024 MediLink Health. The Clinical Sanctuary.</p>
+</footer>
+
+<!-- Login Modal -->
+<div id="loginModal" class="fixed inset-0 z-[100] bg-on-surface/50 backdrop-blur-sm hidden flex items-center justify-center transition-opacity opacity-0 duration-300">
+    <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-2xl max-w-md w-full mx-4 transform scale-95 transition-transform duration-300" id="loginModalContent">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-headline font-bold text-on-surface">Welcome Back</h2>
+            <button onclick="toggleLoginModal()" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <p class="text-on-surface-variant mb-8">Choose your portal to continue.</p>
+        
+        <div class="space-y-4">
+            <button onclick="window.location.href='../patient_dashboard_prescription_analysis/patient_dashboard_prescription_analysis.html'" class="w-full flex items-center justify-between p-4 bg-primary-fixed/20 hover:bg-primary-fixed/40 border border-primary/10 rounded-2xl transition-colors group">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">person</span>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-on-surface">Patient Portal</p>
+                        <p class="text-xs text-on-surface-variant">View records & prescriptions</p>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </button>
+            
+            <button onclick="window.location.href='../doctor_dashboard/doctor_dashboard.html'" class="w-full flex items-center justify-between p-4 bg-tertiary-fixed/20 hover:bg-tertiary-fixed/40 border border-tertiary/10 rounded-2xl transition-colors group">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">stethoscope</span>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-on-surface">Provider Portal</p>
+                        <p class="text-xs text-on-surface-variant">Manage patients & clinic</p>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-tertiary opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </button>
+            
+            <button onclick="window.location.href='../pharmacy_dashboard/pharmacy_dashboard.html'" class="w-full flex items-center justify-between p-4 bg-secondary-fixed/20 hover:bg-secondary-fixed/40 border border-secondary/10 rounded-2xl transition-colors group">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">local_pharmacy</span>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-on-surface">Pharmacy Portal</p>
+                        <p class="text-xs text-on-surface-variant">Inventory & orders</p>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-secondary opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleLoginModal() {
+        const modal = document.getElementById('loginModal');
+        const modalContent = document.getElementById('loginModalContent');
+        if (modal.classList.contains('hidden')) {
+            modal.classList.remove('hidden');
+            // small delay for transition
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        } else {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    }
+</script>
+</body></html>

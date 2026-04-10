@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Medicine Intelligence | MediLink</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e0e3e5",
+                    "secondary-container": "#9cefdf",
+                    "surface-tint": "#0c56d0",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#c4d2ff",
+                    "on-error": "#ffffff",
+                    "primary-container": "#0052cc",
+                    "on-secondary-container": "#0b6f63",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#62ee7a",
+                    "on-secondary-fixed-variant": "#005047",
+                    "surface-container-low": "#f2f4f6",
+                    "on-tertiary-fixed-variant": "#00531c",
+                    "primary-fixed": "#dae2ff",
+                    "on-primary-fixed": "#001848",
+                    "secondary": "#006b5f",
+                    "primary": "#003d9b",
+                    "on-primary-fixed-variant": "#0040a2",
+                    "on-background": "#191c1e",
+                    "surface-dim": "#d8dadc",
+                    "surface": "#f7f9fb",
+                    "inverse-on-surface": "#eff1f3",
+                    "secondary-fixed-dim": "#83d5c6",
+                    "tertiary-fixed": "#72fe88",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#53e16f",
+                    "on-surface": "#191c1e",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "on-tertiary-fixed": "#002107",
+                    "inverse-primary": "#b2c5ff",
+                    "secondary-fixed": "#9ff2e2",
+                    "on-secondary-fixed": "#00201c",
+                    "on-secondary": "#ffffff",
+                    "outline": "#737685",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#006a26",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#004f1b",
+                    "inverse-surface": "#2d3133",
+                    "on-surface-variant": "#434654",
+                    "surface-container": "#eceef0",
+                    "outline-variant": "#c3c6d6",
+                    "background": "#f7f9fb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold tracking-tight text-blue-700 dark:text-blue-400">MediLink</span>
+<div class="hidden md:flex gap-6">
+<a class="text-slate-500 hover:bg-slate-100 transition-colors px-3 py-1 rounded-lg" href="#">Home</a>
+<a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 px-3 py-1" href="#">Medicine Intelligence</a>
+<a class="text-slate-500 hover:bg-slate-100 transition-colors px-3 py-1 rounded-lg" href="#">Directory</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User healthcare profile" data-alt="Close up portrait of a professional healthcare provider wearing a white lab coat with a warm approachable smile in a clinic setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSUcikxAAiQdci69fsdvhVqQyKYOIXK8QOYo6V6d1C7x3Gspz88vtLwgoMOMf771N025KmjnGXkjyTuzjmpvg68hYGBIMJAKcthlZWUfp75ChW-s49vyizyGU-XtWCnAghhxx0KNzffYtzqNR0LK3wXfJ7FMSSL20mLzJhcLGNkVirq9xxneX72e61k6e5vumBMmVf0P_cjHl9RAFwtLAynIGI5RonaLJBqhqtF3_6ucB4pfIX4BE_RLNn0Ctxx7dUMPiWJN0q6g4"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-16 flex flex-col border-r border-slate-100 bg-slate-50 z-40 hidden md:flex">
+<div class="px-6 py-6 flex items-center gap-3">
+<div class="h-10 w-10 bg-primary-container rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="stethoscope">stethoscope</span>
+</div>
+<div>
+<p class="text-sm font-black Manrope text-blue-800">Dr. Sanctuary</p>
+<p class="text-[10px] text-slate-500 font-medium">General Practitioner</p>
+</div>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-blue-700 bg-blue-50 rounded-r-full font-bold transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+<span class="text-sm">Pharmacy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-sm font-semibold">Medical Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-sm font-semibold">Appointments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="videocam">videocam</span>
+<span class="text-sm font-semibold">Telemedicine</span>
+</a>
+</nav>
+<div class="p-6">
+<button class="w-full py-3 bg-gradient-to-r from-primary to-primary-container text-white rounded-xl font-bold text-sm shadow-md active:scale-95 transition-all">
+                New Consultation
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-64 pt-20 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+<!-- Search & Upload Header -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-10 mt-6">
+<div class="lg:col-span-7 flex flex-col justify-center">
+<h1 class="text-4xl font-extrabold text-primary mb-2 tracking-tight">Medicine Intelligence</h1>
+<p class="text-on-surface-variant text-lg mb-8 max-w-lg">Advanced pharmacopeia analysis and local availability engine for clinical decision support.</p>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</div>
+<input class="w-full pl-12 pr-4 py-5 bg-surface-container-highest border-none rounded-2xl text-lg focus:ring-2 focus:ring-primary-container transition-all shadow-sm" placeholder="Enter Medicine Name (e.g., Lisinopril)" type="text"/>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="glass-panel border-2 border-dashed border-primary-fixed p-8 rounded-3xl flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/90 transition-all group">
+<div class="h-16 w-16 bg-primary-fixed text-primary rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl" data-icon="upload_file">upload_file</span>
+</div>
+<h3 class="text-lg font-bold text-primary">Upload/Scan Prescription</h3>
+<p class="text-sm text-on-surface-variant mt-2 px-8">Drop your prescription here or click to scan using AI vision technology.</p>
+</div>
+</div>
+</section>
+<!-- Structured Analysis - Lisinopril -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+<!-- Medicine Identity Card -->
+<div class="lg:col-span-2 bg-surface-container-lowest p-8 rounded-3xl shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-start mb-8">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Active Molecule</span>
+</div>
+<h2 class="text-3xl font-black text-on-surface">Lisinopril 20mg</h2>
+<p class="text-primary font-semibold">Therapeutic Group: ACE Inhibitor</p>
+</div>
+<div class="flex gap-2">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            FDA Approved
+                        </span>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            EMA Verified
+                        </span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-5 rounded-2xl">
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-1">Active Ingredient</p>
+<p class="text-on-surface font-bold">Lisinopril 20mg</p>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl">
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-1">Purpose</p>
+<p class="text-on-surface font-bold">Hypertension &amp; CHF</p>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl">
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-1">Dosage Form</p>
+<p class="text-on-surface font-bold">Oral Tablet</p>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant/10">
+<h4 class="text-sm font-bold text-outline mb-4 flex items-center gap-2 uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm" data-icon="analytics">analytics</span>
+                        Clinical Insights
+                    </h4>
+<p class="text-on-surface-variant leading-relaxed">
+                        Lisinopril is a potent long-acting angiotensin converting enzyme inhibitor. It is used to treat high blood pressure, congestive heart failure, and to improve survival after a heart attack. Patient monitoring of serum potassium levels is recommended during extended use.
+                    </p>
+</div>
+</div>
+<!-- Vital Bloom Visualization -->
+<div class="bg-primary p-8 rounded-3xl text-white flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary to-primary-container opacity-50"></div>
+<!-- Vital Bloom -->
+<div class="relative z-10 w-48 h-48 rounded-full flex items-center justify-center glass-panel shadow-2xl border border-white/20">
+<div class="text-center">
+<p class="text-[10px] font-bold tracking-[0.2em] uppercase text-on-primary-container">Efficacy Rate</p>
+<p class="text-5xl font-black text-white">94<span class="text-xl">%</span></p>
+<div class="mt-2 h-1 w-12 bg-secondary-fixed-dim mx-auto rounded-full"></div>
+</div>
+</div>
+<div class="relative z-10 mt-6 text-center">
+<p class="font-bold text-lg">Therapeutic Window</p>
+<p class="text-on-primary-container text-sm">Optimal Absorption: 1hr post-dose</p>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Equivalent Alternatives -->
+<div class="space-y-4">
+<h3 class="text-xl font-black text-primary px-2">Equivalent Alternatives</h3>
+<div class="bg-surface-container-low rounded-3xl p-6 space-y-4">
+<!-- Alternative 1 -->
+<div class="bg-white p-5 rounded-2xl flex items-center justify-between shadow-sm hover:translate-x-1 transition-transform">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 bg-secondary-container/30 rounded-xl flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="medication">medication</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Zestoretic</h4>
+<p class="text-xs text-outline">Brand Name • Combination</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-on-surface">$42.50</p>
+<p class="text-[10px] text-error font-bold">+120% vs base</p>
+</div>
+</div>
+<!-- Alternative 2 -->
+<div class="bg-white p-5 rounded-2xl flex items-center justify-between shadow-sm hover:translate-x-1 transition-transform">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 bg-tertiary-fixed/20 rounded-xl flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="pill">pill</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Generic Lisinopril</h4>
+<p class="text-xs text-outline">Generic Equivalent</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-on-surface">$18.90</p>
+<p class="text-[10px] text-secondary font-bold">Insurance Covered</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Nearby Availability -->
+<div class="space-y-4">
+<h3 class="text-xl font-black text-primary px-2">Nearby Availability</h3>
+<div class="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/10 overflow-hidden relative min-h-[300px]">
+<div class="absolute top-0 right-0 p-4 z-10">
+<div class="bg-white p-2 rounded-xl shadow-lg">
+<img class="w-full h-32 rounded-lg object-cover mb-2" data-alt="Digital map showing medical locations in a city with blue markers and clean light minimalist aesthetic" data-location="Boston" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxS0mrsHiKYB8jx4uKcUEoBg11golpESWTRzrs0o4b9IgtUVHiIXBsX8FSwcPvTBrjNQGwqSvFciB-coQiPeGCaLWdpmEourz-9Iz0KzkFHQFC5aKOZRy3l14VM-RpSwUKCJa53M0-9inpwKWeIF2F-USCi-dUggh4lN9oaziASNUWZ4x0AQcB7PBiEk006-el0s-Mz5pDCAS3nQ5ZKhdvxrB3SUgKYstruKjF8vE9SLzmycWRbcrPv105Z4AUdtywOEkLQVcivZ0"/>
+<p class="text-center text-[10px] font-bold text-primary uppercase">Regional Supply Network</p>
+</div>
+</div>
+<div class="space-y-6 relative z-10 w-2/3">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div>
+<p class="font-bold text-on-surface">CuraWell Pharmacy</p>
+<p class="text-xs text-outline">0.4 miles • In Stock</p>
+<span class="inline-block mt-2 px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-black rounded uppercase">Immediate Pickup</span>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span>
+<div>
+<p class="font-bold text-on-surface">Beacon Health Hub</p>
+<p class="text-xs text-outline">1.2 miles • Low Stock</p>
+<span class="inline-block mt-2 px-2 py-0.5 bg-error-container text-on-error-container text-[10px] font-black rounded uppercase">3 Units Left</span>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span>
+<div>
+<p class="font-bold text-on-surface">The Clinical Sanctuary</p>
+<p class="text-xs text-outline">2.8 miles • In Stock</p>
+<span class="inline-block mt-2 px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-black rounded uppercase">Mail Order Only</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 bg-white border-t border-slate-100 flex flex-col items-center justify-center space-y-4 ml-0 md:ml-64">
+<div class="flex gap-8">
+<a class="text-xs font-medium Inter text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-xs font-medium Inter text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-xs font-medium Inter text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Help Center</a>
+<a class="text-xs font-medium Inter text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Contact Support</a>
+</div>
+<p class="text-xs font-medium Inter text-slate-400">© 2024 MediLink Health. The Clinical Sanctuary.</p>
+</footer>
+</body></html>

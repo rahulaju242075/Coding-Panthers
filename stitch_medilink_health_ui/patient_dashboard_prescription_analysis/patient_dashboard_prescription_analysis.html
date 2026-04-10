@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#0b6f63",
+                    "on-primary-container": "#c4d2ff",
+                    "inverse-primary": "#b2c5ff",
+                    "inverse-surface": "#2d3133",
+                    "on-tertiary-fixed": "#002107",
+                    "surface-tint": "#0c56d0",
+                    "primary-container": "#0052cc",
+                    "primary": "#003d9b",
+                    "outline-variant": "#c3c6d6",
+                    "outline": "#737685",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#dae2ff",
+                    "on-secondary-fixed-variant": "#005047",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-variant": "#e0e3e5",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#006a26",
+                    "background": "#f7f9fb",
+                    "secondary-fixed": "#9ff2e2",
+                    "secondary-container": "#9cefdf",
+                    "secondary-fixed-dim": "#83d5c6",
+                    "tertiary-fixed-dim": "#53e16f",
+                    "on-surface": "#191c1e",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface": "#f7f9fb",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-secondary-fixed": "#00201c",
+                    "tertiary": "#004f1b",
+                    "secondary": "#006b5f",
+                    "on-tertiary-fixed-variant": "#00531c",
+                    "on-background": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#62ee7a",
+                    "on-primary-fixed-variant": "#0040a2",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#001848",
+                    "surface-dim": "#d8dadc",
+                    "surface-bright": "#f7f9fb",
+                    "surface-container": "#eceef0",
+                    "tertiary-fixed": "#72fe88",
+                    "on-surface-variant": "#434654"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .custom-shadow {
+            box-shadow: 0 12px 32px rgba(25, 28, 30, 0.06);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl flex justify-between items-center px-6 py-3 shadow-sm">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold tracking-tight text-blue-700 font-headline">MediLink</span>
+<div class="hidden md:flex items-center bg-slate-100 rounded-full px-4 py-1.5 gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64" placeholder="Search records, doctors..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors relative">
+<span class="material-symbols-outlined text-slate-600">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<img alt="User healthcare profile" class="w-9 h-9 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWl0wW9Ctd9krrfdIWPXxEG2nfD-WCQKMJbaIWhWZv_BhcMrwaN-nZkaA4BcQSeS29MMXVuxOXWOcOFJUwGfyeFL3Go-ZmX0p6TAUtepz4M8Gpms9eR6rONVfRWb35H3ZpIRUG-AeBa74pSUJJfb0A6AqNN6hlvP8gMygDi1KxWBgCAN5wYvmHSEQluNcu084QdtJJWoAti0Nef-KGlACirjQpKMtBd1mq9ru32vfZnE_-Rk9tGuvWADmaR-9-PVKEju4I9y0Qp6Q" style=""/>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-16 flex flex-col border-r border-slate-100 bg-slate-50 z-40 hidden md:flex">
+<div class="px-6 py-8">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white font-bold">AJ</div>
+<div>
+<p class="text-sm font-black font-headline text-blue-800">Alex Johnson</p>
+<p class="text-xs text-slate-500">ID: ML-882-901</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-blue-700 bg-blue-50 rounded-r-full font-bold transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-semibold font-label">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-r-full transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-sm font-semibold font-label">Medical Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-r-full transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-sm font-semibold font-label">Appointments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-r-full transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+<span class="text-sm font-semibold font-label">Pharmacy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-r-full transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="videocam">videocam</span>
+<span class="text-sm font-semibold font-label">Telemedicine</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-r-full transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm font-semibold font-label">Settings</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6">
+<button class="w-full py-3 px-4 bg-gradient-to-r from-primary to-primary-container text-white rounded-lg font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-200">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Consultation
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-64 pt-20 px-6 pb-12">
+<!-- New Prescription Notification Alert -->
+<div class="mb-6 bg-blue-50 border-l-4 border-primary p-4 rounded-r-xl shadow-sm flex items-center justify-between animate-pulse-once">
+<div class="flex items-center gap-3">
+<div class="bg-primary text-white p-2 rounded-full">
+<span class="material-symbols-outlined text-sm" style='font-variation-settings: "FILL" 1;'>medical_services</span>
+</div>
+<div>
+<p class="text-sm font-bold text-blue-900">New Prescription</p>
+<p class="text-xs text-blue-700">Dr. Sanctuary added Loratadine 10mg</p>
+</div>
+</div>
+<button class="text-blue-400 hover:text-blue-600">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<!-- Bento Header Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+<!-- Welcome Card -->
+<div class="lg:col-span-8 bg-gradient-to-br from-blue-700 to-blue-900 rounded-2xl p-8 text-white relative overflow-hidden flex flex-col justify-between min-h-[240px]">
+<div class="z-10">
+<h1 class="text-3xl font-extrabold font-headline mb-2">Welcome back, Alex</h1>
+<p class="text-blue-100 max-w-md">Your health metrics look stable today. You have a follow-up appointment in 3 days with Dr. Sarah Chen.</p>
+</div>
+<div class="z-10 flex gap-4 mt-6">
+<div class="bg-white/10 backdrop-blur-md rounded-xl p-4 flex-1">
+<p class="text-xs text-blue-200 font-label mb-1">Blood Pressure</p>
+<p class="text-xl font-bold font-headline">120/80 <span class="text-xs font-normal">mmHg</span></p>
+</div>
+<div class="bg-white/10 backdrop-blur-md rounded-xl p-4 flex-1">
+<p class="text-xs text-blue-200 font-label mb-1">Heart Rate</p>
+<div class="flex items-baseline gap-2">
+<p class="text-xl font-bold font-headline">72 <span class="text-xs font-normal">bpm</span></p>
+<span class="material-symbols-outlined text-secondary-fixed text-xs" style='font-variation-settings: "FILL" 1;'>favorite</span>
+</div>
+</div>
+</div>
+<!-- Abstract background shapes -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-blue-400/20 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+<div class="absolute bottom-0 right-0 w-48 h-48 bg-blue-300/10 rounded-full -mr-10 -mb-10 blur-2xl"></div>
+</div>
+<!-- Digital QR Card -->
+<div class="lg:col-span-4 bg-white rounded-2xl p-6 custom-shadow flex flex-col items-center justify-center border border-slate-50">
+<p class="text-sm font-bold font-headline text-slate-800 mb-4">Digital Health Pass</p>
+<div class="bg-slate-50 p-4 rounded-xl border-2 border-dashed border-slate-200">
+<img alt="Health ID QR Code" class="w-32 h-32 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZkCNOz-tEBEmitMU2yV6evwedKy4Rs8P_xlzmv2jI7BmzazUfBbcMq2pSK1cQ0a8BWIEoXgL5uF1Mh-_8a5Aj-WjjRvEV2CuOSuVx4_pcUHaIOH-5kIq9kZLT12cjRMrGZvwMk-QP4eNMeocWcijY8xvklj-lMQWFIxuGRUblYbCuCgV59PgfHLCEwDOV2wD0vCFk8sc13f-R75hGFOvFy5bswOJJsFfg6UReIwYtEyr3W3gVeSEJ0-WmvRsYFDSVghDLhVpGPg0"/>
+</div>
+<div class="mt-4 text-center">
+<p class="text-xs font-bold text-blue-700 tracking-widest">ID: ML-882-901</p>
+<p class="text-[10px] text-slate-400 mt-1 uppercase font-semibold">Scan for emergency records</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Column: Medical History & Diagnoses -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Medical History Timeline -->
+<section class="bg-white rounded-2xl p-6 custom-shadow border border-slate-50">
+<h2 class="text-lg font-bold font-headline mb-6">Medical History Timeline</h2>
+<div class="relative pl-8 space-y-8">
+<div class="absolute left-[3px] top-2 bottom-2 w-1 bg-primary-fixed rounded-full"></div>
+<div class="relative">
+<div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-blue-50"></div>
+<div>
+<p class="text-xs font-bold text-primary mb-1">MARCH 12, 2024</p>
+<h3 class="font-bold text-on-surface">Annual Physical Examination</h3>
+<p class="text-sm text-on-surface-variant mt-1 leading-relaxed">Overall health is excellent. Recommended increasing Vitamin D intake during winter months. All vitals within normal range.</p>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-slate-300 ring-4 ring-slate-50"></div>
+<div>
+<p class="text-xs font-bold text-slate-400 mb-1">JANUARY 05, 2024</p>
+<h3 class="font-bold text-on-surface">Seasonal Influenza Vaccination</h3>
+<p class="text-sm text-on-surface-variant mt-1 leading-relaxed">Routine booster administered by Dr. Sanctuary. No adverse reactions reported during observation.</p>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-slate-300 ring-4 ring-slate-50"></div>
+<div>
+<p class="text-xs font-bold text-slate-400 mb-1">NOVEMBER 18, 2023</p>
+<h3 class="font-bold text-on-surface">Dermatology Consult</h3>
+<p class="text-sm text-on-surface-variant mt-1 leading-relaxed">Minor eczema flare-up treated with topical corticosteroids. Condition resolved in 7 days.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Grid: Diagnoses and Medications -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Recent Diagnoses -->
+<div class="bg-white rounded-2xl p-6 custom-shadow border border-slate-50">
+<h3 class="text-base font-bold font-headline mb-4">Recent Diagnoses</h3>
+<div class="space-y-3">
+<div class="p-3 bg-surface-container-low rounded-xl">
+<p class="text-xs font-bold text-blue-700">ICD-10: J30.1</p>
+<p class="font-semibold">Allergic Rhinitis</p>
+<p class="text-xs text-slate-500 mt-1 italic">Confirmed March 2024</p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-xl">
+<p class="text-xs font-bold text-blue-700">ICD-10: E67.3</p>
+<p class="font-semibold">Hypervitaminosis D</p>
+<p class="text-xs text-slate-500 mt-1 italic">Monitoring Since Nov 2023</p>
+</div>
+</div>
+</div>
+<!-- Active Medications -->
+<div class="bg-white rounded-2xl p-6 custom-shadow border border-slate-50">
+<h3 class="text-base font-bold font-headline mb-4">Active Medications</h3>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined">pill</span>
+</div>
+<div>
+<p class="font-bold text-sm">Loratadine 10mg</p>
+<p class="text-xs text-slate-500">1 tablet daily (Morning)</p>
+<span class="inline-block mt-1 px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full">Refill Available</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-700">
+<span class="material-symbols-outlined">vaccines</span>
+</div>
+<div>
+<p class="font-bold text-sm">Vitamin D3 2000IU</p>
+<p class="text-xs text-slate-500">1 softgel daily (Evening)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Sidebar Panels -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Emergency Card -->
+<div class="bg-white rounded-2xl overflow-hidden custom-shadow border-2 border-error/10">
+<div class="bg-error p-4 text-white flex items-center gap-3">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>emergency_home</span>
+<h3 class="font-bold font-headline">Emergency Health Info</h3>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex justify-between items-center pb-2 border-b border-slate-100">
+<span class="text-xs font-semibold text-slate-500">Blood Type</span>
+<span class="font-bold text-error">O Positive (O+)</span>
+</div>
+<div class="flex justify-between items-center pb-2 border-b border-slate-100">
+<span class="text-xs font-semibold text-slate-500">Allergies</span>
+<span class="font-bold text-slate-800">Penicillin, Peanuts</span>
+</div>
+<div class="flex justify-between items-center pb-2 border-b border-slate-100">
+<span class="text-xs font-semibold text-slate-500">Organ Donor</span>
+<span class="font-bold text-slate-800">Yes</span>
+</div>
+<div class="mt-4">
+<p class="text-xs font-semibold text-slate-500 mb-2">Emergency Contact</p>
+<div class="bg-slate-50 p-3 rounded-xl">
+<p class="font-bold text-sm">Jane Johnson (Wife)</p>
+<p class="text-xs text-blue-700 font-bold mt-1">+1 (555) 012-3456</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Affordable Medicine Recommendations (Smart Savings) -->
+<div class="bg-white rounded-2xl p-6 custom-shadow border border-slate-50">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">biotech</span>
+<h3 class="text-base font-bold font-headline">Medicine Intelligence Center</h3>
+</div>
+<p class="text-xs text-on-surface-variant mb-6 leading-relaxed">
+                    Understand your medications better. Upload, scan, or search for prescriptions to get AI-powered insights on dosage, interactions, and affordable alternatives.
+                </p>
+<div class="space-y-4">
+<div class="flex flex-col gap-2">
+<button class="w-full py-3 bg-primary text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-primary-container transition-all shadow-md shadow-blue-100">
+<span class="material-symbols-outlined text-sm">medication_liquid</span>
+                        Analyze Prescription
+                    </button>
+<p class="text-[10px] text-center text-slate-400 font-medium italic">Supports PDF, JPG, and Live Camera Scan</p>
+</div>
+</div>
+</div>
+<!-- Nearby Pharmacies -->
+<div class="bg-white rounded-2xl p-6 custom-shadow border border-slate-50">
+<h3 class="text-base font-bold font-headline mb-4">Nearby Pharmacies</h3>
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<div class="bg-blue-50 p-2 rounded-lg text-blue-700">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="text-sm font-bold">HealthMart Pharmacy</p>
+<span class="text-[10px] font-bold text-slate-400">0.4 miles</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">128 Medical Center Dr.</p>
+<div class="flex items-center gap-1.5 mt-2 bg-secondary-container/30 px-2 py-1 rounded-md w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<p class="text-[10px] text-on-secondary-container font-black uppercase">Stock Confirmed - Ready for Pickup</p>
+</div>
+<div class="flex items-center gap-1 mt-1 text-[10px] text-slate-400 font-semibold">
+                                    Open until 9:00 PM
+                                </div>
+</div>
+</div>
+<div class="flex items-start gap-4 opacity-70">
+<div class="bg-slate-100 p-2 rounded-lg text-slate-500">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="text-sm font-bold">CVS Health Hub</p>
+<span class="text-[10px] font-bold text-slate-400">1.2 miles</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">450 West Oak St.</p>
+<div class="flex items-center gap-1 mt-1 text-[10px] text-slate-400 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span> Closed • Opens 8AM
+                                </div>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50">View Map</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="md:ml-64 bg-white py-12 px-6 border-t border-slate-100 flex flex-col items-center justify-center space-y-4">
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-xs font-medium text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-xs font-medium text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-xs font-medium text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Help Center</a>
+<a class="text-xs font-medium text-slate-400 hover:text-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Contact Support</a>
+</div>
+<p class="text-xs font-medium text-slate-400">© 2024 MediLink Health. The Clinical Sanctuary.</p>
+</footer>
+</body></html>
