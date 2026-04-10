@@ -5,6 +5,8 @@ import jwt
 from datetime import datetime, timedelta
 import os
 import pydantic
+import uuid
+import random
 
 from database import get_db
 import models, schemas
@@ -47,11 +49,22 @@ def register_patient(patient: schemas.PatientRegister, db: Session = Depends(get
     db.commit()
     db.refresh(new_user)
     
+    # Generate a unique blockchain-style ID (e.g. ML-A1B2-C3D4)
+    bid_part1 = ''.join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=4))
+    bid_part2 = ''.join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=4))
+    blockchain_id = f"ML-{bid_part1}-{bid_part2}"
+
     # Create Profile
     new_profile = models.PatientProfile(
         user_id=new_user.id,
+        blockchain_id=blockchain_id,
         full_name=patient.full_name,
-        dob=patient.dob
+        dob=patient.dob,
+        blood_type=patient.blood_type,
+        allergies=patient.allergies,
+        organ_donor=patient.organ_donor,
+        emergency_contact_name=patient.emergency_contact_name,
+        emergency_contact_phone=patient.emergency_contact_phone
     )
     db.add(new_profile)
     db.commit()

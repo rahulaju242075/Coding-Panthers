@@ -5,7 +5,10 @@ import os
 
 from database import engine, Base
 import models
-from routers import auth
+from routers import auth, patient, doctor
+
+# Ensure uploads folder exists
+os.makedirs("uploads/profiles", exist_ok=True)
 
 # Create Database tables
 Base.metadata.create_all(bind=engine)
@@ -21,6 +24,10 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(patient.router)
+app.include_router(doctor.router)
+
+app.mount("/api/files", StaticFiles(directory="uploads"), name="uploads")
 
 # Mount the frontend directories as static files
 # Since backend/main.py is in stitch_medilink_health_ui/backend,

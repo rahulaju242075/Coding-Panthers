@@ -1,5 +1,6 @@
 import enum
-from sqlalchemy import Column, Integer, String, Enum, ForeignKey, Date, Text
+from sqlalchemy import Column, Integer, String, Enum, ForeignKey, Date, Text, DateTime
+import datetime
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -26,10 +27,32 @@ class PatientProfile(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"))
+    blockchain_id = Column(String, unique=True, index=True, nullable=False)
     full_name = Column(String, nullable=False)
     dob = Column(Date, nullable=False)
     
+    blood_type = Column(String, nullable=True)
+    allergies = Column(String, nullable=True)
+    organ_donor = Column(String, nullable=True) # "Yes" or "No"
+    emergency_contact_name = Column(String, nullable=True)
+    emergency_contact_phone = Column(String, nullable=True)
+    profile_picture_url = Column(String, nullable=True)
+    
     user = relationship("User", back_populates="patient_profile")
+    clinical_reports = relationship("ClinicalReport", back_populates="patient", cascade="all, delete-orphan")
+
+class ClinicalReport(Base):
+    __tablename__ = "clinical_reports"
+
+    id = Column(Integer, primary_key=True, index=True)
+    patient_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    doctor_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    blood_pressure = Column(String, nullable=True)
+    heart_rate = Column(Integer, nullable=True)
+    report_date = Column(DateTime, default=datetime.datetime.utcnow)
+
+    patient = relationship("User", foreign_keys=[patient_id])
+    doctor = relationship("User", foreign_keys=[doctor_id])
 
 class DoctorProfile(Base):
     __tablename__ = "doctor_profiles"

@@ -14,6 +14,11 @@ class UserCreate(UserBase):
 class PatientRegister(UserCreate):
     full_name: str
     dob: date
+    blood_type: Optional[str] = None
+    allergies: Optional[str] = None
+    organ_donor: Optional[str] = "No"
+    emergency_contact_name: Optional[str] = None
+    emergency_contact_phone: Optional[str] = None
 
 # Doctor
 class DoctorRegister(UserCreate):
@@ -37,3 +42,22 @@ class TokenResponse(BaseModel):
     access_token: str
     token_type: str
     role: UserRole
+
+# Vitals & Reports
+class ClinicalReportCreate(BaseModel):
+    blockchain_id: str
+    blood_pressure: Optional[str] = None
+    heart_rate: Optional[int] = None
+
+class PatientDashboardResponse(BaseModel):
+    full_name: str
+    blockchain_id: str
+    dob: date
+    blood_type: str
+    allergies: str
+    organ_donor: str
+    emergency_contact_name: str
+    emergency_contact_phone: str
+    profile_picture_url: Optional[str] = None
+    latest_blood_pressure: Optional[str] = None
+    latest_heart_rate: Optional[int] = None
