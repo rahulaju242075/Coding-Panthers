@@ -98,9 +98,9 @@
 <div class="flex items-center gap-8">
 <span class="text-xl font-extrabold tracking-tight text-blue-700 dark:text-blue-400">MediLink</span>
 <div class="hidden md:flex gap-6">
-<a class="text-slate-500 hover:bg-slate-100 transition-colors px-3 py-1 rounded-lg" href="#">Home</a>
-<a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 px-3 py-1" href="#">Medicine Intelligence</a>
-<a class="text-slate-500 hover:bg-slate-100 transition-colors px-3 py-1 rounded-lg" href="#">Directory</a>
+<a class="text-slate-500 hover:bg-slate-100 transition-colors px-3 py-1 rounded-lg" href="../landing_page/landing_page.html">Home</a>
+<a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 px-3 py-1" href="../medicine_analysis_intelligence/medicine_analysis_intelligence.html">Medicine Intelligence</a>
+<a class="text-slate-500 hover:bg-slate-100 transition-colors px-3 py-1 rounded-lg" href="../telemedicine_consultation/telemedicine_consultation.html">Consultations</a>
 </div>
 </div>
 <div class="flex items-center gap-4">
@@ -119,30 +119,26 @@
 <span class="material-symbols-outlined" data-icon="stethoscope">stethoscope</span>
 </div>
 <div>
-<p class="text-sm font-black Manrope text-blue-800">Dr. Sanctuary</p>
-<p class="text-[10px] text-slate-500 font-medium">General Practitioner</p>
+<p id="patient-identity" class="text-sm font-black Manrope text-blue-800">Patient ID: PR-8821</p>
+<p class="text-[10px] text-slate-500 font-medium">Prescription Analysis</p>
 </div>
 </div>
 <nav class="flex-1 px-3 space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="../patient_dashboard_prescription_analysis/patient_dashboard_prescription_analysis.html">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
 <span class="text-sm font-semibold">Dashboard</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-blue-700 bg-blue-50 rounded-r-full font-bold transition-all" href="#">
-<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
-<span class="text-sm">Pharmacy</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="../patient_dashboard_prescription_analysis/patient_dashboard_prescription_analysis.html">
 <span class="material-symbols-outlined" data-icon="description">description</span>
 <span class="text-sm font-semibold">Medical Records</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="#">
-<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
-<span class="text-sm font-semibold">Appointments</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="../telemedicine_consultation/telemedicine_consultation.html">
 <span class="material-symbols-outlined" data-icon="videocam">videocam</span>
 <span class="text-sm font-semibold">Telemedicine</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all" href="../settings/settings.html">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm font-semibold">Settings</span>
 </a>
 </nav>
 <div class="p-6">
@@ -189,7 +185,7 @@
 </div>
 </div>
 </section>
-<!-- Structured Analysis - Lisinopril -->
+<!-- Structured Analysis - Crocin -->
 <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
 <!-- Medicine Identity Card -->
 <div class="lg:col-span-2 bg-surface-container-lowest p-8 rounded-3xl shadow-sm border border-outline-variant/10">
@@ -198,8 +194,8 @@
 <div class="flex items-center gap-3 mb-1">
 <span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Active Molecule</span>
 </div>
-<h2 id="medicine-title" class="text-3xl font-black text-on-surface">Loading medicine...</h2>
-<p id="medicine-group" class="text-primary font-semibold">Therapeutic Group: Loading...</p>
+<h2 id="medicine-title" class="text-3xl font-black text-on-surface">Crocin 500mg</h2>
+<p id="medicine-group" class="text-primary font-semibold">Therapeutic Group: Analgesic</p>
 </div>
 <div class="flex gap-2">
 <span class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1">
@@ -215,15 +211,15 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <div class="bg-surface-container-low p-5 rounded-2xl">
 <p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-1">Active Ingredient</p>
-<p id="medicine-ingredient" class="text-on-surface font-bold">Loading...</p>
+<p id="medicine-ingredient" class="text-on-surface font-bold">Paracetamol 500mg</p>
 </div>
 <div class="bg-surface-container-low p-5 rounded-2xl">
 <p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-1">Purpose</p>
-<p id="medicine-purpose" class="text-on-surface font-bold">Loading...</p>
+<p id="medicine-purpose" class="text-on-surface font-bold">Pain relief</p>
 </div>
 <div class="bg-surface-container-low p-5 rounded-2xl">
 <p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-1">Dosage Form</p>
-<p id="medicine-dosage-form" class="text-on-surface font-bold">Loading...</p>
+<p id="medicine-dosage-form" class="text-on-surface font-bold">500mg Tablet</p>
 </div>
 </div>
 <div class="mt-8 pt-8 border-t border-outline-variant/10">
@@ -231,7 +227,7 @@
 <span class="material-symbols-outlined text-sm" data-icon="analytics">analytics</span>
                         Clinical Insights
                     </h4>
-<p id="medicine-insights" class="text-on-surface-variant leading-relaxed">Loading dataset insights...</p>
+<p id="medicine-insights" class="text-on-surface-variant leading-relaxed">Crocin is listed in the local formulation catalogue as an analgesic medicine. Paracetamol is commonly used for pain relief. Review dose, interactions, and patient-specific contraindications before dispensing.</p>
 </div>
 </div>
 <!-- Vital Bloom Visualization -->
@@ -241,13 +237,13 @@
 <div class="relative z-10 w-48 h-48 rounded-full flex items-center justify-center glass-panel shadow-2xl border border-white/20">
 <div class="text-center">
 <p class="text-[10px] font-bold tracking-[0.2em] uppercase text-on-primary-container">Efficacy Rate</p>
-<p id="medicine-efficacy" class="text-5xl font-black text-white">--<span class="text-xl">%</span></p>
+<p id="medicine-efficacy" class="text-5xl font-black text-white">89<span class="text-xl">%</span></p>
 <div class="mt-2 h-1 w-12 bg-secondary-fixed-dim mx-auto rounded-full"></div>
 </div>
 </div>
 <div class="relative z-10 mt-6 text-center">
 <p class="font-bold text-lg">Therapeutic Window</p>
-<p id="medicine-window" class="text-on-primary-container text-sm">Waiting for medicine selection...</p>
+<p id="medicine-window" class="text-on-primary-container text-sm">Lowest local price: ₹15 at JanAushadhi</p>
 </div>
 </div>
 </section>
@@ -256,7 +252,51 @@
 <div class="space-y-4">
 <h3 class="text-xl font-black text-primary px-2">Equivalent Alternatives</h3>
 <div id="alternatives-list" class="bg-surface-container-low rounded-3xl p-6 space-y-4">
-<div class="bg-white p-5 rounded-2xl text-sm text-on-surface-variant">Loading recommendations...</div>
+<div class="bg-white p-5 rounded-2xl flex items-center justify-between shadow-sm hover:translate-x-1 transition-transform">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 bg-secondary-container/30 rounded-xl flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">medication</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Crocin</h4>
+<p class="text-xs text-outline">Paracetamol • Apollo</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-on-surface">₹30</p>
+<p class="text-[10px] text-secondary font-bold">Analgesic</p>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl flex items-center justify-between shadow-sm hover:translate-x-1 transition-transform">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 bg-tertiary-fixed/20 rounded-xl flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">pill</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Calpol</h4>
+<p class="text-xs text-outline">Paracetamol • MedPlus</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-on-surface">₹25</p>
+<p class="text-[10px] text-secondary font-bold">Analgesic</p>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl flex items-center justify-between shadow-sm hover:translate-x-1 transition-transform">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 bg-tertiary-fixed/20 rounded-xl flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">pill</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Dolo</h4>
+<p class="text-xs text-outline">Paracetamol • NetMeds</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-on-surface">₹35</p>
+<p class="text-[10px] text-secondary font-bold">Analgesic</p>
+</div>
+</div>
 </div>
 </div>
 <!-- Nearby Availability -->
@@ -270,7 +310,39 @@
 </div>
 </div>
 <div id="availability-list" class="space-y-6 relative z-10 w-2/3">
-<div class="text-sm text-on-surface-variant">Loading local availability...</div>
+<a href="https://www.google.com/maps/search/?api=1&query=JanAushadhi%20Paracetamol%20near%20me" target="_blank" rel="noopener noreferrer" class="flex gap-4 p-3 -mx-3 rounded-2xl hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2 flex-wrap">
+<p class="font-bold text-on-surface group-hover:text-primary">JanAushadhi</p>
+<span class="text-[10px] font-bold text-primary underline decoration-dotted">Open in Google Maps</span>
+</div>
+<p class="text-xs text-outline">Local price • ₹15 • Paracetamol</p>
+<span class="inline-block mt-2 px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-black rounded uppercase">Best Local Price</span>
+</div>
+</a>
+<a href="https://www.google.com/maps/search/?api=1&query=Apollo%20Paracetamol%20near%20me" target="_blank" rel="noopener noreferrer" class="flex gap-4 p-3 -mx-3 rounded-2xl hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2 flex-wrap">
+<p class="font-bold text-on-surface group-hover:text-primary">Apollo</p>
+<span class="text-[10px] font-bold text-primary underline decoration-dotted">Open in Google Maps</span>
+</div>
+<p class="text-xs text-outline">Local price • ₹30 • Crocin</p>
+<span class="inline-block mt-2 px-2 py-0.5 bg-primary-fixed text-on-primary-fixed text-[10px] font-black rounded uppercase">Available Now</span>
+</div>
+</a>
+<a href="https://www.google.com/maps/search/?api=1&query=MedPlus%20Paracetamol%20near%20me" target="_blank" rel="noopener noreferrer" class="flex gap-4 p-3 -mx-3 rounded-2xl hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2 flex-wrap">
+<p class="font-bold text-on-surface group-hover:text-primary">MedPlus</p>
+<span class="text-[10px] font-bold text-primary underline decoration-dotted">Open in Google Maps</span>
+</div>
+<p class="text-xs text-outline">Local price • ₹25 • Calpol</p>
+<span class="inline-block mt-2 px-2 py-0.5 bg-primary-fixed text-on-primary-fixed text-[10px] font-black rounded uppercase">Available Now</span>
+</div>
+</a>
 </div>
 </div>
 </div>
@@ -354,6 +426,46 @@
     });
   }
 
+  function fallbackDrugs() {
+    return [
+      { name: 'Crocin', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Calpol', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Dolo', active_ingredient: 'Paracetamol', dosage: '650mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Combiflam', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Sumo', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'P-650', active_ingredient: 'Paracetamol', dosage: '650mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Paracetamol', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Fevernil', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Pyrex', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'PCM', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Xyka', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Olcin', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Medomol', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Lekadol', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' },
+      { name: 'Tempra', active_ingredient: 'Paracetamol', dosage: '500mg', category: 'Analgesic', approved: 'Yes' }
+    ];
+  }
+
+  function fallbackPrices() {
+    return [
+      { name: 'Crocin', price: '30', pharmacy: 'Apollo' },
+      { name: 'Calpol', price: '25', pharmacy: 'MedPlus' },
+      { name: 'Dolo', price: '35', pharmacy: 'NetMeds' },
+      { name: 'Combiflam', price: '28', pharmacy: 'Apollo' },
+      { name: 'Sumo', price: '22', pharmacy: 'MedPlus' },
+      { name: 'P-650', price: '18', pharmacy: 'NetMeds' },
+      { name: 'Paracetamol', price: '15', pharmacy: 'JanAushadhi' },
+      { name: 'Fevernil', price: '30', pharmacy: 'Apollo' },
+      { name: 'Pyrex', price: '26', pharmacy: 'MedPlus' },
+      { name: 'PCM', price: '22', pharmacy: 'NetMeds' },
+      { name: 'Xyka', price: '28', pharmacy: 'Apollo' },
+      { name: 'Olcin', price: '24', pharmacy: 'MedPlus' },
+      { name: 'Medomol', price: '26', pharmacy: 'NetMeds' },
+      { name: 'Lekadol', price: '25', pharmacy: 'Apollo' },
+      { name: 'Tempra', price: '28', pharmacy: 'MedPlus' }
+    ];
+  }
+
   function normalize(value) {
     return String(value || '')
       .toLowerCase()
@@ -397,6 +509,31 @@
     const purpose = medicinePurpose(drug.category);
     const ingredient = drug.active_ingredient || drug.name;
     return `${drug.name} is listed in the local formulation catalogue as a ${drug.category || 'clinical'} medicine. ${ingredient} is commonly used for ${purpose.toLowerCase()}. Review dose, interactions, and patient-specific contraindications before dispensing.`;
+  }
+
+  async function resolvePatientId() {
+    const searchParams = new URLSearchParams(window.location.search);
+    const queryPatientId = searchParams.get('patient_id');
+    if (queryPatientId) return queryPatientId;
+
+    const storedPatientId = localStorage.getItem('medilink_patient_id') || localStorage.getItem('patient_id');
+    if (storedPatientId) return storedPatientId;
+
+    const token = localStorage.getItem('medilink_token');
+    if (!token) return 'PR-8821';
+
+    try {
+      const response = await fetch('/api/patient/dashboard', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (!response.ok) return 'PR-8821';
+      const data = await response.json();
+      const apiPatientId = data && data.blockchain_id ? data.blockchain_id : 'PR-8821';
+      localStorage.setItem('medilink_patient_id', apiPatientId);
+      return apiPatientId;
+    } catch {
+      return 'PR-8821';
+    }
   }
 
   function findDrug(query) {
@@ -594,12 +731,24 @@
   }
 
   async function loadData() {
-    const [drugsResponse, pricesResponse] = await Promise.all([
-      fetch('../data/drugs.csv'),
-      fetch('../data/prices.csv')
-    ]);
-    medicineState.drugs = parseCsv(await drugsResponse.text());
-    medicineState.prices = parseCsv(await pricesResponse.text());
+    try {
+      const [drugsResponse, pricesResponse] = await Promise.all([
+        fetch('../data/drugs.csv'),
+        fetch('../data/prices.csv')
+      ]);
+      const [drugsText, pricesText] = await Promise.all([drugsResponse.text(), pricesResponse.text()]);
+      medicineState.drugs = parseCsv(drugsText).filter((row) => row.name && row.active_ingredient);
+      medicineState.prices = parseCsv(pricesText).filter((row) => row.name && row.price);
+    } catch (error) {
+      console.error('Failed to fetch datasets, using embedded fallback data.', error);
+    }
+
+    if (!medicineState.drugs.length) {
+      medicineState.drugs = fallbackDrugs();
+    }
+    if (!medicineState.prices.length) {
+      medicineState.prices = fallbackPrices();
+    }
   }
 
   function wireControls() {
@@ -648,10 +797,12 @@
 
   (async function init() {
     wireControls();
+    const patientId = await resolvePatientId();
+    document.getElementById('patient-identity').textContent = `Patient ID: ${patientId}`;
     try {
       await loadData();
       const startQuery = new URLSearchParams(window.location.search).get('medicine') || '';
-      const initial = findDrug(startQuery) || medicineState.drugs[0];
+      const initial = findDrug(startQuery) || medicineState.drugs[0] || fallbackDrugs()[0];
       if (initial) {
         renderDrug(initial);
       } else {
@@ -660,6 +811,9 @@
     } catch (error) {
       console.error('Failed to load medicine datasets', error);
       document.getElementById('prescription-status').textContent = 'Dataset load failed. Search and upload controls are still available, but prices cannot be resolved.';
+      medicineState.drugs = medicineState.drugs.length ? medicineState.drugs : fallbackDrugs();
+      medicineState.prices = medicineState.prices.length ? medicineState.prices : fallbackPrices();
+      renderDrug(medicineState.drugs[0] || fallbackDrugs()[0]);
     }
   })();
 </script>
