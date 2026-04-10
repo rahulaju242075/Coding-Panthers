@@ -158,20 +158,34 @@
 <div class="lg:col-span-7 flex flex-col justify-center">
 <h1 class="text-4xl font-extrabold text-primary mb-2 tracking-tight">Medicine Intelligence</h1>
 <p class="text-on-surface-variant text-lg mb-8 max-w-lg">Advanced pharmacopeia analysis and local availability engine for clinical decision support.</p>
-<div class="relative group">
+<div class="relative group flex flex-col gap-3">
+<div class="relative">
 <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline">
 <span class="material-symbols-outlined" data-icon="search">search</span>
 </div>
-<input class="w-full pl-12 pr-4 py-5 bg-surface-container-highest border-none rounded-2xl text-lg focus:ring-2 focus:ring-primary-container transition-all shadow-sm" placeholder="Enter Medicine Name (e.g., Lisinopril)" type="text"/>
+<input id="medicine-search-input" class="w-full pl-12 pr-28 py-5 bg-surface-container-highest border-none rounded-2xl text-lg focus:ring-2 focus:ring-primary-container transition-all shadow-sm" placeholder="Enter medicine name, ingredient, or brand" type="text"/>
+<button id="medicine-search-btn" class="absolute right-3 top-1/2 -translate-y-1/2 bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md">Search</button>
+</div>
+<div class="flex flex-wrap gap-2 text-xs font-semibold text-on-surface-variant">
+<span class="px-3 py-1 rounded-full bg-surface-container-low">Search</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-low">Upload prescription</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-low">Scan prescription</span>
+</div>
 </div>
 </div>
 <div class="lg:col-span-5">
-<div class="glass-panel border-2 border-dashed border-primary-fixed p-8 rounded-3xl flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/90 transition-all group">
+<div id="prescription-dropzone" class="glass-panel border-2 border-dashed border-primary-fixed p-8 rounded-3xl flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/90 transition-all group">
 <div class="h-16 w-16 bg-primary-fixed text-primary rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
 <span class="material-symbols-outlined text-4xl" data-icon="upload_file">upload_file</span>
 </div>
 <h3 class="text-lg font-bold text-primary">Upload/Scan Prescription</h3>
 <p class="text-sm text-on-surface-variant mt-2 px-8">Drop your prescription here or click to scan using AI vision technology.</p>
+<div class="mt-5 flex flex-wrap items-center justify-center gap-3">
+<button id="upload-prescription-btn" class="px-4 py-2 rounded-xl bg-primary text-white text-sm font-bold shadow-sm">Upload Prescription</button>
+<button id="scan-prescription-btn" class="px-4 py-2 rounded-xl bg-secondary text-white text-sm font-bold shadow-sm">Scan Prescription</button>
+</div>
+<p id="prescription-status" class="mt-4 text-xs font-semibold text-on-surface-variant">Accepted formats: image, text, or a typed medicine name.</p>
+<input id="prescription-file-input" class="hidden" type="file" accept="image/*,.txt"/>
 </div>
 </div>
 </section>
@@ -184,8 +198,8 @@
 <div class="flex items-center gap-3 mb-1">
 <span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Active Molecule</span>
 </div>
-<h2 class="text-3xl font-black text-on-surface">Lisinopril 20mg</h2>
-<p class="text-primary font-semibold">Therapeutic Group: ACE Inhibitor</p>
+<h2 id="medicine-title" class="text-3xl font-black text-on-surface">Loading medicine...</h2>
+<p id="medicine-group" class="text-primary font-semibold">Therapeutic Group: Loading...</p>
 </div>
 <div class="flex gap-2">
 <span class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1">
@@ -201,15 +215,15 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <div class="bg-surface-container-low p-5 rounded-2xl">
 <p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-1">Active Ingredient</p>
-<p class="text-on-surface font-bold">Lisinopril 20mg</p>
+<p id="medicine-ingredient" class="text-on-surface font-bold">Loading...</p>
 </div>
 <div class="bg-surface-container-low p-5 rounded-2xl">
 <p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-1">Purpose</p>
-<p class="text-on-surface font-bold">Hypertension &amp; CHF</p>
+<p id="medicine-purpose" class="text-on-surface font-bold">Loading...</p>
 </div>
 <div class="bg-surface-container-low p-5 rounded-2xl">
 <p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-1">Dosage Form</p>
-<p class="text-on-surface font-bold">Oral Tablet</p>
+<p id="medicine-dosage-form" class="text-on-surface font-bold">Loading...</p>
 </div>
 </div>
 <div class="mt-8 pt-8 border-t border-outline-variant/10">
@@ -217,9 +231,7 @@
 <span class="material-symbols-outlined text-sm" data-icon="analytics">analytics</span>
                         Clinical Insights
                     </h4>
-<p class="text-on-surface-variant leading-relaxed">
-                        Lisinopril is a potent long-acting angiotensin converting enzyme inhibitor. It is used to treat high blood pressure, congestive heart failure, and to improve survival after a heart attack. Patient monitoring of serum potassium levels is recommended during extended use.
-                    </p>
+<p id="medicine-insights" class="text-on-surface-variant leading-relaxed">Loading dataset insights...</p>
 </div>
 </div>
 <!-- Vital Bloom Visualization -->
@@ -229,13 +241,13 @@
 <div class="relative z-10 w-48 h-48 rounded-full flex items-center justify-center glass-panel shadow-2xl border border-white/20">
 <div class="text-center">
 <p class="text-[10px] font-bold tracking-[0.2em] uppercase text-on-primary-container">Efficacy Rate</p>
-<p class="text-5xl font-black text-white">94<span class="text-xl">%</span></p>
+<p id="medicine-efficacy" class="text-5xl font-black text-white">--<span class="text-xl">%</span></p>
 <div class="mt-2 h-1 w-12 bg-secondary-fixed-dim mx-auto rounded-full"></div>
 </div>
 </div>
 <div class="relative z-10 mt-6 text-center">
 <p class="font-bold text-lg">Therapeutic Window</p>
-<p class="text-on-primary-container text-sm">Optimal Absorption: 1hr post-dose</p>
+<p id="medicine-window" class="text-on-primary-container text-sm">Waiting for medicine selection...</p>
 </div>
 </div>
 </section>
@@ -243,39 +255,8 @@
 <!-- Equivalent Alternatives -->
 <div class="space-y-4">
 <h3 class="text-xl font-black text-primary px-2">Equivalent Alternatives</h3>
-<div class="bg-surface-container-low rounded-3xl p-6 space-y-4">
-<!-- Alternative 1 -->
-<div class="bg-white p-5 rounded-2xl flex items-center justify-between shadow-sm hover:translate-x-1 transition-transform">
-<div class="flex items-center gap-4">
-<div class="h-12 w-12 bg-secondary-container/30 rounded-xl flex items-center justify-center text-secondary">
-<span class="material-symbols-outlined" data-icon="medication">medication</span>
-</div>
-<div>
-<h4 class="font-bold text-on-surface">Zestoretic</h4>
-<p class="text-xs text-outline">Brand Name • Combination</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-xl font-black text-on-surface">$42.50</p>
-<p class="text-[10px] text-error font-bold">+120% vs base</p>
-</div>
-</div>
-<!-- Alternative 2 -->
-<div class="bg-white p-5 rounded-2xl flex items-center justify-between shadow-sm hover:translate-x-1 transition-transform">
-<div class="flex items-center gap-4">
-<div class="h-12 w-12 bg-tertiary-fixed/20 rounded-xl flex items-center justify-center text-tertiary">
-<span class="material-symbols-outlined" data-icon="pill">pill</span>
-</div>
-<div>
-<h4 class="font-bold text-on-surface">Generic Lisinopril</h4>
-<p class="text-xs text-outline">Generic Equivalent</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-xl font-black text-on-surface">$18.90</p>
-<p class="text-[10px] text-secondary font-bold">Insurance Covered</p>
-</div>
-</div>
+<div id="alternatives-list" class="bg-surface-container-low rounded-3xl p-6 space-y-4">
+<div class="bg-white p-5 rounded-2xl text-sm text-on-surface-variant">Loading recommendations...</div>
 </div>
 </div>
 <!-- Nearby Availability -->
@@ -288,31 +269,8 @@
 <p class="text-center text-[10px] font-bold text-primary uppercase">Regional Supply Network</p>
 </div>
 </div>
-<div class="space-y-6 relative z-10 w-2/3">
-<div class="flex gap-4">
-<span class="material-symbols-outlined text-secondary" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
-<div>
-<p class="font-bold text-on-surface">CuraWell Pharmacy</p>
-<p class="text-xs text-outline">0.4 miles • In Stock</p>
-<span class="inline-block mt-2 px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-black rounded uppercase">Immediate Pickup</span>
-</div>
-</div>
-<div class="flex gap-4">
-<span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span>
-<div>
-<p class="font-bold text-on-surface">Beacon Health Hub</p>
-<p class="text-xs text-outline">1.2 miles • Low Stock</p>
-<span class="inline-block mt-2 px-2 py-0.5 bg-error-container text-on-error-container text-[10px] font-black rounded uppercase">3 Units Left</span>
-</div>
-</div>
-<div class="flex gap-4">
-<span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span>
-<div>
-<p class="font-bold text-on-surface">The Clinical Sanctuary</p>
-<p class="text-xs text-outline">2.8 miles • In Stock</p>
-<span class="inline-block mt-2 px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-black rounded uppercase">Mail Order Only</span>
-</div>
-</div>
+<div id="availability-list" class="space-y-6 relative z-10 w-2/3">
+<div class="text-sm text-on-surface-variant">Loading local availability...</div>
 </div>
 </div>
 </div>
@@ -328,4 +286,381 @@
 </div>
 <p class="text-xs font-medium Inter text-slate-400">© 2024 MediLink Health. The Clinical Sanctuary.</p>
 </footer>
+<script>
+  const medicineState = {
+    drugs: [],
+    prices: [],
+    current: null,
+    currentQuery: ''
+  };
+
+  const rupees = new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  });
+
+  function parseCsv(text) {
+    const rows = [];
+    let current = '';
+    let row = [];
+    let inQuotes = false;
+
+    for (let index = 0; index < text.length; index += 1) {
+      const char = text[index];
+      const next = text[index + 1];
+      if (char === '"') {
+        if (inQuotes && next === '"') {
+          current += '"';
+          index += 1;
+        } else {
+          inQuotes = !inQuotes;
+        }
+        continue;
+      }
+      if (char === ',' && !inQuotes) {
+        row.push(current.trim());
+        current = '';
+        continue;
+      }
+      if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (char === '\r' && next === '\n') {
+          index += 1;
+        }
+        if (current.length || row.length) {
+          row.push(current.trim());
+          rows.push(row);
+          row = [];
+          current = '';
+        }
+        continue;
+      }
+      current += char;
+    }
+
+    if (current.length || row.length) {
+      row.push(current.trim());
+      rows.push(row);
+    }
+
+    if (!rows.length) return [];
+    const headers = rows[0].map((value) => value.trim());
+    return rows.slice(1).filter((item) => item.length).map((item) => {
+      const entry = {};
+      headers.forEach((header, index) => {
+        entry[header] = (item[index] || '').trim();
+      });
+      return entry;
+    });
+  }
+
+  function normalize(value) {
+    return String(value || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+  }
+
+  function formatPrice(value) {
+    const amount = Number(value);
+    if (!Number.isFinite(amount)) return 'N/A';
+    return rupees.format(amount);
+  }
+
+  function medicinePurpose(category) {
+    const lookup = {
+      'ACE Inhibitor': 'Hypertension & CHF',
+      'Antihypertensive': 'Blood pressure management',
+      'Analgesic': 'Pain relief',
+      'Antipyretic': 'Fever reduction',
+      NSAID: 'Pain and inflammation',
+      Antibiotic: 'Bacterial infections',
+      'Antidiabetic': 'Glycemic control',
+      'Antidepressant': 'Mood disorders',
+      'PPI': 'Acid suppression'
+    };
+    return lookup[category] || category || 'Clinical use';
+  }
+
+  function efficacyScore(drug) {
+    const category = normalize(drug.category);
+    if (category.includes('antihypertensive')) return 94;
+    if (category.includes('antidiabetic')) return 91;
+    if (category.includes('antidepressant')) return 88;
+    if (category.includes('antibiotic')) return 90;
+    if (category.includes('analgesic') || category.includes('nsaid')) return 89;
+    if (category.includes('antacid')) return 87;
+    return 85;
+  }
+
+  function insightFor(drug) {
+    const purpose = medicinePurpose(drug.category);
+    const ingredient = drug.active_ingredient || drug.name;
+    return `${drug.name} is listed in the local formulation catalogue as a ${drug.category || 'clinical'} medicine. ${ingredient} is commonly used for ${purpose.toLowerCase()}. Review dose, interactions, and patient-specific contraindications before dispensing.`;
+  }
+
+  function findDrug(query) {
+    const cleaned = normalize(query);
+    if (!cleaned) return null;
+
+    const exact = medicineState.drugs.find((drug) => normalize(drug.name) === cleaned || normalize(drug.active_ingredient) === cleaned);
+    if (exact) return exact;
+
+    const partial = medicineState.drugs.find((drug) => normalize(drug.name).includes(cleaned) || normalize(drug.active_ingredient).includes(cleaned));
+    if (partial) return partial;
+
+    const priceMatch = medicineState.prices.find((price) => normalize(price.name).includes(cleaned));
+    if (priceMatch) {
+      return medicineState.drugs.find((drug) => normalize(drug.name) === normalize(priceMatch.name)) || {
+        name: priceMatch.name,
+        active_ingredient: priceMatch.name,
+        dosage: 'Tablet',
+        category: 'Clinical use',
+        approved: 'Unknown'
+      };
+    }
+
+    return null;
+  }
+
+  function bestPriceForName(name) {
+    const matches = medicineState.prices.filter((row) => normalize(row.name) === normalize(name));
+    if (!matches.length) return null;
+    return matches.reduce((best, row) => {
+      const amount = Number(row.price);
+      if (!Number.isFinite(amount)) return best;
+      if (!best || amount < best.price) return { price: amount, pharmacy: row.pharmacy };
+      return best;
+    }, null);
+  }
+
+  function medicineFamilyFor(drug) {
+    const ingredientMatches = medicineState.drugs.filter((row) => normalize(row.active_ingredient) === normalize(drug.active_ingredient));
+    if (ingredientMatches.length) return ingredientMatches;
+
+    const categoryMatches = medicineState.drugs.filter((row) => normalize(row.category) === normalize(drug.category));
+    if (categoryMatches.length) return categoryMatches;
+
+    return [drug];
+  }
+
+  function alternativesFor(drug) {
+    const pool = medicineFamilyFor(drug);
+    return pool.map((row) => ({
+      ...row,
+      pricing: bestPriceForName(row.name)
+    })).sort((left, right) => {
+      const leftPrice = left.pricing ? left.pricing.price : Number.POSITIVE_INFINITY;
+      const rightPrice = right.pricing ? right.pricing.price : Number.POSITIVE_INFINITY;
+      return leftPrice - rightPrice;
+    });
+  }
+
+  function nearestAvailabilityFor(drug) {
+    const familyNames = new Set(medicineFamilyFor(drug).map((item) => item.name));
+    return medicineState.prices
+      .filter((row) => familyNames.has(row.name))
+      .map((row) => ({
+        ...row,
+        priceValue: Number(row.price),
+        pricing: bestPriceForName(row.name)
+      }))
+      .filter((row) => Number.isFinite(row.priceValue))
+      .sort((left, right) => left.priceValue - right.priceValue || left.pharmacy.localeCompare(right.pharmacy));
+  }
+
+  function googleMapsSearchUrl(pharmacyName, medicineName) {
+    const query = `${pharmacyName} ${medicineName} near me`;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  }
+
+  function renderDrug(drug) {
+    medicineState.current = drug;
+    const bestPrice = bestPriceForName(drug.name);
+    const efficacy = efficacyScore(drug);
+
+    document.getElementById('medicine-title').textContent = `${drug.name} ${drug.dosage || ''}`.trim();
+    document.getElementById('medicine-group').textContent = `Therapeutic Group: ${drug.category || 'Clinical use'}`;
+    document.getElementById('medicine-ingredient').textContent = `${drug.active_ingredient || drug.name} ${drug.dosage || ''}`.trim();
+    document.getElementById('medicine-purpose').textContent = medicinePurpose(drug.category);
+    document.getElementById('medicine-dosage-form').textContent = drug.dosage || 'Tablet';
+    document.getElementById('medicine-insights').textContent = insightFor(drug);
+    document.getElementById('medicine-efficacy').innerHTML = `${efficacy}<span class="text-xl">%</span>`;
+    document.getElementById('medicine-window').textContent = bestPrice ? `Lowest local price: ${formatPrice(bestPrice.price)} at ${bestPrice.pharmacy}` : 'Lowest local price unavailable in dataset';
+
+    const altList = document.getElementById('alternatives-list');
+    const alternatives = alternativesFor(drug).filter((row) => normalize(row.name) !== normalize(drug.name));
+    if (alternatives.length) {
+      altList.innerHTML = alternatives.slice(0, 4).map((row) => {
+        const price = row.pricing ? formatPrice(row.pricing.price) : 'N/A';
+        const pharmacy = row.pricing ? row.pricing.pharmacy : 'Price unavailable';
+        return `
+          <div class="bg-white p-5 rounded-2xl flex items-center justify-between shadow-sm hover:translate-x-1 transition-transform">
+            <div class="flex items-center gap-4">
+              <div class="h-12 w-12 bg-secondary-container/30 rounded-xl flex items-center justify-center text-secondary">
+                <span class="material-symbols-outlined">medication</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-on-surface">${row.name}</h4>
+                <p class="text-xs text-outline">${row.active_ingredient || row.category || 'Equivalent'} • ${pharmacy}</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-xl font-black text-on-surface">${price}</p>
+              <p class="text-[10px] text-secondary font-bold">${row.category || 'Equivalent'}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    } else {
+      altList.innerHTML = '<div class="bg-white p-5 rounded-2xl text-sm text-on-surface-variant">No matching alternatives found in the dataset.</div>';
+    }
+
+    const availabilityList = document.getElementById('availability-list');
+    const availability = nearestAvailabilityFor(drug).slice(0, 3);
+    if (availability.length) {
+      availabilityList.innerHTML = availability.map((row, index) => {
+        const mapsUrl = googleMapsSearchUrl(row.pharmacy, drug.active_ingredient || drug.name);
+        return `
+          <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="flex gap-4 p-3 -mx-3 rounded-2xl hover:bg-surface-container-low transition-colors group">
+            <span class="material-symbols-outlined text-secondary group-hover:text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <p class="font-bold text-on-surface group-hover:text-primary">${row.pharmacy}</p>
+                <span class="text-[10px] font-bold text-primary underline decoration-dotted">Open in Google Maps</span>
+              </div>
+              <p class="text-xs text-outline">Local price • ${formatPrice(row.priceValue)} • ${row.name}</p>
+              <span class="inline-block mt-2 px-2 py-0.5 ${index === 0 ? 'bg-secondary-container text-on-secondary-container' : 'bg-primary-fixed text-on-primary-fixed'} text-[10px] font-black rounded uppercase">${index === 0 ? 'Best Local Price' : 'Available Now'}</span>
+            </div>
+          </a>
+        `;
+      }).join('');
+    } else {
+      availabilityList.innerHTML = '<div class="text-sm text-on-surface-variant">No local stock data found for this medicine.</div>';
+    }
+
+    document.getElementById('prescription-status').textContent = `Loaded ${drug.name}. Use search, upload, or scan to change the active medicine.`;
+    document.getElementById('medicine-search-input').value = drug.name;
+  }
+
+  function analyzeQuery(query) {
+    medicineState.currentQuery = query;
+    const drug = findDrug(query);
+    if (!drug) {
+      document.getElementById('prescription-status').textContent = `No match found for "${query}". Try a brand name, generic name, or active ingredient.`;
+      return;
+    }
+    renderDrug(drug);
+  }
+
+  function handlePrescriptionText(text, source) {
+    const cleaned = text.replace(/\s+/g, ' ').trim();
+    if (!cleaned) return;
+    const tokens = cleaned.match(/[A-Za-z][A-Za-z0-9\- ]+/g) || [];
+    const candidates = tokens.map((token) => token.trim()).filter(Boolean);
+    const match = candidates.map(findDrug).find(Boolean) || findDrug(cleaned);
+    if (match) {
+      renderDrug(match);
+      document.getElementById('prescription-status').textContent = `${source} recognized ${match.name} from the prescription.`;
+      return;
+    }
+
+    document.getElementById('prescription-status').textContent = `Could not auto-detect medicine from ${source}. Please search by name.`;
+  }
+
+  async function handlePrescriptionFile(file) {
+    if (!file) return;
+    const lowerName = file.name.toLowerCase();
+    const fromName = findDrug(lowerName.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' '));
+    if (fromName) {
+      renderDrug(fromName);
+      document.getElementById('prescription-status').textContent = `Detected ${fromName.name} from uploaded file name.`;
+      return;
+    }
+
+    if (file.type.startsWith('text/')) {
+      const text = await file.text();
+      handlePrescriptionText(text, 'uploaded file');
+      return;
+    }
+
+    const nameGuess = window.prompt('Upload detected. Type the medicine name visible on the prescription so we can analyze it:', '');
+    if (nameGuess) {
+      analyzeQuery(nameGuess);
+      document.getElementById('prescription-status').textContent = `Scanned file ${file.name} and mapped it to ${nameGuess}.`;
+    } else {
+      document.getElementById('prescription-status').textContent = `Uploaded ${file.name}. No medicine name was provided for analysis.`;
+    }
+  }
+
+  async function loadData() {
+    const [drugsResponse, pricesResponse] = await Promise.all([
+      fetch('../data/drugs.csv'),
+      fetch('../data/prices.csv')
+    ]);
+    medicineState.drugs = parseCsv(await drugsResponse.text());
+    medicineState.prices = parseCsv(await pricesResponse.text());
+  }
+
+  function wireControls() {
+    const searchInput = document.getElementById('medicine-search-input');
+    const searchButton = document.getElementById('medicine-search-btn');
+    const fileInput = document.getElementById('prescription-file-input');
+    const uploadButton = document.getElementById('upload-prescription-btn');
+    const scanButton = document.getElementById('scan-prescription-btn');
+    const dropzone = document.getElementById('prescription-dropzone');
+
+    searchButton.addEventListener('click', () => analyzeQuery(searchInput.value));
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        analyzeQuery(searchInput.value);
+      }
+    });
+
+    uploadButton.addEventListener('click', () => fileInput.click());
+    scanButton.addEventListener('click', () => fileInput.click());
+    dropzone.addEventListener('click', (event) => {
+      if (event.target.closest('button')) return;
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', async () => {
+      const file = fileInput.files && fileInput.files[0];
+      if (file) await handlePrescriptionFile(file);
+      fileInput.value = '';
+    });
+
+    dropzone.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      dropzone.classList.add('ring-2', 'ring-primary-container');
+    });
+    dropzone.addEventListener('dragleave', () => {
+      dropzone.classList.remove('ring-2', 'ring-primary-container');
+    });
+    dropzone.addEventListener('drop', async (event) => {
+      event.preventDefault();
+      dropzone.classList.remove('ring-2', 'ring-primary-container');
+      const file = event.dataTransfer.files && event.dataTransfer.files[0];
+      if (file) await handlePrescriptionFile(file);
+    });
+  }
+
+  (async function init() {
+    wireControls();
+    try {
+      await loadData();
+      const startQuery = new URLSearchParams(window.location.search).get('medicine') || '';
+      const initial = findDrug(startQuery) || medicineState.drugs[0];
+      if (initial) {
+        renderDrug(initial);
+      } else {
+        document.getElementById('prescription-status').textContent = 'No medicines were loaded from the dataset.';
+      }
+    } catch (error) {
+      console.error('Failed to load medicine datasets', error);
+      document.getElementById('prescription-status').textContent = 'Dataset load failed. Search and upload controls are still available, but prices cannot be resolved.';
+    }
+  })();
+</script>
 </body></html>

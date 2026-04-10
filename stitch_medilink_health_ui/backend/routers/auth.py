@@ -5,7 +5,6 @@ import jwt
 from datetime import datetime, timedelta
 import os
 import pydantic
-import uuid
 import random
 
 from database import get_db
@@ -16,6 +15,20 @@ router = APIRouter(prefix="/api/auth", tags=["auth"])
 SECRET_KEY = os.environ.get("SECRET_KEY", "super-secret-key-for-hackathon-only")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 # 1 day
+
+
+def generate_unique_blockchain_id(db: Session) -> str:
+    # Retry on the small chance of a random collision.
+    for _ in range(20):
+        bid_part1 = ''.join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=4))
+        bid_part2 = ''.join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=4))
+        blockchain_id = f"ML-{bid_part1}-{bid_part2}"
+
+        existing = db.query(models.PatientProfile).filter(models.PatientProfile.blockchain_id == blockchain_id).first()
+        if existing is None:
+            return blockchain_id
+
+    raise HTTPException(status_code=500, detail="Unable to generate unique patient ID")
 
 def get_password_hash(password: str) -> str:
     return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
@@ -50,9 +63,7 @@ def register_patient(patient: schemas.PatientRegister, db: Session = Depends(get
     db.refresh(new_user)
     
     # Generate a unique blockchain-style ID (e.g. ML-A1B2-C3D4)
-    bid_part1 = ''.join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=4))
-    bid_part2 = ''.join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=4))
-    blockchain_id = f"ML-{bid_part1}-{bid_part2}"
+    blockchain_id = generate_unique_blockchain_id(db)
 
     # Create Profile
     new_profile = models.PatientProfile(

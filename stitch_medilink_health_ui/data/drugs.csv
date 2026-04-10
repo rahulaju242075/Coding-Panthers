@@ -1,0 +1,564 @@
+name,active_ingredient,dosage,category,approved
+Crocin,Paracetamol,500mg,Analgesic,Yes
+Calpol,Paracetamol,500mg,Analgesic,Yes
+Dolo,Paracetamol,650mg,Analgesic,Yes
+Combiflam,Paracetamol,500mg,Analgesic,Yes
+Sumo,Paracetamol,500mg,Analgesic,Yes
+P-650,Paracetamol,650mg,Analgesic,Yes
+Paracetamol,Paracetamol,500mg,Analgesic,Yes
+Fevernil,Paracetamol,500mg,Analgesic,Yes
+Pyrex,Paracetamol,500mg,Analgesic,Yes
+PCM,Paracetamol,500mg,Analgesic,Yes
+Xyka,Paracetamol,500mg,Analgesic,Yes
+Olcin,Paracetamol,500mg,Analgesic,Yes
+Medomol,Paracetamol,500mg,Analgesic,Yes
+Lekadol,Paracetamol,500mg,Analgesic,Yes
+Tempra,Paracetamol,500mg,Analgesic,Yes
+Brufen,Ibuprofen,400mg,NSAID,Yes
+Ibugesic,Ibuprofen,400mg,NSAID,Yes
+Nurofen,Ibuprofen,400mg,NSAID,Yes
+Ibuprofen,Ibuprofen,200mg,NSAID,Yes
+Ibufen,Ibuprofen,200mg,NSAID,Yes
+Combiflam,Ibuprofen,400mg,NSAID,Yes
+Nurol,Ibuprofen,400mg,NSAID,Yes
+Rofen,Ibuprofen,400mg,NSAID,Yes
+Movalis,Meloxicam,15mg,NSAID,Yes
+Melfax,Meloxicam,7.5mg,NSAID,Yes
+Melox,Meloxicam,7.5mg,NSAID,Yes
+M-Cam,Meloxicam,7.5mg,NSAID,Yes
+Mixam,Meloxicam,15mg,NSAID,Yes
+Naproxen,Naproxen,500mg,NSAID,Yes
+Naprox,Naproxen,250mg,NSAID,Yes
+Xenox,Naproxen,500mg,NSAID,Yes
+Diclomol,Diclofenac,50mg,NSAID,Yes
+Voveran,Diclofenac,50mg,NSAID,Yes
+Diclofenac,Diclofenac,50mg,NSAID,Yes
+Cefe,Norfloxacin,400mg,Antibiotic,Yes
+Norfin,Norfloxacin,400mg,Antibiotic,Yes
+Norflox,Norfloxacin,400mg,Antibiotic,Yes
+Norocin,Norfloxacin,400mg,Antibiotic,Yes
+Zoxan,Ofloxacin,200mg,Antibiotic,Yes
+Oflox,Ofloxacin,200mg,Antibiotic,Yes
+Ofloxacin,Ofloxacin,200mg,Antibiotic,Yes
+Moxoff,Ofloxacin,200mg,Antibiotic,Yes
+Augmentin,Amoxicillin,500mg,Antibiotic,Yes
+Mox,Amoxicillin,500mg,Antibiotic,Yes
+Symbipta,Amoxicillin,250mg,Antibiotic,Yes
+Amox,Amoxicillin,500mg,Antibiotic,Yes
+Azithral,Azithromycin,500mg,Antibiotic,Yes
+Azithromycin,Azithromycin,250mg,Antibiotic,Yes
+Zithromax,Azithromycin,500mg,Antibiotic,Yes
+Azithro,Azithromycin,250mg,Antibiotic,Yes
+Cipmox,Amoxicillin,500mg,Antibiotic,Yes
+Roxithromycin,Roxithromycin,150mg,Antibiotic,Yes
+Ciprofloxacin,Ciprofloxacin,250mg,Antibiotic,Yes
+Ciplox,Ciprofloxacin,500mg,Antibiotic,Yes
+Cipro,Ciprofloxacin,500mg,Antibiotic,Yes
+Ziprax,Ciprofloxacin,500mg,Antibiotic,Yes
+Lomex,Levofloxacin,500mg,Antibiotic,Yes
+Levox,Levofloxacin,500mg,Antibiotic,Yes
+Doxycycline,Doxycycline,100mg,Antibiotic,Yes
+Oracea,Doxycycline,100mg,Antibiotic,Yes
+Doxy,Doxycycline,100mg,Antibiotic,Yes
+Pantocid,Pantoprazole,40mg,Antacid,Yes
+Pantrazole,Pantoprazole,40mg,Antacid,Yes
+PPI,Pantoprazole,40mg,Antacid,Yes
+Pantop,Pantoprazole,40mg,Antacid,Yes
+Proton,Pantoprazole,40mg,Antacid,Yes
+Omez,Omeprazole,20mg,Antacid,Yes
+Omeprazole,Omeprazole,20mg,Antacid,Yes
+Omezol,Omeprazole,20mg,Antacid,Yes
+Omesan,Omeprazole,20mg,Antacid,Yes
+Losacar,Losartan,50mg,Antihypertensive,Yes
+Losartan,Losartan,25mg,Antihypertensive,Yes
+Lostar,Losartan,50mg,Antihypertensive,Yes
+Losu,Losartan,25mg,Antihypertensive,Yes
+RSure,Losartan,50mg,Antihypertensive,Yes
+Telma,Telmisartan,40mg,Antihypertensive,Yes
+Telsart,Telmisartan,40mg,Antihypertensive,Yes
+Telmisartan,Telmisartan,40mg,Antihypertensive,Yes
+Telmistat,Telmisartan,40mg,Antihypertensive,Yes
+T-Star,Telmisartan,40mg,Antihypertensive,Yes
+Amlip,Amlodipine,5mg,Antihypertensive,Yes
+Amlodipine,Amlodipine,5mg,Antihypertensive,Yes
+Stamlo,Amlodipine,5mg,Antihypertensive,Yes
+Amlodip,Amlodipine,5mg,Antihypertensive,Yes
+C-Card,Amlodipine,5mg,Antihypertensive,Yes
+C-Lip,Amlodipine,5mg,Antihypertensive,Yes
+Lupin,Amlodipine,5mg,Antihypertensive,Yes
+Nicosun,Amlodipine,5mg,Antihypertensive,Yes
+Vaspin,Amlodipine,5mg,Antihypertensive,Yes
+Glucophage,Metformin,500mg,Antidiabetic,Yes
+Metformin,Metformin,500mg,Antidiabetic,Yes
+Glycomet,Metformin,500mg,Antidiabetic,Yes
+Bigmet,Metformin,500mg,Antidiabetic,Yes
+Metrogyl,Metformin,500mg,Antidiabetic,Yes
+Obimet,Metformin,500mg,Antidiabetic,Yes
+Dianorm,Metformin,500mg,Antidiabetic,Yes
+Daonil,Glibenclamide,5mg,Antidiabetic,Yes
+Glyburide,Glibenclamide,5mg,Antidiabetic,Yes
+Glibenclamide,Glibenclamide,5mg,Antidiabetic,Yes
+Pioglitazone,Pioglitazone,15mg,Antidiabetic,Yes
+Actos,Pioglitazone,15mg,Antidiabetic,Yes
+Reclide,Repaglinide,1mg,Antidiabetic,Yes
+Repaglinide,Repaglinide,0.5mg,Antidiabetic,Yes
+Janumet,Metformin,500mg,Antidiabetic,Yes
+Isrok,Escitalopram,10mg,Antidepressant,Yes
+Escitalopram,Escitalopram,10mg,Antidepressant,Yes
+Sertralin,Sertraline,50mg,Antidepressant,Yes
+Sertraline,Sertraline,50mg,Antidepressant,Yes
+Lustral,Sertraline,50mg,Antidepressant,Yes
+Seral,Sertraline,50mg,Antidepressant,Yes
+Zoloft,Sertraline,50mg,Antidepressant,Yes
+Nexium,Esomeprazole,20mg,Antacid,Yes
+Esmolab,Esomeprazole,20mg,Antacid,Yes
+Esomeprazole,Esomeprazole,20mg,Antacid,Yes
+Nepram,Esomeprazole,20mg,Antacid,Yes
+Sompraz,Esomeprazole,20mg,Antacid,Yes
+Astelin,Montelukast,10mg,Antiallergic,Yes
+Montelukast,Montelukast,10mg,Antiallergic,Yes
+Singulair,Montelukast,10mg,Antiallergic,Yes
+Montair,Montelukast,10mg,Antiallergic,Yes
+Montu,Montelukast,4mg,Antiallergic,Yes
+Fexofenadine,Fexofenadine,120mg,Antiallergic,Yes
+Allegra,Fexofenadine,120mg,Antiallergic,Yes
+Fixodex,Fexofenadine,180mg,Antiallergic,Yes
+Histal,Chlorpheniramine,4mg,Antiallergic,Yes
+Chlorpheniramine,Chlorpheniramine,4mg,Antiallergic,Yes
+Avil,Chlorpheniramine,25mg,Antiallergic,Yes
+Phenergan,Promethazine,25mg,Antiallergic,Yes
+Prime,Cetirizine,10mg,Antiallergic,Yes
+Cetrizine,Cetirizine,10mg,Antiallergic,Yes
+Cetirizine,Cetirizine,10mg,Antiallergic,Yes
+Citrin,Cetirizine,10mg,Antiallergic,Yes
+Lorfast,Loratadine,10mg,Antiallergic,Yes
+Loratadine,Loratadine,10mg,Antiallergic,Yes
+Lorinol,Loratadine,10mg,Antiallergic,Yes
+Aerin,Loratadine,10mg,Antiallergic,Yes
+Medivinc,Levocetirizine,5mg,Antiallergic,Yes
+Levocet,Levocetirizine,5mg,Antiallergic,Yes
+XYZ,Levocetirizine,5mg,Antiallergic,Yes
+Rabeprazole,Rabeprazole,20mg,Antacid,Yes
+Rabecid,Rabeprazole,20mg,Antacid,Yes
+Rabi,Rabeprazole,20mg,Antacid,Yes
+Raz,Rabeprazole,20mg,Antacid,Yes
+Ranitidine,Ranitidine,150mg,Antacid,Yes
+Zantac,Ranitidine,150mg,Antacid,Yes
+Ranitin,Ranitidine,150mg,Antacid,Yes
+R-Loc,Ranitidine,150mg,Antacid,Yes
+Histac,Ranitidine,150mg,Antacid,Yes
+Famotidine,Famotidine,20mg,Antacid,Yes
+Famocid,Famotidine,20mg,Antacid,Yes
+Famoplex,Famotidine,20mg,Antacid,Yes
+Gaviscon,Alginic Acid,500mg,Antacid,Yes
+Algicon,Alginic Acid,500mg,Antacid,Yes
+Sucralfate,Sucralfate,1g,Antulcer,Yes
+Sucral,Sucralfate,1g,Antulcer,Yes
+Alsucrate,Sucralfate,1g,Antulcer,Yes
+Misoprostol,Misoprostol,200mcg,Antulcer,Yes
+Cytotec,Misoprostol,200mcg,Antulcer,Yes
+Domperidone,Domperidone,10mg,Antiemetic,Yes
+Domstal,Domperidone,10mg,Antiemetic,Yes
+Dom,Domperidone,10mg,Antiemetic,Yes
+Domperon,Domperidone,10mg,Antiemetic,Yes
+Motilium,Domperidone,10mg,Antiemetic,Yes
+Perinorm,Metoclopramide,10mg,Antiemetic,Yes
+Metoclopramide,Metoclopramide,10mg,Antiemetic,Yes
+Reglan,Metoclopramide,10mg,Antiemetic,Yes
+Ondansetron,Ondansetron,4mg,Antiemetic,Yes
+Ondane,Ondansetron,4mg,Antiemetic,Yes
+Ondissolve,Ondansetron,4mg,Antiemetic,Yes
+Zofran,Ondansetron,4mg,Antiemetic,Yes
+Emeset,Ondansetron,4mg,Antiemetic,Yes
+Granisetron,Granisetron,1mg,Antiemetic,Yes
+Cinnarizine,Cinnarizine,25mg,Antivertigo,Yes
+Stugeron,Cinnarizine,25mg,Antivertigo,Yes
+Betahistine,Betahistine,16mg,Antivertigo,Yes
+Betavert,Betahistine,16mg,Antivertigo,Yes
+Vertin,Betahistine,16mg,Antivertigo,Yes
+Levocarnitine,Levocarnitine,500mg,Supplement,Yes
+L-Carnitine,Levocarnitine,500mg,Supplement,Yes
+Carnisure,Levocarnitine,500mg,Supplement,Yes
+Ursocol,Ursodeoxycholic Acid,300mg,Hepatoprotective,Yes
+Ursodiol,Ursodeoxycholic Acid,300mg,Hepatoprotective,Yes
+Ursogal,Ursodeoxycholic Acid,300mg,Hepatoprotective,Yes
+Ursodil,Ursodeoxycholic Acid,150mg,Hepatoprotective,Yes
+Silymarin,Silymarin,140mg,Hepatoprotective,Yes
+Legalon,Silymarin,140mg,Hepatoprotective,Yes
+Alfuzosin,Alfuzosin,10mg,BPH,Yes
+Alfuzin,Alfuzosin,10mg,BPH,Yes
+Xatral,Alfuzosin,10mg,BPH,Yes
+Finasteride,Finasteride,5mg,BPH,Yes
+Finast,Finasteride,5mg,BPH,Yes
+Proscar,Finasteride,5mg,BPH,Yes
+Finpecia,Finasteride,1mg,BPH,Yes
+Tamsulosin,Tamsulosin,0.4mg,BPH,Yes
+Tamsin,Tamsulosin,0.4mg,BPH,Yes
+Flomax,Tamsulosin,0.4mg,BPH,Yes
+Tamson,Tamsulosin,0.4mg,BPH,Yes
+Dutasteride,Dutasteride,0.5mg,BPH,Yes
+Dutas,Dutasteride,0.5mg,BPH,Yes
+Avodart,Dutasteride,0.5mg,BPH,Yes
+Spironolactone,Spironolactone,25mg,Diuretic,Yes
+Aldactone,Spironolactone,25mg,Diuretic,Yes
+Spiractin,Spironolactone,25mg,Diuretic,Yes
+Lasix,Furosemide,40mg,Diuretic,Yes
+Furosemide,Furosemide,40mg,Diuretic,Yes
+Frusenex,Furosemide,40mg,Diuretic,Yes
+Torasemide,Torasemide,10mg,Diuretic,Yes
+Torem,Torasemide,10mg,Diuretic,Yes
+Diamox,Acetazolamide,250mg,Diuretic,Yes
+Acetazolamide,Acetazolamide,250mg,Diuretic,Yes
+Mannitol,Mannitol,20%,Diuretic,Yes
+Aten,Atenolol,50mg,Antihypertensive,Yes
+Atenolol,Atenolol,50mg,Antihypertensive,Yes
+Tenormin,Atenolol,50mg,Antihypertensive,Yes
+Aznol,Atenolol,50mg,Antihypertensive,Yes
+Tensodin,Atenolol,50mg,Antihypertensive,Yes
+Bisoprolol,Bisoprolol,5mg,Antihypertensive,Yes
+Bisomer,Bisoprolol,5mg,Antihypertensive,Yes
+Concor,Bisoprolol,5mg,Antihypertensive,Yes
+Metoprolol,Metoprolol,50mg,Antihypertensive,Yes
+Lopresor,Metoprolol,50mg,Antihypertensive,Yes
+Carvedilol,Carvedilol,12.5mg,Antihypertensive,Yes
+Carvol,Carvedilol,12.5mg,Antihypertensive,Yes
+Dilatrend,Carvedilol,12.5mg,Antihypertensive,Yes
+Labetalol,Labetalol,100mg,Antihypertensive,Yes
+Nebivolol,Nebivolol,5mg,Antihypertensive,Yes
+Neb,Nebivolol,5mg,Antihypertensive,Yes
+Nebistat,Nebivolol,5mg,Antihypertensive,Yes
+Clonidine,Clonidine,0.1mg,Antihypertensive,Yes
+Arkamin,Clonidine,0.1mg,Antihypertensive,Yes
+Methyldopa,Methyldopa,500mg,Antihypertensive,Yes
+Aldomet,Methyldopa,500mg,Antihypertensive,Yes
+Hydralazine,Hydralazine,25mg,Antihypertensive,Yes
+Minoxidil,Minoxidil,10mg,Antihypertensive,Yes
+Loniten,Minoxidil,10mg,Antihypertensive,Yes
+Prazosin,Prazosin,5mg,Antihypertensive,Yes
+Minipres,Prazosin,5mg,Antihypertensive,Yes
+Doxazosin,Doxazosin,4mg,Antihypertensive,Yes
+Doxacard,Doxazosin,4mg,Antihypertensive,Yes
+Phenylephrine,Phenylephrine,10mg,Decongestant,Yes
+Otrivin,Phenylephrine,0.1%,Decongestant,Yes
+Nasivion,Oxymetazoline,0.05%,Decongestant,Yes
+Xylocaine,Lidocaine,2%,Local Anesthetic,Yes
+Lignocaine,Lidocaine,2%,Local Anesthetic,Yes
+Lidocaine,Lidocaine,2%,Local Anesthetic,Yes
+Emla,Lidocaine Prilocaine,5%,Local Anesthetic,Yes
+Diclofenac gel,Diclofenac Gel,1%,Topical NSAID,Yes
+Voveran gel,Diclofenac Gel,1%,Topical NSAID,Yes
+Volini,Diclofenac Gel,1%,Topical NSAID,Yes
+Metronidazole,Metronidazole,400mg,Antiprotozoal,Yes
+Coxen,Metronidazole,400mg,Antiprotozoal,Yes
+Flagyl,Metronidazole,400mg,Antiprotozoal,Yes
+Nidazole,Metronidazole,400mg,Antiprotozoal,Yes
+Tinidazole,Tinidazole,500mg,Antiprotozoal,Yes
+Secnidazole,Secnidazole,1g,Antiprotozoal,Yes
+Albendazole,Albendazole,400mg,Anthelmintic,Yes
+Albenza,Albendazole,400mg,Anthelmintic,Yes
+Zentel,Albendazole,400mg,Anthelmintic,Yes
+Mebendazole,Mebendazole,100mg,Anthelmintic,Yes
+Vermox,Mebendazole,100mg,Anthelmintic,Yes
+Pyrantel,Pyrantel Pamoate,250mg,Anthelmintic,Yes
+Combantrin,Pyrantel Pamoate,250mg,Anthelmintic,Yes
+Ivermectin,Ivermectin,12mg,Anthelmintic,Yes
+Ketoconazole,Ketoconazole,200mg,Antifungal,Yes
+Nizoral,Ketoconazole,200mg,Antifungal,Yes
+Fluconazole,Fluconazole,150mg,Antifungal,Yes
+Flucos,Fluconazole,150mg,Antifungal,Yes
+Forcan,Fluconazole,150mg,Antifungal,Yes
+Zocon,Fluconazole,150mg,Antifungal,Yes
+Itraconazole,Itraconazole,100mg,Antifungal,Yes
+Canditral,Itraconazole,100mg,Antifungal,Yes
+Itrizole,Itraconazole,100mg,Antifungal,Yes
+Terbinafine,Terbinafine,250mg,Antifungal,Yes
+Lamisil,Terbinafine,250mg,Antifungal,Yes
+Canesten,Clotrimazole,1%,Antifungal,Yes
+Candid,Clotrimazole,1%,Antifungal,Yes
+Clotrimazole,Clotrimazole,1%,Antifungal,Yes
+Miconazole,Miconazole,2%,Antifungal,Yes
+Daktarin,Miconazole,2%,Antifungal,Yes
+Nystatin,Nystatin,500000IU,Antifungal,Yes
+Acyclovir,Acyclovir,400mg,Antiviral,Yes
+Zovirax,Acyclovir,400mg,Antiviral,Yes
+Valacyclovir,Valacyclovir,500mg,Antiviral,Yes
+Valtrex,Valacyclovir,500mg,Antiviral,Yes
+Oseltamivir,Oseltamivir,75mg,Antiviral,Yes
+Tamiflu,Oseltamivir,75mg,Antiviral,Yes
+Cyanocobalamin,Cyanocobalamin,1000mcg,Vitamin B12,Yes
+Cobadex,Cyanocobalamin,1000mcg,Vitamin B12,Yes
+Mecobalamin,Mecobalamin,500mcg,Vitamin B12,Yes
+Mecobal,Mecobalamin,500mcg,Vitamin B12,Yes
+Methylcobalamin,Methylcobalamin,500mcg,Vitamin B12,Yes
+Methycobal,Methylcobalamin,500mcg,Vitamin B12,Yes
+Thiamine,Thiamine,100mg,Vitamin B1,Yes
+Benerva,Thiamine,100mg,Vitamin B1,Yes
+Pyridoxine,Pyridoxine,100mg,Vitamin B6,Yes
+Benadon,Pyridoxine,100mg,Vitamin B6,Yes
+Nicotinic acid,Nicotinic Acid,500mg,Vitamin B3,Yes
+Niacin,Nicotinic Acid,500mg,Vitamin B3,Yes
+Ascorbic acid,Ascorbic Acid,500mg,Vitamin C,Yes
+Redoxon,Ascorbic Acid,500mg,Vitamin C,Yes
+C-500,Ascorbic Acid,500mg,Vitamin C,Yes
+Calciferol,Calciferol,60000IU,Vitamin D,Yes
+D-Rise,Calciferol,60000IU,Vitamin D,Yes
+D-3,Cholecalciferol,60000IU,Vitamin D,Yes
+Osteocare,Cholecalciferol,60000IU,Vitamin D,Yes
+Calcium carbonate,Calcium Carbonate,500mg,Calcium Supplement,Yes
+Calcimax,Calcium Carbonate,500mg,Calcium Supplement,Yes
+Calciplus,Calcium Carbonate,500mg,Calcium Supplement,Yes
+Calcium gluconate,Calcium Gluconate,500mg,Calcium Supplement,Yes
+Calcium-D,Calcium Carbonate Vitamin D3,500mg,Calcium Supplement,Yes
+Calcirol,Calcium Carbonate Vitamin D3,500mg,Calcium Supplement,Yes
+Shelcal,Calcium Carbonate Vitamin D3,500mg,Calcium Supplement,Yes
+Gemcal,Calcium Carbonate Vitamin D3,500mg,Calcium Supplement,Yes
+L-3,Levothyroxine,50mcg,Thyroid,Yes
+Thyrox,Levothyroxine,50mcg,Thyroid,Yes
+Eltroxin,Levothyroxine,50mcg,Thyroid,Yes
+Thyronorm,Levothyroxine,50mcg,Thyroid,Yes
+Thyroxin,Levothyroxine,25mcg,Thyroid,Yes
+Thyropur,Levothyroxine,25mcg,Thyroid,Yes
+Thyrofit,Levothyroxine,25mcg,Thyroid,Yes
+Methimazole,Methimazole,10mg,Antithyroid,Yes
+Favistan,Methimazole,10mg,Antithyroid,Yes
+Strumazole,Methimazole,10mg,Antithyroid,Yes
+Carbimazole,Carbimazole,10mg,Antithyroid,Yes
+PTU,Propylthiouracil,100mg,Antithyroid,Yes
+Propylthiouracil,Propylthiouracil,100mg,Antithyroid,Yes
+Propycil,Propylthiouracil,100mg,Antithyroid,Yes
+Dexamethasone,Dexamethasone,0.5mg,Corticosteroid,Yes
+Dexona,Dexamethasone,0.5mg,Corticosteroid,Yes
+Decadron,Dexamethasone,0.5mg,Corticosteroid,Yes
+Prednisone,Prednisone,10mg,Corticosteroid,Yes
+Wysolone,Prednisone,10mg,Corticosteroid,Yes
+Prednolon,Prednisone,10mg,Corticosteroid,Yes
+Solucortif,Prednisone,10mg,Corticosteroid,Yes
+Prednisolone,Prednisolone,10mg,Corticosteroid,Yes
+Solu-Medrol,Methylprednisolone,40mg,Corticosteroid,Yes
+Methylprednisolone,Methylprednisolone,40mg,Corticosteroid,Yes
+Medrol,Methylprednisolone,40mg,Corticosteroid,Yes
+Hydrocortisone,Hydrocortisone,10mg,Corticosteroid,Yes
+Lycortin,Hydrocortisone,10mg,Corticosteroid,Yes
+Cortef,Hydrocortisone,10mg,Corticosteroid,Yes
+Triamcinolone,Triamcinolone,4mg,Corticosteroid,Yes
+Triacort,Triamcinolone,4mg,Corticosteroid,Yes
+Kenalog,Triamcinolone,40mg,Corticosteroid,Yes
+Betamethasone,Betamethasone,0.5mg,Corticosteroid,Yes
+Betnovate,Betamethasone,0.5mg,Corticosteroid,Yes
+Celestone,Betamethasone,0.5mg,Corticosteroid,Yes
+Fluticasone,Fluticasone,100mcg,Corticosteroid,Yes
+Flixotide,Fluticasone,100mcg,Corticosteroid,Yes
+Seretide,Fluticasone Salmeterol,250mcg,Corticosteroid,Yes
+Symbicort,Budesonide Formoterol,200mcg,Corticosteroid,Yes
+Budesonide,Budesonide,200mcg,Corticosteroid,Yes
+Budecort,Budesonide,200mcg,Corticosteroid,Yes
+Pulmicort,Budesonide,200mcg,Corticosteroid,Yes
+Mometasone,Mometasone,100mcg,Corticosteroid,Yes
+Asmanex,Mometasone,100mcg,Corticosteroid,Yes
+Nasonex,Mometasone,100mcg,Corticosteroid,Yes
+Ciclesonide,Ciclesonide,200mcg,Corticosteroid,Yes
+Alvesco,Ciclesonide,200mcg,Corticosteroid,Yes
+Beclomethasone,Beclomethasone,50mcg,Corticosteroid,Yes
+Becotide,Beclomethasone,50mcg,Corticosteroid,Yes
+Clobetasol,Clobetasol,0.05%,Corticosteroid,Yes
+Tenovate,Clobetasol,0.05%,Corticosteroid,Yes
+Dermovate,Clobetasol,0.05%,Corticosteroid,Yes
+Salmeterol,Salmeterol,50mcg,Bronchodilator,Yes
+Serevent,Salmeterol,50mcg,Bronchodilator,Yes
+Salvan,Salmeterol,50mcg,Bronchodilator,Yes
+Formoterol,Formoterol,12mcg,Bronchodilator,Yes
+Foradil,Formoterol,12mcg,Bronchodilator,Yes
+Oxymetazoline,Oxymetazoline,0.05%,Decongestant,Yes
+Afrin,Oxymetazoline,0.05%,Decongestant,Yes
+Pseudoephedrine,Pseudoephedrine,30mg,Decongestant,Yes
+Sudafed,Pseudoephedrine,30mg,Decongestant,Yes
+Phenylephrine,Phenylephrine,0.25%,Decongestant,Yes
+Neo-Synephrine,Phenylephrine,0.25%,Decongestant,Yes
+Theophylline,Theophylline,100mg,Bronchodilator,Yes
+Elixophylline,Theophylline,100mg,Bronchodilator,Yes
+Uniphyllin,Theophylline,100mg,Bronchodilator,Yes
+Aminophylline,Aminophylline,100mg,Bronchodilator,Yes
+Doxophylline,Doxophylline,400mg,Bronchodilator,Yes
+Etophylline,Etophylline,200mg,Bronchodilator,Yes
+Deriphylline,Etophylline,200mg,Bronchodilator,Yes
+Albuterol,Salbutamol,100mcg,Bronchodilator,Yes
+Salbutamol,Salbutamol,100mcg,Bronchodilator,Yes
+Ventolin,Salbutamol,100mcg,Bronchodilator,Yes
+Asthalin,Salbutamol,100mcg,Bronchodilator,Yes
+Proventil,Salbutamol,100mcg,Bronchodilator,Yes
+Terbutaline,Terbutaline,500mcg,Bronchodilator,Yes
+Brethine,Terbutaline,500mcg,Bronchodilator,Yes
+Bricanyl,Terbutaline,500mcg,Bronchodilator,Yes
+Epinephrine,Epinephrine,1mg,Bronchodilator,Yes
+Adrenaline,Epinephrine,1mg,Bronchodilator,Yes
+Ephedrine,Ephedrine,25mg,Bronchodilator,Yes
+Montelukast,Montelukast,5mg,Antiallergic,Yes
+Singulair,Montelukast,5mg,Antiallergic,Yes
+Montair,Montelukast,5mg,Antiallergic,Yes
+Singulair,Montelukast,10mg,Antiallergic,Yes
+Zafirlukast,Zafirlukast,20mg,Antiallergic,Yes
+Accolate,Zafirlukast,20mg,Antiallergic,Yes
+Zyflo,Zafirlukast,20mg,Antiallergic,Yes
+Zileuton,Zileuton,600mg,Antiallergic,Yes
+Ketotifen,Ketotifen,1mg,Antiallergic,Yes
+Zaditen,Ketotifen,1mg,Antiallergic,Yes
+Olopatadine,Olopatadine,0.1%,Antiallergic,Yes
+Pataday,Olopatadine,0.1%,Antiallergic,Yes
+Patran,Olopatadine,0.1%,Antiallergic,Yes
+Azelastine,Azelastine,0.1%,Antiallergic,Yes
+Optivar,Azelastine,0.1%,Antiallergic,Yes
+Astelin,Azelastine,0.1%,Antiallergic,Yes
+Naphazoline,Naphazoline,0.05%,Decongestant,Yes
+Naphcon,Naphazoline,0.05%,Decongestant,Yes
+Apraclonidine,Apraclonidine,0.5%,Antiglaucoma,Yes
+Alphagan,Apraclonidine,0.5%,Antiglaucoma,Yes
+Brimonidine,Brimonidine,0.2%,Antiglaucoma,Yes
+Timolol,Timolol,0.5%,Antiglaucoma,Yes
+Timoptic,Timolol,0.5%,Antiglaucoma,Yes
+Betagan,Timolol,0.5%,Antiglaucoma,Yes
+Latanoprost,Latanoprost,0.005%,Antiglaucoma,Yes
+Xalatan,Latanoprost,0.005%,Antiglaucoma,Yes
+Xalacom,Latanoprost Timolol,0.005%,Antiglaucoma,Yes
+Travoprost,Travoprost,0.004%,Antiglaucoma,Yes
+Travatan,Travoprost,0.004%,Antiglaucoma,Yes
+Bimatoprost,Bimatoprost,0.03%,Antiglaucoma,Yes
+Lumigan,Bimatoprost,0.03%,Antiglaucoma,Yes
+Dorzolamide,Dorzolamide,2%,Antiglaucoma,Yes
+Trusopt,Dorzolamide,2%,Antiglaucoma,Yes
+Cosopt,Dorzolamide Timolol,2%,Antiglaucoma,Yes
+Acetazolamide,Acetazolamide,250mg,Antiglaucoma,Yes
+Methazolamide,Methazolamide,50mg,Antiglaucoma,Yes
+Neptazane,Methazolamide,50mg,Antiglaucoma,Yes
+Mannitol,Mannitol,20%,Antiglaucoma,Yes
+Osmitrol,Mannitol,20%,Antiglaucoma,Yes
+Isosorbide dinitrate,Isosorbide Dinitrate,10mg,Antianginal,Yes
+Isordil,Isosorbide Dinitrate,10mg,Antianginal,Yes
+Ismo,Isosorbide Dinitrate,10mg,Antianginal,Yes
+Monoket,Isosorbide Dinitrate,10mg,Antianginal,Yes
+Isosorbide mononitrate,Isosorbide Mononitrate,20mg,Antianginal,Yes
+Imdur,Isosorbide Mononitrate,20mg,Antianginal,Yes
+Mononit,Isosorbide Mononitrate,20mg,Antianginal,Yes
+Nitroglycerin,Nitroglycerin,0.4mg,Antianginal,Yes
+Nitrostat,Nitroglycerin,0.4mg,Antianginal,Yes
+Glyceryl trinitrate,Nitroglycerin,0.5mg,Antianginal,Yes
+Nicorandil,Nicorandil,10mg,Antianginal,Yes
+Angic,Nicorandil,10mg,Antianginal,Yes
+Ivabradine,Ivabradine,5mg,Antianginal,Yes
+Corlanor,Ivabradine,5mg,Antianginal,Yes
+Procainamide,Procainamide,1000mg,Antiarrhythmic,Yes
+Pronestyl,Procainamide,1000mg,Antiarrhythmic,Yes
+Quinidine,Quinidine,200mg,Antiarrhythmic,Yes
+Quinidine,Quinidine,200mg,Antiarrhythmic,Yes
+Disopyramide,Disopyramide,100mg,Antiarrhythmic,Yes
+Norpace,Disopyramide,100mg,Antiarrhythmic,Yes
+Mexiletine,Mexiletine,200mg,Antiarrhythmic,Yes
+Mexitil,Mexiletine,200mg,Antiarrhythmic,Yes
+Flecainide,Flecainide,100mg,Antiarrhythmic,Yes
+Tambocor,Flecainide,100mg,Antiarrhythmic,Yes
+Propafenone,Propafenone,300mg,Antiarrhythmic,Yes
+Rythmol,Propafenone,300mg,Antiarrhythmic,Yes
+Irbesartan,Irbesartan,150mg,Antihypertensive,Yes
+Aprovel,Irbesartan,150mg,Antihypertensive,Yes
+Cozaar,Losartan,50mg,Antihypertensive,Yes
+Olmesartan,Olmesartan,20mg,Antihypertensive,Yes
+Olmetec,Olmesartan,20mg,Antihypertensive,Yes
+Benicar,Olmesartan,20mg,Antihypertensive,Yes
+Valsartan,Valsartan,80mg,Antihypertensive,Yes
+Diovan,Valsartan,80mg,Antihypertensive,Yes
+Exforge,Amlodipine Valsartan,5mg,Antihypertensive,Yes
+Candesartan,Candesartan,8mg,Antihypertensive,Yes
+Atacand,Candesartan,8mg,Antihypertensive,Yes
+Azilsartan,Azilsartan,40mg,Antihypertensive,Yes
+Edarbi,Azilsartan,40mg,Antihypertensive,Yes
+Perindopril,Perindopril,4mg,Antihypertensive,Yes
+Coversyl,Perindopril,4mg,Antihypertensive,Yes
+Lisinopril,Lisinopril,10mg,Antihypertensive,Yes
+Zestril,Lisinopril,10mg,Antihypertensive,Yes
+Prinivil,Lisinopril,10mg,Antihypertensive,Yes
+Enalapril,Enalapril,5mg,Antihypertensive,Yes
+Renitec,Enalapril,5mg,Antihypertensive,Yes
+Ramipril,Ramipril,5mg,Antihypertensive,Yes
+Altace,Ramipril,5mg,Antihypertensive,Yes
+Trandolapril,Trandolapril,2mg,Antihypertensive,Yes
+Quinapril,Quinapril,10mg,Antihypertensive,Yes
+Accupril,Quinapril,10mg,Antihypertensive,Yes
+Fosinopril,Fosinopril,10mg,Antihypertensive,Yes
+Monopril,Fosinopril,10mg,Antihypertensive,Yes
+Captopril,Captopril,25mg,Antihypertensive,Yes
+Capoten,Captopril,25mg,Antihypertensive,Yes
+Eplerenone,Eplerenone,50mg,Antihypertensive,Yes
+Inspra,Eplerenone,50mg,Antihypertensive,Yes
+Amiloride,Amiloride,5mg,Diuretic,Yes
+Midamor,Amiloride,5mg,Diuretic,Yes
+Triamterene,Triamterene,50mg,Diuretic,Yes
+Dyrenium,Triamterene,50mg,Diuretic,Yes
+Bumetanide,Bumetanide,1mg,Diuretic,Yes
+Bumex,Bumetanide,1mg,Diuretic,Yes
+Chlorthalidide,Chlorthalidide,25mg,Diuretic,Yes
+Hygroton,Chlorthalidide,25mg,Diuretic,Yes
+Metolazone,Metolazone,2.5mg,Diuretic,Yes
+Zaroxolyn,Metolazone,2.5mg,Diuretic,Yes
+Indapamide,Indapamide,1.5mg,Diuretic,Yes
+Lozol,Indapamide,1.5mg,Diuretic,Yes
+Bendroflumethiazide,Bendroflumethiazide,2.5mg,Diuretic,Yes
+Naturetin,Bendroflumethiazide,2.5mg,Diuretic,Yes
+Hydrochlorothiazide,Hydrochlorothiazide,25mg,Diuretic,Yes
+Microzide,Hydrochlorothiazide,25mg,Diuretic,Yes
+Co-Trimoxazole,Sulfamethoxazole Trimethoprim,800mg,Antibiotic,Yes
+Bactrim,Sulfamethoxazole Trimethoprim,800mg,Antibiotic,Yes
+Septran,Sulfamethoxazole Trimethoprim,800mg,Antibiotic,Yes
+Cephalexin,Cephalexin,500mg,Antibiotic,Yes
+Keflex,Cephalexin,500mg,Antibiotic,Yes
+Monocef,Cephalexin,500mg,Antibiotic,Yes
+Ceftriaxone,Ceftriaxone,1g,Antibiotic,Yes
+Ceftran,Ceftriaxone,1g,Antibiotic,Yes
+Ceftazidime,Ceftazidime,1g,Antibiotic,Yes
+Cefzim,Ceftazidime,1g,Antibiotic,Yes
+Cefoperazone,Cefoperazone,1g,Antibiotic,Yes
+Cefepime,Cefepime,1g,Antibiotic,Yes
+Cefixime,Cefixime,200mg,Antibiotic,Yes
+Suprax,Cefixime,200mg,Antibiotic,Yes
+Cefdinir,Cefdinir,300mg,Antibiotic,Yes
+Cefpodoxime,Cefpodoxime,200mg,Antibiotic,Yes
+Cefuroxime,Cefuroxime,250mg,Antibiotic,Yes
+Zinacef,Cefuroxime,250mg,Antibiotic,Yes
+Meropenem,Meropenem,1g,Antibiotic,Yes
+Meronem,Meropenem,1g,Antibiotic,Yes
+Imipenem,Imipenem,500mg,Antibiotic,Yes
+Primaxin,Imipenem Cilastatin,500mg,Antibiotic,Yes
+Ertapenem,Ertapenem,1g,Antibiotic,Yes
+Invanz,Ertapenem,1g,Antibiotic,Yes
+Vancomycin,Vancomycin,1g,Antibiotic,Yes
+Vancocin,Vancomycin,1g,Antibiotic,Yes
+Teicoplanin,Teicoplanin,400mg,Antibiotic,Yes
+Targocid,Teicoplanin,400mg,Antibiotic,Yes
+Linezolid,Linezolid,600mg,Antibiotic,Yes
+Zyvox,Linezolid,600mg,Antibiotic,Yes
+Daptomycin,Daptomycin,500mg,Antibiotic,Yes
+Cubicin,Daptomycin,500mg,Antibiotic,Yes
+Colistin,Colistin,500mg,Antibiotic,Yes
+Tigecycline,Tigecycline,50mg,Antibiotic,Yes
+Tygacil,Tigecycline,50mg,Antibiotic,Yes
+Clindamycin,Clindamycin,300mg,Antibiotic,Yes
+Dalacin,Clindamycin,300mg,Antibiotic,Yes
+Azithromycin,Azithromycin,500mg,Antibiotic,Yes
+Clarithromycin,Clarithromycin,500mg,Antibiotic,Yes
+Biaxin,Clarithromycin,500mg,Antibiotic,Yes
+Erythromycin,Erythromycin,500mg,Antibiotic,Yes
+Erythrocin,Erythromycin,500mg,Antibiotic,Yes
+Mupirocin,Mupirocin,2%,Antibiotic,Yes
+Bactroban,Mupirocin,2%,Antibiotic,Yes
+Fusidic acid,Fusidic acid,2%,Antibiotic,Yes
+Fucidin,Fusidic acid,2%,Antibiotic,Yes
+Rifampicin,Rifampicin,450mg,Antibiotic,Yes
+Rimactan,Rifampicin,450mg,Antibiotic,Yes
+Ethambutol,Ethambutol,400mg,Antibiotic,Yes
+Mycobutin,Ethambutol,400mg,Antibiotic,Yes
+Isoniazid,Isoniazid,100mg,Antibiotic,Yes
+Isoniazid,Isoniazid,100mg,Antibiotic,Yes
+Pyrazinamide,Pyrazinamide,500mg,Antibiotic,Yes
+Streptomycin,Streptomycin,1g,Antibiotic,Yes
+Pyrazinamide,Pyrazinamide,500mg,Antibiotic,Yes
+Ethionamide,Ethionamide,250mg,Antibiotic,Yes
+Cycloserine,Cycloserine,250mg,Antibiotic,Yes
+PA-15,Cycloserine,250mg,Antibiotic,Yes

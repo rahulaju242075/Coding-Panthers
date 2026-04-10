@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 import os
 
 from database import engine, Base
@@ -28,6 +29,11 @@ app.include_router(patient.router)
 app.include_router(doctor.router)
 
 app.mount("/api/files", StaticFiles(directory="uploads"), name="uploads")
+
+
+@app.get("/")
+def root_redirect():
+    return RedirectResponse(url="/landing_page/landing_page.html")
 
 # Mount the frontend directories as static files
 # Since backend/main.py is in stitch_medilink_health_ui/backend,

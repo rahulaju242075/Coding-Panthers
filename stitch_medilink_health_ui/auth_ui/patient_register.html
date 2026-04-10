@@ -123,10 +123,17 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-                
-                const data = await res.json();
+
+                const raw = await res.text();
+                let data = {};
+                try {
+                    data = raw ? JSON.parse(raw) : {};
+                } catch (_) {
+                    data = {};
+                }
+
                 if (!res.ok) {
-                    document.getElementById('errorMsg').textContent = data.detail || 'Registration failed';
+                    document.getElementById('errorMsg').textContent = data.detail || data.message || `Registration failed (${res.status})`;
                     document.getElementById('errorMsg').classList.remove('hidden');
                 } else {
                     localStorage.setItem('medilink_token', data.access_token);

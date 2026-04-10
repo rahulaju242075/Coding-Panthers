@@ -318,7 +318,7 @@
 </div>
 <!-- Affordable Medicine Recommendations (Smart Savings) -->
 <div class="bg-white rounded-2xl p-6 custom-shadow border border-slate-50">
-<div class="flex items-center gap-2 mb-4">
+<div onclick="window.location.href='../medicine_analysis_intelligence/medicine_analysis_intelligence.html'" class="flex items-center gap-2 mb-4 cursor-pointer">
 <span class="material-symbols-outlined text-primary">biotech</span>
 <h3 class="text-base font-bold font-headline">Medicine Intelligence Center</h3>
 </div>
@@ -327,7 +327,7 @@
                 </p>
 <div class="space-y-4">
 <div class="flex flex-col gap-2">
-<button class="w-full py-3 bg-primary text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-primary-container transition-all shadow-md shadow-blue-100">
+<button onclick="window.location.href='../medicine_analysis_intelligence/medicine_analysis_intelligence.html'" class="w-full py-3 bg-primary text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-primary-container transition-all shadow-md shadow-blue-100">
 <span class="material-symbols-outlined text-sm">medication_liquid</span>
                         Analyze Prescription
                     </button>
@@ -436,67 +436,24 @@
                     document.getElementById('sb-patient-initials').textContent = "";
                     document.getElementById('top-patient-initials').style.backgroundImage = `url('${avatarUrl}')`;
                     document.getElementById('top-patient-initials').textContent = "";
-                    document.getElementById('preview-avatar').style.backgroundImage = `url('${avatarUrl}')`;
-                    document.getElementById('preview-avatar').innerHTML = "";
                 }
-
-                // Vitals
-                document.getElementById('db-bp').textContent = data.latest_blood_pressure;
-                document.getElementById('db-hr').textContent = data.latest_heart_rate;
-
-                // Avatar Upload Logic
-                const avatarInput = document.getElementById('avatarInput');
-                const uploadBtn = document.getElementById('uploadBtn');
-                
-                avatarInput.addEventListener('change', (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        uploadBtn.classList.remove('hidden');
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            document.getElementById('preview-avatar').style.backgroundImage = `url('${e.target.result}')`;
-                            document.getElementById('preview-avatar').innerHTML = "";
-                        }
-                        reader.readAsDataURL(file);
-                    }
-                });
-
-                uploadBtn.addEventListener('click', async () => {
-                    const file = avatarInput.files[0];
-                    if (!file) return;
-
-                    const formData = new FormData();
-                    formData.append("file", file);
-
-                    try {
-                        uploadBtn.textContent = "Uploading...";
-                        const res = await fetch('/api/patient/upload_avatar', {
-                            method: "POST",
-                            headers: { 'Authorization': `Bearer ${token}` },
-                            body: formData
-                        });
-                        if (res.ok) {
-                            window.location.reload();
-                        } else {
-                            uploadBtn.textContent = "Failed";
-                        }
-                    } catch (e) {
-                        console.error(e);
-                        uploadBtn.textContent = "Error";
-                    }
-                });
 
                 // Fetch and Render QR Code properly
                 const qrImg = document.getElementById('qr-img');
-                qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(data.blockchain_id)}`;
+                const qrPayload = JSON.stringify({
+                    patient_id: data.blockchain_id,
+                    full_name: data.full_name,
+                    blood_type: data.blood_type || 'Unknown'
+                });
+                qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrPayload)}`;
                 qrImg.onload = () => qrImg.classList.remove('opacity-0');
 
                 // Update Emergency Health Info
-                document.getElementById('em-blood-type').textContent = data.blood_type;
-                document.getElementById('em-allergies').textContent = data.allergies;
-                document.getElementById('em-donor').textContent = data.organ_donor;
-                document.getElementById('em-contact-name').textContent = data.emergency_contact_name;
-                document.getElementById('em-contact-phone').textContent = data.emergency_contact_phone;
+                document.getElementById('em-blood-type').textContent = data.blood_type || 'Unknown';
+                document.getElementById('em-allergies').textContent = data.allergies || 'None reported';
+                document.getElementById('em-donor').textContent = data.organ_donor || 'No';
+                document.getElementById('em-contact-name').textContent = data.emergency_contact_name || 'Not provided';
+                document.getElementById('em-contact-phone').textContent = data.emergency_contact_phone || 'Not provided';
 
             } catch (err) {
                 console.error("Failed to load patient dashboard", err);

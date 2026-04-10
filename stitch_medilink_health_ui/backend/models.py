@@ -39,7 +39,6 @@ class PatientProfile(Base):
     profile_picture_url = Column(String, nullable=True)
     
     user = relationship("User", back_populates="patient_profile")
-    clinical_reports = relationship("ClinicalReport", back_populates="patient", cascade="all, delete-orphan")
 
 class ClinicalReport(Base):
     __tablename__ = "clinical_reports"

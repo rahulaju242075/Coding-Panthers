@@ -104,7 +104,7 @@
 </div>
 <div class="flex items-center space-x-4">
 <div class="relative hidden sm:block">
-<input class="bg-surface-container-highest border-none rounded-full py-2 px-10 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search medicines..." type="text"/>
+<input id="medicine-search" class="bg-surface-container-highest border-none rounded-full py-2 px-10 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search medicines..." type="text"/>
 <span class="material-symbols-outlined absolute left-3 top-2 text-slate-400">search</span>
 </div>
 <button class="material-symbols-outlined text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-colors">notifications</button>
@@ -161,7 +161,7 @@
 <!-- Header Section -->
 <header class="mb-8">
 <h1 class="text-3xl font-bold font-headline text-on-surface mb-2">Medicine Intelligence</h1>
-<p class="text-on-surface-variant text-sm font-medium">Analyzing active prescriptions for Patient: <span class="text-primary font-bold">Jonathan Sterling (PR-8821)</span></p>
+<p class="text-on-surface-variant text-sm font-medium">Analyzing active prescriptions for Patient: <span id="patient-context" class="text-primary font-bold">Loading...</span></p>
 </header>
 <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
 <!-- Prescription Summary Card -->
@@ -170,8 +170,8 @@
 <div class="flex justify-between items-start mb-6">
 <div>
 <span class="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-1 block">Primary Prescription</span>
-<h2 class="text-2xl font-bold text-on-surface">Lisinopril-HCTZ</h2>
-<p class="text-primary font-semibold">20mg / 12.5mg Tablet</p>
+<h2 id="primary-name" class="text-2xl font-bold text-on-surface">Lisinopril-HCTZ</h2>
+<p id="primary-subtitle" class="text-primary font-semibold">20mg / 12.5mg Tablet</p>
 </div>
 <div class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-xs font-bold flex items-center">
 <span class="material-symbols-outlined text-sm mr-1">verified</span>
@@ -181,19 +181,19 @@
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
 <div class="bg-surface-container-low p-4 rounded-lg">
 <p class="text-xs text-on-surface-variant mb-1">Dosage</p>
-<p class="font-bold">Once Daily</p>
+<p id="primary-dosage" class="font-bold">Once Daily</p>
 </div>
 <div class="bg-surface-container-low p-4 rounded-lg">
 <p class="text-xs text-on-surface-variant mb-1">Duration</p>
-<p class="font-bold">90 Days</p>
+<p id="primary-duration" class="font-bold">90 Days</p>
 </div>
 <div class="bg-surface-container-low p-4 rounded-lg">
 <p class="text-xs text-on-surface-variant mb-1">Remaining</p>
-<p class="font-bold">42 Tablets</p>
+<p id="primary-remaining" class="font-bold">42 Tablets</p>
 </div>
 <div class="bg-surface-container-low p-4 rounded-lg">
 <p class="text-xs text-on-surface-variant mb-1">Prescriber</p>
-<p class="font-bold">Dr. Sanctuary</p>
+<p id="primary-prescriber" class="font-bold">Dr. Sanctuary</p>
 </div>
 </div>
 <!-- Comparison Table -->
@@ -208,7 +208,7 @@
 <th class="pb-4 font-semibold text-right">Action</th>
 </tr>
 </thead>
-<tbody class="text-sm">
+<tbody id="alt-table-body" class="text-sm">
 <tr class="border-b border-surface-container border-opacity-20 hover:bg-surface-container-low/50 transition-colors">
 <td class="py-4">
 <div class="font-bold">Zestoretic</div>
@@ -248,6 +248,7 @@
 </tbody>
 </table>
 </div>
+<p id="switch-feedback" class="text-xs text-secondary font-bold mt-4 hidden"></p>
 </div>
 <!-- Bento Grid Extra Info -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -257,7 +258,7 @@
 <span class="material-symbols-outlined text-error" data-weight="fill" style="font-variation-settings: 'FILL' 1;">warning</span>
 <h3 class="font-bold text-on-error-container">Allergy Warning</h3>
 </div>
-<p class="text-sm text-on-surface-variant leading-relaxed">
+<p id="allergy-warning" class="text-sm text-on-surface-variant leading-relaxed">
                             Patient has a documented sensitivity to <span class="font-bold text-error">Sulfa-drugs</span>. Hydrochlorothiazide is a sulfonamide derivative. Monitor for cross-reactivity symptoms including rash or photosensitivity.
                         </p>
 </div>
@@ -270,10 +271,10 @@
 </div>
 <div class="p-4 flex justify-between items-center">
 <div>
-<p class="font-bold text-sm">HealthFirst Dispensary</p>
-<p class="text-xs text-on-surface-variant">0.8 miles away • Open until 10PM</p>
+<p id="nearest-pharmacy" class="font-bold text-sm">HealthFirst Dispensary</p>
+<p id="nearest-meta" class="text-xs text-on-surface-variant">0.8 miles away • Open until 10PM</p>
 </div>
-<button class="p-2 bg-primary-fixed rounded-lg text-primary">
+<button id="directions-btn" class="p-2 bg-primary-fixed rounded-lg text-primary">
 <span class="material-symbols-outlined">directions</span>
 </button>
 </div>
@@ -287,7 +288,7 @@
 <div class="absolute top-0 right-0 p-4 opacity-10">
 <span class="material-symbols-outlined text-6xl">emergency_home</span>
 </div>
-<div class="flex items-center space-x-2 text-error mb-4">
+<div id="interaction-level" class="flex items-center space-x-2 text-error mb-4">
 <span class="material-symbols-outlined animate-pulse">priority_high</span>
 <span class="text-xs font-black uppercase tracking-widest">High Priority Interaction</span>
 </div>
@@ -295,9 +296,9 @@
 <div class="space-y-4">
 <div class="p-3 bg-white/10 rounded-lg backdrop-blur-md">
 <p class="text-xs font-bold text-slate-300 mb-1">Conflict Pair</p>
-<p class="text-sm font-medium">Lisinopril + Ibuprofen (Advil)</p>
+<p id="conflict-pair" class="text-sm font-medium">Lisinopril + Ibuprofen (Advil)</p>
 </div>
-<p class="text-sm text-slate-300 leading-relaxed">
+<p id="interaction-note" class="text-sm text-slate-300 leading-relaxed">
                             NSAIDs like Ibuprofen may decrease the antihypertensive effect of ACE inhibitors and increase risk of renal impairment. 
                         </p>
 <div class="pt-4 border-t border-white/10">
@@ -306,7 +307,7 @@
 <div class="w-8 h-8 rounded bg-white/20 flex items-center justify-center">
 <span class="material-symbols-outlined text-sm">check_circle</span>
 </div>
-<span class="text-sm font-bold">Acetaminophen (Tylenol)</span>
+<span id="interaction-alternative" class="text-sm font-bold">Acetaminophen (Tylenol)</span>
 </div>
 </div>
 </div>
@@ -322,26 +323,26 @@
 <div class="absolute inset-0 bg-primary-fixed/30 rounded-full blur-xl scale-90"></div>
 <div class="glass-panel w-full h-full rounded-full flex flex-col items-center justify-center border border-white/50 shadow-inner">
 <span class="text-xs font-bold text-on-surface-variant">BP</span>
-<span class="text-2xl font-black text-primary">118/74</span>
-<span class="text-[10px] font-bold text-secondary">STABLE</span>
+<span id="live-bp" class="text-2xl font-black text-primary">118/74</span>
+<span id="live-status" class="text-[10px] font-bold text-secondary">STABLE</span>
 </div>
 </div>
-<p class="text-xs text-center text-on-surface-variant font-medium">
+<p id="live-sync" class="text-xs text-center text-on-surface-variant font-medium">
                             Last sync: 2 minutes ago via <br/>MediLink Connected Watch
                         </p>
 </div>
 </div>
 <!-- Quick Actions List -->
 <div class="space-y-2">
-<button class="w-full flex items-center justify-between p-4 bg-white hover:bg-slate-50 transition-colors rounded-xl text-sm font-bold text-on-surface-variant">
+<button id="download-safety-btn" class="w-full flex items-center justify-between p-4 bg-white hover:bg-slate-50 transition-colors rounded-xl text-sm font-bold text-on-surface-variant">
 <span>Download Safety PDF</span>
 <span class="material-symbols-outlined">download</span>
 </button>
-<button class="w-full flex items-center justify-between p-4 bg-white hover:bg-slate-50 transition-colors rounded-xl text-sm font-bold text-on-surface-variant">
+<button id="report-side-effect-btn" class="w-full flex items-center justify-between p-4 bg-white hover:bg-slate-50 transition-colors rounded-xl text-sm font-bold text-on-surface-variant">
 <span>Report Side Effect</span>
 <span class="material-symbols-outlined">feedback</span>
 </button>
-<button class="w-full flex items-center justify-between p-4 bg-white hover:bg-slate-50 transition-colors rounded-xl text-sm font-bold text-on-surface-variant">
+<button id="refill-auth-btn" class="w-full flex items-center justify-between p-4 bg-white hover:bg-slate-50 transition-colors rounded-xl text-sm font-bold text-on-surface-variant">
 <span>Refill Authorization</span>
 <span class="material-symbols-outlined">reorder</span>
 </button>
@@ -359,4 +360,364 @@
 <a class="text-xs font-medium text-slate-400 hover:text-blue-500 transition-colors" href="#">Contact Support</a>
 </div>
 </footer>
+<script>
+  const state = {
+    drugs: [],
+    prices: [],
+    currentMedicine: 'Loratadine',
+    patient: {
+      full_name: 'Jonathan Sterling',
+      blockchain_id: 'PR-8821',
+      allergies: 'Sulfa-drugs',
+      latest_blood_pressure: '118/74'
+    }
+  };
+
+  const pharmacyMeta = {
+    Apollo: { distance: '0.8 miles', timing: 'Open until 10PM' },
+    MedPlus: { distance: '1.1 miles', timing: 'Open until 9PM' },
+    NetMeds: { distance: '1.4 miles', timing: 'Open until 11PM' },
+    JanAushadhi: { distance: '0.6 miles', timing: 'Open until 8PM' }
+  };
+
+  function parseCsv(text) {
+    const rows = [];
+    let current = '';
+    let row = [];
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i += 1) {
+      const char = text[i];
+      const next = text[i + 1];
+      if (char === '"') {
+        if (inQuotes && next === '"') {
+          current += '"';
+          i += 1;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === ',' && !inQuotes) {
+        row.push(current.trim());
+        current = '';
+      } else if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (char === '\r' && next === '\n') {
+          i += 1;
+        }
+        if (current.length || row.length) {
+          row.push(current.trim());
+          rows.push(row);
+          row = [];
+          current = '';
+        }
+      } else {
+        current += char;
+      }
+    }
+
+    if (current.length || row.length) {
+      row.push(current.trim());
+      rows.push(row);
+    }
+
+    if (!rows.length) return [];
+    const headers = rows[0].map((h) => h.trim());
+    return rows.slice(1).filter((r) => r.length).map((r) => {
+      const obj = {};
+      headers.forEach((header, idx) => {
+        obj[header] = (r[idx] || '').trim();
+      });
+      return obj;
+    });
+  }
+
+  function toTitle(value) {
+    if (!value) return '';
+    return value
+      .toLowerCase()
+      .split(' ')
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ');
+  }
+
+  function findDrugByName(name) {
+    const lower = name.toLowerCase();
+    return state.drugs.find((d) => d.name.toLowerCase() === lower) || null;
+  }
+
+  function minPriceForName(name) {
+    const lower = name.toLowerCase();
+    const matches = state.prices.filter((p) => p.name.toLowerCase() === lower);
+    if (!matches.length) return null;
+    return matches.reduce((best, row) => {
+      const amount = Number(row.price);
+      if (!Number.isFinite(amount)) return best;
+      if (!best || amount < best.price) {
+        return { price: amount, pharmacy: row.pharmacy };
+      }
+      return best;
+    }, null);
+  }
+
+  function candidateRowsForIngredient(activeIngredient) {
+    const ingredientLower = activeIngredient.toLowerCase();
+    const names = new Map();
+    state.drugs
+      .filter((d) => d.active_ingredient.toLowerCase() === ingredientLower)
+      .forEach((d) => {
+        if (!names.has(d.name.toLowerCase())) {
+          const pricing = minPriceForName(d.name);
+          names.set(d.name.toLowerCase(), {
+            name: d.name,
+            active_ingredient: d.active_ingredient,
+            dosage: d.dosage,
+            category: d.category,
+            pricing
+          });
+        }
+      });
+    return Array.from(names.values()).sort((a, b) => {
+      const ap = a.pricing ? a.pricing.price : Number.POSITIVE_INFINITY;
+      const bp = b.pricing ? b.pricing.price : Number.POSITIVE_INFINITY;
+      return ap - bp;
+    });
+  }
+
+  function renderAltTable(rows, currentName) {
+    const tbody = document.getElementById('alt-table-body');
+    const feedback = document.getElementById('switch-feedback');
+    if (!tbody) return;
+    feedback.classList.add('hidden');
+
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td class="py-4 text-slate-500" colspan="4">No alternatives found in dataset.</td></tr>';
+      return;
+    }
+
+    const currentPrice = (rows.find((r) => r.name.toLowerCase() === currentName.toLowerCase()) || {}).pricing?.price;
+
+    tbody.innerHTML = rows.slice(0, 6).map((row) => {
+      const isCurrent = row.name.toLowerCase() === currentName.toLowerCase();
+      const priceText = row.pricing ? `$${row.pricing.price.toFixed(2)}` : 'N/A';
+      const savings = currentPrice && row.pricing ? Math.max(0, Math.round(((currentPrice - row.pricing.price) / currentPrice) * 100)) : 0;
+      return `
+        <tr class="border-b border-surface-container border-opacity-20 hover:bg-surface-container-low/50 transition-colors">
+          <td class="py-4">
+            <div class="font-bold">${row.name}</div>
+            <div class="text-xs text-slate-400 italic">${isCurrent ? 'Reference Listed Drug' : (savings > 0 ? `SAVINGS ${savings}%` : 'Bio-equivalent')}</div>
+          </td>
+          <td class="py-4">${row.active_ingredient}</td>
+          <td class="py-4 font-bold ${!isCurrent && savings > 0 ? 'text-tertiary-container' : 'text-on-surface'}">${priceText}</td>
+          <td class="py-4 text-right">
+            ${isCurrent ? '<span class="text-xs font-bold text-slate-400">Current</span>' : `<button data-switch="${row.name}" class="switch-btn text-primary text-xs font-bold hover:underline">Switch</button>`}
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function setInteraction(activeIngredient, category) {
+    const level = document.getElementById('interaction-level');
+    const pair = document.getElementById('conflict-pair');
+    const note = document.getElementById('interaction-note');
+    const alt = document.getElementById('interaction-alternative');
+
+    const ing = activeIngredient.toLowerCase();
+    const cat = category.toLowerCase();
+    if (cat.includes('antihypertensive') || ing.includes('lisinopril') || ing.includes('losartan') || ing.includes('telmisartan')) {
+      level.innerHTML = '<span class="material-symbols-outlined animate-pulse">priority_high</span><span class="text-xs font-black uppercase tracking-widest">High Priority Interaction</span>';
+      level.className = 'flex items-center space-x-2 text-error mb-4';
+      pair.textContent = `${toTitle(activeIngredient)} + Ibuprofen (Advil)`;
+      note.textContent = 'NSAIDs may reduce antihypertensive efficacy and increase renal strain in susceptible patients.';
+      alt.textContent = 'Acetaminophen (Tylenol)';
+      return;
+    }
+
+    level.innerHTML = '<span class="material-symbols-outlined">info</span><span class="text-xs font-black uppercase tracking-widest">Moderate Interaction Risk</span>';
+    level.className = 'flex items-center space-x-2 text-amber-300 mb-4';
+    pair.textContent = `${toTitle(activeIngredient)} + Alcohol`;
+    note.textContent = 'Avoid alcohol and duplicate over-the-counter medications while this course is active.';
+    alt.textContent = 'Consult physician before combining medications';
+  }
+
+  function setAllergyWarning(activeIngredient) {
+    const warningEl = document.getElementById('allergy-warning');
+    const allergies = (state.patient.allergies || '').toLowerCase();
+    const ingredient = activeIngredient.toLowerCase();
+
+    if (allergies && allergies !== 'none reported') {
+      if (allergies.includes('sulfa') && (ingredient.includes('hydrochlorothiazide') || ingredient.includes('sulfa'))) {
+        warningEl.innerHTML = 'Patient has documented sensitivity to <span class="font-bold text-error">Sulfa-drugs</span>. Current molecule may trigger cross-reactivity. Monitor for rash, itching, or respiratory changes.';
+        return;
+      }
+      warningEl.innerHTML = `Patient allergy record: <span class="font-bold text-error">${state.patient.allergies}</span>. Check inactive ingredients before dispensing.`;
+      return;
+    }
+    warningEl.textContent = 'No known allergy conflicts found from the available patient profile data.';
+  }
+
+  function setNearestPharmacy(medicineName) {
+    const entries = state.prices.filter((p) => p.name.toLowerCase() === medicineName.toLowerCase());
+    const best = entries.reduce((acc, row) => {
+      const price = Number(row.price);
+      if (!Number.isFinite(price)) return acc;
+      if (!acc || price < acc.price) return { pharmacy: row.pharmacy, price };
+      return acc;
+    }, null);
+
+    const pharmacyName = best ? best.pharmacy : 'HealthFirst Dispensary';
+    const meta = pharmacyMeta[pharmacyName] || { distance: '1.0 miles', timing: 'Open until 9PM' };
+    document.getElementById('nearest-pharmacy').textContent = pharmacyName;
+    document.getElementById('nearest-meta').textContent = `${meta.distance} away • ${meta.timing}`;
+
+    const btn = document.getElementById('directions-btn');
+    btn.onclick = () => {
+      const q = encodeURIComponent(`${pharmacyName} pharmacy near me`);
+      window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, '_blank');
+    };
+  }
+
+  function setMonitoring(bp) {
+    const value = bp || '118/74';
+    document.getElementById('live-bp').textContent = value;
+    const systolic = Number(value.split('/')[0]);
+    const status = Number.isFinite(systolic) && systolic <= 129 ? 'STABLE' : 'CHECK REQUIRED';
+    document.getElementById('live-status').textContent = status;
+
+    const minutes = 1 + Math.floor(Math.random() * 4);
+    document.getElementById('live-sync').innerHTML = `Last sync: ${minutes} minute${minutes > 1 ? 's' : ''} ago via <br/>MediLink Connected Watch`;
+  }
+
+  function renderMedicine(selectedName) {
+    const chosen = findDrugByName(selectedName) || findDrugByName('Loratadine') || state.drugs[0];
+    if (!chosen) return;
+
+    state.currentMedicine = chosen.name;
+    document.getElementById('primary-name').textContent = chosen.name;
+    document.getElementById('primary-subtitle').textContent = `${chosen.dosage} • ${chosen.active_ingredient}`;
+    document.getElementById('primary-dosage').textContent = 'Once Daily';
+    document.getElementById('primary-duration').textContent = '90 Days';
+    document.getElementById('primary-remaining').textContent = '42 Tablets';
+    document.getElementById('primary-prescriber').textContent = 'Dr. Sanctuary';
+
+    const alternatives = candidateRowsForIngredient(chosen.active_ingredient);
+    renderAltTable(alternatives, chosen.name);
+    setAllergyWarning(chosen.active_ingredient);
+    setInteraction(chosen.active_ingredient, chosen.category || '');
+    setNearestPharmacy(chosen.name);
+    setMonitoring(state.patient.latest_blood_pressure);
+
+    document.getElementById('medicine-search').value = chosen.name;
+  }
+
+  async function hydratePatientContext() {
+    const token = localStorage.getItem('medilink_token');
+    if (!token) {
+      document.getElementById('patient-context').textContent = `${state.patient.full_name} (${state.patient.blockchain_id})`;
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/patient/dashboard', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (!res.ok) {
+        document.getElementById('patient-context').textContent = `${state.patient.full_name} (${state.patient.blockchain_id})`;
+        return;
+      }
+      const profile = await res.json();
+      state.patient = {
+        full_name: profile.full_name || state.patient.full_name,
+        blockchain_id: profile.blockchain_id || state.patient.blockchain_id,
+        allergies: profile.allergies || state.patient.allergies,
+        latest_blood_pressure: profile.latest_blood_pressure || state.patient.latest_blood_pressure
+      };
+      document.getElementById('patient-context').textContent = `${state.patient.full_name} (${state.patient.blockchain_id})`;
+    } catch (_) {
+      document.getElementById('patient-context').textContent = `${state.patient.full_name} (${state.patient.blockchain_id})`;
+    }
+  }
+
+  async function loadDatasets() {
+    const [drugsRes, pricesRes] = await Promise.all([
+      fetch('../data/drugs.csv'),
+      fetch('../data/prices.csv')
+    ]);
+    const [drugsText, pricesText] = await Promise.all([drugsRes.text(), pricesRes.text()]);
+    state.drugs = parseCsv(drugsText).filter((r) => r.name && r.active_ingredient);
+    state.prices = parseCsv(pricesText).filter((r) => r.name && r.price);
+  }
+
+  function wireActions() {
+    const search = document.getElementById('medicine-search');
+    search.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        renderMedicine(search.value.trim() || state.currentMedicine);
+      }
+    });
+    search.addEventListener('blur', () => {
+      const query = search.value.trim();
+      if (query) renderMedicine(query);
+    });
+
+    document.getElementById('alt-table-body').addEventListener('click', (e) => {
+      const btn = e.target.closest('.switch-btn');
+      if (!btn) return;
+      const target = btn.getAttribute('data-switch');
+      renderMedicine(target);
+      const feedback = document.getElementById('switch-feedback');
+      feedback.textContent = `Switched active course to ${target}.`;
+      feedback.classList.remove('hidden');
+    });
+
+    document.getElementById('download-safety-btn').addEventListener('click', () => {
+      const text = [
+        'MediLink Safety Summary',
+        `Patient: ${state.patient.full_name} (${state.patient.blockchain_id})`,
+        `Medication: ${state.currentMedicine}`,
+        `Allergies: ${state.patient.allergies || 'None reported'}`,
+        `Monitoring BP: ${document.getElementById('live-bp').textContent}`,
+        `Interaction Alert: ${document.getElementById('conflict-pair').textContent}`,
+        `Recommendation: ${document.getElementById('interaction-alternative').textContent}`
+      ].join('\n');
+
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${state.currentMedicine.replace(/\s+/g, '_')}_safety_summary.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('report-side-effect-btn').addEventListener('click', () => {
+      const effect = window.prompt('Report side effect for care team review:', '');
+      if (!effect) return;
+      const key = 'medilink_side_effect_reports';
+      const existing = JSON.parse(localStorage.getItem(key) || '[]');
+      existing.push({ medicine: state.currentMedicine, effect, time: new Date().toISOString() });
+      localStorage.setItem(key, JSON.stringify(existing));
+      window.alert('Side effect report submitted for clinician review.');
+    });
+
+    document.getElementById('refill-auth-btn').addEventListener('click', () => {
+      const pharmacy = document.getElementById('nearest-pharmacy').textContent;
+      window.alert(`Refill authorization request created for ${state.currentMedicine} at ${pharmacy}.`);
+    });
+  }
+
+  (async function initMedicineIntelligence() {
+    await hydratePatientContext();
+    try {
+      await loadDatasets();
+      const initial = new URLSearchParams(window.location.search).get('medicine') || 'Loratadine';
+      renderMedicine(initial);
+    } catch (e) {
+      console.error('Failed to load medicine datasets', e);
+      document.getElementById('patient-context').textContent = `${state.patient.full_name} (${state.patient.blockchain_id})`;
+      renderMedicine('Loratadine');
+    }
+    wireActions();
+  })();
+</script>
 </body></html>

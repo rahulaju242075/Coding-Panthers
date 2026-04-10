@@ -18,8 +18,8 @@ def get_current_user_from_token(credentials: HTTPAuthorizationCredentials = Depe
     token = credentials.credentials
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        email: str = payload.get("sub")
-        if email is None:
+        email = payload.get("sub")
+        if not isinstance(email, str) or not email:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid auth credentials")
     except jwt.PyJWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
@@ -30,8 +30,13 @@ def get_current_user_from_token(credentials: HTTPAuthorizationCredentials = Depe
     return user
 
 @router.get("/dashboard")
-def get_patient_dashboard(current_user: models.User = Depends(get_current_user_from_token)):
-    if current_user.role != models.UserRole.PATIENT:
+def get_patient_dashboard(
+    current_user: models.User = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db)
+):
+    role_value = current_user.role
+    normalized_role = role_value.value if isinstance(role_value, models.UserRole) else str(role_value)
+    if normalized_role != models.UserRole.PATIENT.value:
         raise HTTPException(status_code=403, detail="Not authorized as patient")
 
     profile = current_user.patient_profile
@@ -66,7 +71,9 @@ async def upload_avatar(
     current_user: models.User = Depends(get_current_user_from_token),
     db: Session = Depends(get_db)
 ):
-    if current_user.role != models.UserRole.PATIENT:
+    role_value = current_user.role
+    normalized_role = role_value.value if isinstance(role_value, models.UserRole) else str(role_value)
+    if normalized_role != models.UserRole.PATIENT.value:
         raise HTTPException(status_code=403, detail="Not authorized as patient")
         
     profile = current_user.patient_profile
