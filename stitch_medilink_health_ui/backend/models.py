@@ -1,5 +1,5 @@
 import enum
-from sqlalchemy import Column, Integer, String, Enum, ForeignKey, Date, Text, DateTime
+from sqlalchemy import Column, Integer, String, Enum, ForeignKey, Date, Text, DateTime, Boolean
 import datetime
 from sqlalchemy.orm import relationship
 from database import Base
@@ -76,3 +76,36 @@ class PharmacyProfile(Base):
     verification_status = Column(String, default="pending") # pending, verified, rejected
     
     user = relationship("User", back_populates="pharmacy_profile")
+
+
+class PatientClinicalState(Base):
+    __tablename__ = "patient_clinical_states"
+
+    id = Column(Integer, primary_key=True, index=True)
+    blockchain_id = Column(String, unique=True, index=True, nullable=False)
+    state_json = Column(Text, nullable=False)
+
+
+class PatientAccessPermission(Base):
+    __tablename__ = "patient_access_permissions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    blockchain_id = Column(String, unique=True, index=True, nullable=False)
+    history_granted = Column(Boolean, default=False)
+    reports_granted = Column(Boolean, default=False)
+    granted_by = Column(String, default="")
+    granted_at = Column(String, default="")
+
+
+class PatientAccessRequest(Base):
+    __tablename__ = "patient_access_requests"
+
+    id = Column(Integer, primary_key=True, index=True)
+    request_id = Column(String, unique=True, index=True, nullable=False)
+    blockchain_id = Column(String, index=True, nullable=False)
+    request_type = Column(String, nullable=False)  # history | reports
+    status = Column(String, default="pending")  # pending | approved | rejected
+    doctor = Column(String, nullable=False)
+    label = Column(String, nullable=False)
+    created_at = Column(String, nullable=False)
+    resolved_at = Column(String, nullable=True)

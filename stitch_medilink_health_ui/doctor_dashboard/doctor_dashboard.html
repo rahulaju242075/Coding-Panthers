@@ -5,6 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>MediLink - Clinical Sanctuary</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -102,8 +103,8 @@
 <button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors scale-95 active:duration-150">
 <span class="material-symbols-outlined text-outline" data-icon="notifications">notifications</span>
 </button>
-<div class="h-8 w-8 rounded-full overflow-hidden bg-primary-container flex items-center justify-center">
-<img alt="User healthcare profile" class="object-cover h-full w-full" data-alt="Professional portrait of a male doctor in clinical attire with soft lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArlTTlAlq5h9zbA8Jj85LJa050p9OeTg5dZF51JM1Bo8oWLxglBvPCAA7qsU6_lSOVNd9w_RqSlMzY4cgcs0kiYsTAgfPlM4GsQMi5aijcQhs2mSNhxzXBnJ2Cpv6B_DDZaSnPdfQ-0df1vwOthjeICDUIU0VVm17P5msb-8b5JshsdvkTy8JRBelPN3t-jVxH6yKMj2J2Zw0DsLMkVOh7RIok98qaPUlTvzZRS3uXxk0kBoanejicO9K_FWqq5aHzJlM3rBLVwEw"/>
+<div id="doctor-top-avatar" class="h-8 w-8 rounded-full overflow-hidden bg-primary-container flex items-center justify-center text-white text-xs font-bold uppercase">
+DP
 </div>
 </div>
 </header>
@@ -115,8 +116,8 @@
 <span class="material-symbols-outlined text-white" data-icon="medical_services">medical_services</span>
 </div>
 <div>
-<p class="text-sm font-black Manrope text-blue-800 leading-tight">Dr. Sanctuary</p>
-<p class="text-[10px] font-semibold Inter text-slate-500 uppercase tracking-wider">General Practitioner</p>
+<p id="doctor-sidebar-name" class="text-sm font-black Manrope text-blue-800 leading-tight">Doctor</p>
+<p id="doctor-sidebar-specialty" class="text-[10px] font-semibold Inter text-slate-500 uppercase tracking-wider">General Practitioner</p>
 </div>
 </div>
 </div>
@@ -129,24 +130,6 @@
 </a>
 </li>
 <li>
-<a class="flex items-center gap-3 px-6 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-all duration-300 ease-in-out" href="../medicine_intelligence/medicine_intelligence.html">
-<span class="material-symbols-outlined" data-icon="description">description</span>
-<span class="text-sm font-semibold Inter">Medical Records</span>
-</a>
-</li>
-<li>
-<a class="flex items-center gap-3 px-6 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-all duration-300 ease-in-out" href="../telemedicine_consultation/telemedicine_consultation.html">
-<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
-<span class="text-sm font-semibold Inter">Appointments</span>
-</a>
-</li>
-<li>
-<a class="flex items-center gap-3 px-6 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-all duration-300 ease-in-out" href="../telemedicine_consultation/telemedicine_consultation.html">
-<span class="material-symbols-outlined" data-icon="videocam">videocam</span>
-<span class="text-sm font-semibold Inter">Telemedicine</span>
-</a>
-</li>
-<li>
 <a class="flex items-center gap-3 px-6 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-all duration-300 ease-in-out" href="../settings/settings.html">
 <span class="material-symbols-outlined" data-icon="settings">settings</span>
 <span class="text-sm font-semibold Inter">Settings</span>
@@ -154,11 +137,6 @@
 </li>
 </ul>
 </nav>
-<div class="px-6 py-6">
-<button class="w-full py-3 bg-gradient-to-r from-primary to-primary-container text-white rounded-lg font-bold text-sm shadow-sm hover:opacity-90 transition-opacity">
-                New Consultation
-            </button>
-</div>
 </aside>
 <!-- Main Content -->
 <main class="ml-64 pt-20 px-8 pb-12">
@@ -167,7 +145,7 @@
 <div class="flex justify-between items-end mb-8">
 <div>
 <h1 class="text-3xl font-extrabold font-headline text-on-surface">Clinical Workspace</h1>
-<p class="text-outline font-medium mt-1">Patient: <span class="text-primary font-bold">#ML-4482: Marcus Holloway</span></p>
+<p class="text-outline font-medium mt-1">Patient: <span id="doctor-patient-heading" class="text-primary font-bold">No patient selected</span></p>
 </div>
 <div class="flex gap-3">
 <span class="px-4 py-1.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-xs font-bold flex items-center gap-2">
@@ -184,39 +162,40 @@
 <div class="col-span-4 space-y-6">
 <!-- QR Scanner Placeholder -->
 <div class="bg-surface-container-lowest p-6 rounded-xl relative overflow-hidden group">
-<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 <h3 class="text-sm font-bold font-headline mb-4 uppercase tracking-wider text-outline">Quick Authorization</h3>
 <div class="aspect-square w-full border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center bg-surface-container-low">
 <span class="material-symbols-outlined text-6xl text-outline-variant" data-icon="qr_code_scanner">qr_code_scanner</span>
 <p class="text-xs font-semibold text-outline mt-4">Place Health ID QR Code here</p>
-<button class="mt-6 px-6 py-2 bg-white border border-outline-variant rounded-full text-xs font-bold text-on-surface hover:bg-surface-container-high transition-colors">
+<button id="launch-scanner-btn" class="mt-6 px-6 py-2 bg-white border border-outline-variant rounded-full text-xs font-bold text-on-surface hover:bg-surface-container-high transition-colors">
                                 Launch Scanner
                             </button>
+<p id="scanner-status" class="text-[10px] text-outline mt-3 text-center px-4">Select a patient by scanning from camera or uploading QR image.</p>
 </div>
 </div>
 <!-- Access Request Status -->
 <div class="bg-surface-container-lowest p-6 rounded-xl">
 <h3 class="text-sm font-bold font-headline mb-4 uppercase tracking-wider text-outline">Access Permissions</h3>
 <div class="space-y-4">
-<div class="flex items-center justify-between p-3 bg-secondary-container/30 rounded-lg">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg" id="full-history-permission-card">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-secondary" data-icon="verified_user">verified_user</span>
 <div>
 <p class="text-xs font-bold">Full Medical History</p>
-<p class="text-[10px] text-outline">Granted by Patient</p>
+<p id="full-history-status" class="text-[10px] text-outline">Access Restricted</p>
 </div>
 </div>
-<span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle">check_circle</span>
+<button id="request-history-btn" class="text-[10px] font-bold text-primary hover:underline">Request</button>
 </div>
-<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg opacity-60">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg" id="reports-permission-card">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-outline" data-icon="lock_open">lock_open</span>
 <div>
-<p class="text-xs font-bold">Genomic Data</p>
-<p class="text-[10px] text-outline">Access Restricted</p>
+<p class="text-xs font-bold">Full Reports &amp; Labs</p>
+<p id="reports-status" class="text-[10px] text-outline">Access Restricted</p>
 </div>
 </div>
-<button class="text-[10px] font-bold text-primary hover:underline">Request</button>
+<button id="request-reports-btn" class="text-[10px] font-bold text-primary hover:underline">Request</button>
 </div>
 </div>
 </div>
@@ -261,43 +240,15 @@
 </div>
 <div class="relative">
 <div class="absolute left-1.5 top-2 bottom-2 w-1 bg-primary-fixed rounded-full"></div>
-<div class="space-y-8 pl-8 relative">
-<div class="relative">
-<div class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-primary ring-4 ring-white"></div>
-<div class="flex justify-between mb-1">
-<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Active Diagnosis</span>
-<span class="text-[10px] font-medium text-outline">05 Sept 2023</span>
-</div>
-<h4 class="text-sm font-bold">Type 2 Diabetes Mellitus</h4>
-<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">Patient reports consistent monitoring of blood glucose levels. Occasional spikes observed post-prandial. HbA1c: 7.2%.</p>
-</div>
-<div class="relative">
-<div class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-outline-variant ring-4 ring-white"></div>
-<div class="flex justify-between mb-1">
-<span class="text-[10px] font-bold uppercase tracking-widest text-outline">Past Procedure</span>
-<span class="text-[10px] font-medium text-outline">12 Jan 2022</span>
-</div>
-<h4 class="text-sm font-bold">Laparoscopic Cholecystectomy</h4>
-<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">Uneventful recovery. No current abdominal complaints or biliary symptoms.</p>
-</div>
-<div class="relative">
-<div class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-outline-variant ring-4 ring-white"></div>
-<div class="flex justify-between mb-1">
-<span class="text-[10px] font-bold uppercase tracking-widest text-outline">Chronic Condition</span>
-<span class="text-[10px] font-medium text-outline">Established 2018</span>
-</div>
-<h4 class="text-sm font-bold">Hypertension (Stage 1)</h4>
-<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">Controlled with Lisinopril 10mg. Last reading 128/82 mmHg.</p>
-</div>
-</div>
+<div id="doctor-history-container" class="space-y-8 pl-8 relative"></div>
 </div>
 </div>
 <!-- Treatment Notes -->
 <div class="bg-surface-container-lowest p-8 rounded-xl">
 <h3 class="text-sm font-bold font-headline mb-6 uppercase tracking-wider text-outline">Clinical Notes</h3>
-<textarea class="w-full bg-surface-container-low border-none rounded-xl text-sm p-4 h-32 focus:ring-2 focus:ring-primary-container transition-all" placeholder="Enter clinical observations, patient concerns, and treatment progress...">Prescribed Loratadine; generic alternatives suggested to patient.</textarea>
+<textarea id="doctor-clinical-note" class="w-full bg-surface-container-low border-none rounded-xl text-sm p-4 h-32 focus:ring-2 focus:ring-primary-container transition-all" placeholder="Enter clinical observations, patient concerns, and treatment progress...">Prescribed Loratadine; generic alternatives suggested to patient.</textarea>
 <div class="flex justify-end mt-4">
-<button class="px-6 py-2 bg-surface-container-high text-on-primary-fixed-variant rounded-lg font-bold text-xs hover:bg-surface-container-highest transition-colors">
+<button id="save-note-btn" class="px-6 py-2 bg-surface-container-high text-on-primary-fixed-variant rounded-lg font-bold text-xs hover:bg-surface-container-highest transition-colors">
                                 Save Internal Note
                             </button>
 </div>
@@ -313,8 +264,8 @@
 <div class="space-y-3">
 <label class="text-[10px] font-bold text-outline-variant uppercase">Diagnosis</label>
 <div class="relative">
-<input class="w-full bg-surface-container-low border-none rounded-lg text-xs py-2.5 focus:ring-2 focus:ring-primary-container" placeholder="ICD-10 Code or Name" type="text"/>
-<button class="absolute right-2 top-1.5 p-1 text-primary">
+<input id="diagnosis-input" class="w-full bg-surface-container-low border-none rounded-lg text-xs py-2.5 focus:ring-2 focus:ring-primary-container" placeholder="ICD-10 Code or Name" type="text"/>
+<button id="add-diagnosis-btn" class="absolute right-2 top-1.5 p-1 text-primary">
 <span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
 </button>
 </div>
@@ -323,12 +274,12 @@
 <div class="space-y-3">
 <label class="text-[10px] font-bold text-outline-variant uppercase">Prescription</label>
 <div class="space-y-2">
-<input class="w-full bg-surface-container-low border-none rounded-lg text-xs py-2.5 focus:ring-2 focus:ring-primary-container" placeholder="Medication Name" type="text" value="Loratadine 10mg"/>
+<input id="prescription-name" class="w-full bg-surface-container-low border-none rounded-lg text-xs py-2.5 focus:ring-2 focus:ring-primary-container" placeholder="Medication Name" type="text" value="Loratadine 10mg"/>
 <div class="flex gap-2">
-<input class="w-1/2 bg-surface-container-low border-none rounded-lg text-xs py-2.5 focus:ring-2 focus:ring-primary-container" placeholder="Dosage" type="text" value="10mg"/>
-<input class="w-1/2 bg-surface-container-low border-none rounded-lg text-xs py-2.5 focus:ring-2 focus:ring-primary-container" placeholder="Freq" type="text" value="Once Daily"/>
+<input id="prescription-dose" class="w-1/2 bg-surface-container-low border-none rounded-lg text-xs py-2.5 focus:ring-2 focus:ring-primary-container" placeholder="Dosage" type="text" value="10mg"/>
+<input id="prescription-frequency" class="w-1/2 bg-surface-container-low border-none rounded-lg text-xs py-2.5 focus:ring-2 focus:ring-primary-container" placeholder="Freq" type="text" value="Once Daily"/>
 </div>
-<div class="flex items-center gap-2 p-2 bg-secondary-container/20 text-on-secondary-fixed-variant rounded-lg mb-2"><span class="material-symbols-outlined text-sm">check_circle</span><span class="text-[10px] font-bold">Prescription Sent Successfully</span></div><button class="w-full py-2 bg-primary-container text-white rounded-lg text-xs font-bold hover:opacity-90">Add to Plan</button>
+<div id="prescription-success" class="hidden flex items-center gap-2 p-2 bg-secondary-container/20 text-on-secondary-fixed-variant rounded-lg mb-2"><span class="material-symbols-outlined text-sm">check_circle</span><span class="text-[10px] font-bold">Prescription Sent Successfully</span></div><button id="add-plan-btn" class="w-full py-2 bg-primary-container text-white rounded-lg text-xs font-bold hover:opacity-90">Add to Plan</button>
 </div>
 </div>
 </div>
@@ -336,12 +287,12 @@
 <!-- Upload Reports Widget -->
 <div class="bg-surface-container-lowest p-6 rounded-xl border-2 border-dashed border-primary/20">
 <h3 class="text-sm font-bold font-headline mb-4 uppercase tracking-wider text-outline">Reports &amp; Labs</h3>
-<div class="flex flex-col items-center py-4 px-2 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div id="upload-lab-btn" class="flex flex-col items-center py-4 px-2 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors">
 <span class="material-symbols-outlined text-3xl text-primary mb-2" data-icon="upload_file">upload_file</span>
 <p class="text-[10px] font-bold text-on-surface">Upload Lab Results</p>
 <p class="text-[9px] text-outline mt-1">PDF, DICOM or JPEG up to 25MB</p>
 </div>
-<div class="mt-6 space-y-3">
+<div id="reports-list" class="mt-6 space-y-3">
 <div class="flex items-center gap-3 p-2 bg-white rounded-lg group">
 <div class="w-8 h-8 rounded bg-error-container/30 flex items-center justify-center">
 <span class="material-symbols-outlined text-error text-lg" data-icon="picture_as_pdf">picture_as_pdf</span>
@@ -361,7 +312,7 @@
 <div class="w-24 h-24 rounded-full border-4 border-primary-fixed flex items-center justify-center relative">
 <div class="absolute inset-0 rounded-full border-4 border-primary border-t-transparent animate-pulse"></div>
 <div class="text-center">
-<span class="text-2xl font-black Manrope text-primary">72</span>
+<span id="doctor-live-bpm" class="text-2xl font-black Manrope text-primary">72</span>
 <p class="text-[8px] font-bold text-outline">BPM</p>
 </div>
 </div>
@@ -371,6 +322,33 @@
 </div>
 </div>
 </main>
+<div id="scanner-modal" class="hidden fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm items-center justify-center p-4">
+<div class="bg-white rounded-2xl w-full max-w-2xl p-6 shadow-2xl">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold">Scan Patient QR</h3>
+<button id="close-scanner-modal" class="text-slate-500 hover:text-slate-800">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="grid md:grid-cols-2 gap-4">
+<button id="start-camera-scan" class="px-4 py-3 rounded-xl bg-primary text-white font-bold text-sm">Scan with Camera</button>
+<label for="upload-qr-input" class="px-4 py-3 rounded-xl bg-surface-container-high text-on-surface font-bold text-sm text-center cursor-pointer">Upload QR Image</label>
+<input id="upload-qr-input" class="hidden" type="file" accept="image/*"/>
+</div>
+<div class="mt-4 rounded-xl border border-outline-variant/40 bg-surface-container-low p-3">
+<video id="scanner-video" class="w-full rounded-lg hidden" autoplay playsinline muted></video>
+<canvas id="scanner-canvas" class="hidden"></canvas>
+<p id="scanner-hint" class="text-xs text-outline">Camera scanner is idle. Choose an option above.</p>
+</div>
+<div class="mt-4">
+<label for="manual-patient-id" class="text-xs font-semibold text-outline block mb-1">Manual Patient ID (fallback)</label>
+<div class="flex gap-2">
+<input id="manual-patient-id" type="text" class="flex-1 rounded-lg border-outline-variant text-sm" placeholder="Example: ML-AB12-CD34"/>
+<button id="manual-load-btn" class="px-4 py-2 rounded-lg bg-slate-800 text-white text-xs font-bold">Load</button>
+</div>
+</div>
+</div>
+</div>
 <!-- Footer -->
 <footer class="w-full py-8 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col items-center justify-center space-y-4 ml-64">
 <p class="text-xs font-medium Inter text-slate-400">© 2024 MediLink Health. The Clinical Sanctuary.</p>
@@ -381,4 +359,480 @@
 <a class="text-xs font-medium Inter text-slate-400 hover:text-blue-500 opacity-80 hover:opacity-100 transition-all" href="#">Contact Support</a>
 </div>
 </footer>
+<script>
+    (function initDoctorWorkspace() {
+        const token = localStorage.getItem('medilink_token');
+        const storedRole = String(localStorage.getItem('medilink_role') || '').toLowerCase();
+        if (!token) {
+            window.location.href = '../auth_ui/login.html';
+            return;
+        }
+        if (storedRole && storedRole !== 'doctor') {
+            if (storedRole === 'patient') {
+                window.location.href = '../patient_dashboard_prescription_analysis/patient_dashboard_prescription_analysis.html';
+                return;
+            }
+            if (storedRole === 'pharmacy') {
+                window.location.href = '../pharmacy_dashboard/pharmacy_dashboard.html';
+                return;
+            }
+            window.location.href = '../auth_ui/login.html';
+            return;
+        }
+
+        const parseDateLabel = (dateValue) => {
+            const d = new Date(dateValue);
+            if (Number.isNaN(d.getTime())) return String(dateValue || '');
+            return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        };
+
+        const headingEl = document.getElementById('doctor-patient-heading');
+        const historyContainer = document.getElementById('doctor-history-container');
+        const fullHistoryStatus = document.getElementById('full-history-status');
+        const reportsStatus = document.getElementById('reports-status');
+        const bpmEl = document.getElementById('doctor-live-bpm');
+        const reportsList = document.getElementById('reports-list');
+        const scannerStatus = document.getElementById('scanner-status');
+        const doctorNameEl = document.getElementById('doctor-sidebar-name');
+        const doctorSpecialtyEl = document.getElementById('doctor-sidebar-specialty');
+        const doctorTopAvatarEl = document.getElementById('doctor-top-avatar');
+
+        let currentPatient = null;
+        try {
+            const saved = JSON.parse(localStorage.getItem('medilink_doctor_selected_patient') || 'null');
+            if (saved && typeof saved.blockchain_id === 'string' && saved.blockchain_id.trim()) {
+                currentPatient = {
+                    blockchain_id: saved.blockchain_id.trim(),
+                    patient_id: (saved.patient_id || saved.blockchain_id || '').trim(),
+                    full_name: (saved.full_name || 'Patient').trim(),
+                };
+            }
+        } catch {
+            currentPatient = null;
+        }
+        let permissions = { historyGranted: false, reportsGranted: false, grantedAt: '' };
+        let clinicalState = null;
+        let scannerStream = null;
+        let cameraScanRaf = null;
+        let scannerBusy = false;
+
+        const api = async (path, options = {}) => {
+            const response = await fetch(path, {
+                ...options,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                    ...(options.headers || {})
+                }
+            });
+            if (!response.ok) {
+                const bodyText = await response.text();
+                let detail = bodyText;
+                try {
+                    const parsed = bodyText ? JSON.parse(bodyText) : null;
+                    detail = (parsed && (parsed.detail || parsed.message)) || bodyText;
+                } catch {
+                    // keep raw text detail
+                }
+                if (response.status === 401 || response.status === 403) {
+                    if (String(detail || '').toLowerCase().includes('not authorized as doctor')) {
+                        throw new Error('Doctor session required. Please log in with a doctor account.');
+                    }
+                }
+                throw new Error(detail || `Request failed: ${response.status}`);
+            }
+            return response.json();
+        };
+
+        const stopCameraScan = () => {
+            if (cameraScanRaf) {
+                cancelAnimationFrame(cameraScanRaf);
+                cameraScanRaf = null;
+            }
+            if (scannerStream) {
+                scannerStream.getTracks().forEach((track) => track.stop());
+                scannerStream = null;
+            }
+            const video = document.getElementById('scanner-video');
+            video.srcObject = null;
+            video.classList.add('hidden');
+        };
+
+        const resetPatientWorkspace = () => {
+            permissions = { historyGranted: false, reportsGranted: false, grantedAt: '' };
+            clinicalState = { timeline: [], vitals: { hr: 72 }, reports: [] };
+            renderPermissions();
+            renderHistory();
+            renderReports();
+        };
+
+        const renderHeader = () => {
+            if (!currentPatient) {
+                headingEl.textContent = 'No patient selected';
+                scannerStatus.textContent = 'Select a patient by scanning from camera or uploading QR image.';
+                return;
+            }
+            headingEl.textContent = `#${currentPatient.blockchain_id}: ${currentPatient.full_name}`;
+            scannerStatus.textContent = `Loaded patient ${currentPatient.full_name} (${currentPatient.blockchain_id})`;
+        };
+
+        const renderPermissions = () => {
+            fullHistoryStatus.textContent = permissions.historyGranted
+                ? `Granted by Patient${permissions.grantedAt ? ` • ${permissions.grantedAt}` : ''}`
+                : 'Access Restricted';
+            reportsStatus.textContent = permissions.reportsGranted
+                ? `Granted by Patient${permissions.grantedAt ? ` • ${permissions.grantedAt}` : ''}`
+                : 'Access Restricted';
+        };
+
+        const renderReports = () => {
+            const reports = (clinicalState && clinicalState.reports) || [];
+            const fallback = `
+                <div class="flex items-center gap-3 p-2 bg-white rounded-lg group">
+                    <div class="w-8 h-8 rounded bg-error-container/30 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-error text-lg">picture_as_pdf</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-[10px] font-bold truncate">No reports uploaded</p>
+                        <p class="text-[8px] text-outline">Upload a report to begin</p>
+                    </div>
+                </div>
+            `;
+            if (!reports.length) {
+                reportsList.innerHTML = fallback;
+                return;
+            }
+            reportsList.innerHTML = reports.map((item) => `
+                <div class="flex items-center gap-3 p-2 bg-white rounded-lg group">
+                    <div class="w-8 h-8 rounded bg-error-container/30 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-error text-lg">picture_as_pdf</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-[10px] font-bold truncate">${item.file || 'Report'}</p>
+                        <p class="text-[8px] text-outline">${item.size || ''} • ${item.when || ''}</p>
+                    </div>
+                    <button><span class="material-symbols-outlined text-outline text-sm">visibility</span></button>
+                </div>
+            `).join('');
+        };
+
+        const renderHistory = () => {
+            const state = clinicalState || { timeline: [], vitals: { hr: 72 } };
+            bpmEl.textContent = state.vitals && state.vitals.hr ? String(state.vitals.hr) : '72';
+
+            if (!permissions.historyGranted) {
+                historyContainer.innerHTML = `
+                    <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/40">
+                        <p class="text-xs font-bold text-outline uppercase tracking-wider">Access Restricted</p>
+                        <p class="text-sm mt-2 text-on-surface-variant">Request patient authorization to view full medical history timeline.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            historyContainer.innerHTML = (state.timeline || []).map((item, index) => `
+                <div class="relative">
+                    <div class="absolute -left-[31px] top-1 w-3 h-3 rounded-full ${index === 0 ? 'bg-primary' : 'bg-outline-variant'} ring-4 ring-white"></div>
+                    <div class="flex justify-between mb-1">
+                        <span class="text-[10px] font-bold uppercase tracking-widest ${index === 0 ? 'text-primary' : 'text-outline'}">${item.title || 'Clinical Update'}</span>
+                        <span class="text-[10px] font-medium text-outline">${parseDateLabel(item.date)}</span>
+                    </div>
+                    <p class="text-xs text-on-surface-variant mt-2 leading-relaxed">${item.notes || ''}</p>
+                </div>
+            `).join('');
+        };
+
+        const refreshFromApi = async () => {
+            if (!currentPatient || !currentPatient.blockchain_id) {
+                resetPatientWorkspace();
+                return;
+            }
+            permissions = await api(`/api/doctor/access-status/${encodeURIComponent(currentPatient.blockchain_id)}`);
+            clinicalState = await api(`/api/doctor/clinical-state/${encodeURIComponent(currentPatient.blockchain_id)}`);
+            renderPermissions();
+            renderHistory();
+            renderReports();
+        };
+
+        const loadDoctorProfile = async () => {
+            const me = await api('/api/doctor/me');
+            const fullName = (me.full_name || 'Doctor').trim();
+            const specialty = (me.specialty || 'General Practitioner').trim();
+            doctorNameEl.textContent = fullName;
+            doctorSpecialtyEl.textContent = specialty;
+            const nameParts = fullName.split(' ').filter(Boolean);
+            const initials = nameParts.length >= 2
+                ? `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}`
+                : (fullName.slice(0, 2) || 'DR');
+            doctorTopAvatarEl.textContent = initials.toUpperCase();
+        };
+
+        const getPatientFromBackend = async (blockchainId) => {
+            const patient = await api(`/api/doctor/patient/${encodeURIComponent(blockchainId)}`);
+            return {
+                blockchain_id: patient.blockchain_id,
+                patient_id: patient.blockchain_id,
+                full_name: patient.full_name,
+            };
+        };
+
+        const parseQrPayload = (rawText) => {
+            const raw = String(rawText || '').trim();
+            if (!raw) return '';
+            try {
+                const parsed = JSON.parse(raw);
+                return String(parsed.blockchain_id || parsed.patient_id || parsed.id || '').trim();
+            } catch {
+                return raw;
+            }
+        };
+
+        const setPatientByBlockchainId = async (candidateId) => {
+            const blockchainId = parseQrPayload(candidateId);
+            if (!blockchainId) {
+                throw new Error('Invalid QR payload.');
+            }
+            const patient = await getPatientFromBackend(blockchainId);
+            currentPatient = patient;
+            localStorage.setItem('medilink_doctor_selected_patient', JSON.stringify(currentPatient));
+            renderHeader();
+            await refreshFromApi();
+        };
+
+        const requestPermission = async (type) => {
+            if (!currentPatient) {
+                window.alert('Select a patient first by scanning a QR code.');
+                return;
+            }
+            await api('/api/doctor/access-request', {
+                method: 'POST',
+                body: JSON.stringify({ blockchain_id: currentPatient.blockchain_id, type })
+            });
+            window.alert('Access request sent to patient notification center.');
+        };
+
+        const decodeQrFromCanvas = (canvas) => {
+            const ctx = canvas.getContext('2d');
+            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            if (window.jsQR) {
+                const qr = window.jsQR(imgData.data, imgData.width, imgData.height);
+                if (qr && qr.data) {
+                    return qr.data;
+                }
+            }
+            return null;
+        };
+
+        const processQrText = async (text) => {
+            if (scannerBusy) return;
+            scannerBusy = true;
+            try {
+                await setPatientByBlockchainId(text);
+                document.getElementById('scanner-modal').classList.add('hidden');
+                stopCameraScan();
+                window.alert(`Patient ${currentPatient.full_name} (${currentPatient.blockchain_id}) loaded.`);
+            } finally {
+                scannerBusy = false;
+            }
+        };
+
+        const onScan = () => {
+            const modal = document.getElementById('scanner-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('scanner-hint').textContent = 'Choose camera scan or upload QR image.';
+        };
+
+        const requireHistory = () => {
+            if (!currentPatient) {
+                window.alert('Select a patient first by scanning a QR code.');
+                return false;
+            }
+            if (!permissions.historyGranted) {
+                window.alert('Patient approval required: Full Medical History access is restricted.');
+                return false;
+            }
+            return true;
+        };
+
+        const requireReports = () => {
+            if (!currentPatient) {
+                window.alert('Select a patient first by scanning a QR code.');
+                return false;
+            }
+            if (!permissions.reportsGranted) {
+                window.alert('Patient approval required: Full Reports & Labs access is restricted.');
+                return false;
+            }
+            return true;
+        };
+
+        const addDiagnosis = async () => {
+            if (!requireHistory()) return;
+            const input = document.getElementById('diagnosis-input');
+            const value = (input.value || '').trim();
+            if (!value) return;
+            await api(`/api/doctor/clinical-state/${encodeURIComponent(currentPatient.blockchain_id)}/diagnosis`, {
+                method: 'POST',
+                body: JSON.stringify({ code: value.toUpperCase(), name: value, status: `Added ${parseDateLabel(new Date())}` })
+            });
+            input.value = '';
+            await refreshFromApi();
+        };
+
+        const addPrescription = async () => {
+            if (!requireHistory()) return;
+            const name = (document.getElementById('prescription-name').value || '').trim();
+            const dose = (document.getElementById('prescription-dose').value || '').trim();
+            const frequency = (document.getElementById('prescription-frequency').value || '').trim();
+            if (!name) return;
+            await api(`/api/doctor/clinical-state/${encodeURIComponent(currentPatient.blockchain_id)}/prescription`, {
+                method: 'POST',
+                body: JSON.stringify({ name, schedule: `${dose || 'Dose not set'} • ${frequency || 'As directed'}` })
+            });
+            const success = document.getElementById('prescription-success');
+            success.classList.remove('hidden');
+            setTimeout(() => success.classList.add('hidden'), 2200);
+            await refreshFromApi();
+        };
+
+        const saveInternalNote = async () => {
+            if (!requireHistory()) return;
+            const note = (document.getElementById('doctor-clinical-note').value || '').trim();
+            if (!note) return;
+            await api(`/api/doctor/clinical-state/${encodeURIComponent(currentPatient.blockchain_id)}/timeline`, {
+                method: 'POST',
+                body: JSON.stringify({ title: 'Clinical Note', notes: note })
+            });
+            await refreshFromApi();
+            window.alert('Internal clinical note saved and shared with patient timeline.');
+        };
+
+        const uploadReport = async () => {
+            if (!requireReports()) return;
+            const fileName = window.prompt('Report file name', `Lab_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
+            if (!fileName) return;
+            await api(`/api/doctor/clinical-state/${encodeURIComponent(currentPatient.blockchain_id)}/report`, {
+                method: 'POST',
+                body: JSON.stringify({ file: fileName.trim(), size: '1.9 MB', when: 'Uploaded Now' })
+            });
+            await refreshFromApi();
+        };
+
+        document.getElementById('launch-scanner-btn').addEventListener('click', () => { onScan(); });
+        document.getElementById('request-history-btn').addEventListener('click', () => { requestPermission('history').catch((e) => window.alert(e.message)); });
+        document.getElementById('request-reports-btn').addEventListener('click', () => { requestPermission('reports').catch((e) => window.alert(e.message)); });
+        document.getElementById('add-diagnosis-btn').addEventListener('click', () => { addDiagnosis().catch((e) => window.alert(e.message)); });
+        document.getElementById('add-plan-btn').addEventListener('click', () => { addPrescription().catch((e) => window.alert(e.message)); });
+        document.getElementById('save-note-btn').addEventListener('click', () => { saveInternalNote().catch((e) => window.alert(e.message)); });
+        document.getElementById('upload-lab-btn').addEventListener('click', () => { uploadReport().catch((e) => window.alert(e.message)); });
+
+        document.getElementById('close-scanner-modal').addEventListener('click', () => {
+            document.getElementById('scanner-modal').classList.add('hidden');
+            document.getElementById('scanner-modal').classList.remove('flex');
+            stopCameraScan();
+        });
+
+        document.getElementById('start-camera-scan').addEventListener('click', async () => {
+            const video = document.getElementById('scanner-video');
+            const canvas = document.getElementById('scanner-canvas');
+            const hint = document.getElementById('scanner-hint');
+            stopCameraScan();
+            try {
+                scannerStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                video.srcObject = scannerStream;
+                video.classList.remove('hidden');
+                hint.textContent = 'Camera active. Point at patient QR code.';
+                const scanLoop = () => {
+                    if (!video.videoWidth || !video.videoHeight) {
+                        cameraScanRaf = requestAnimationFrame(scanLoop);
+                        return;
+                    }
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    const detected = decodeQrFromCanvas(canvas);
+                    if (detected) {
+                        processQrText(detected).catch((err) => window.alert(err.message));
+                        return;
+                    }
+                    cameraScanRaf = requestAnimationFrame(scanLoop);
+                };
+                cameraScanRaf = requestAnimationFrame(scanLoop);
+            } catch {
+                hint.textContent = 'Unable to access camera. You can upload a QR image instead.';
+            }
+        });
+
+        document.getElementById('upload-qr-input').addEventListener('change', (event) => {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            const hint = document.getElementById('scanner-hint');
+            const img = new Image();
+            const canvas = document.getElementById('scanner-canvas');
+            const reader = new FileReader();
+            reader.onload = () => {
+                img.onload = () => {
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0, img.width, img.height);
+                    const detected = decodeQrFromCanvas(canvas);
+                    if (!detected) {
+                        hint.textContent = 'No QR detected in image. Try a clearer image or use camera.';
+                        return;
+                    }
+                    processQrText(detected).catch((err) => window.alert(err.message));
+                };
+                img.src = String(reader.result || '');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('manual-load-btn').addEventListener('click', () => {
+            const raw = document.getElementById('manual-patient-id').value;
+            setPatientByBlockchainId(raw)
+                .then(() => {
+                    document.getElementById('scanner-modal').classList.add('hidden');
+                    document.getElementById('scanner-modal').classList.remove('flex');
+                    stopCameraScan();
+                })
+                .catch((err) => window.alert(err.message));
+        });
+
+        renderHeader();
+        resetPatientWorkspace();
+        loadDoctorProfile().catch((error) => {
+            const msg = String(error && error.message || '');
+            if (msg.includes('Doctor session required')) {
+                localStorage.removeItem('medilink_token');
+                localStorage.removeItem('medilink_role');
+                window.alert('Doctor login required. Please sign in again with a doctor account.');
+                window.location.href = '../auth_ui/login.html';
+                return;
+            }
+            console.error(error);
+        });
+        if (currentPatient) {
+            refreshFromApi().catch((error) => {
+                console.error(error);
+                currentPatient = null;
+                localStorage.removeItem('medilink_doctor_selected_patient');
+                renderHeader();
+                resetPatientWorkspace();
+            });
+        }
+
+        window.addEventListener('beforeunload', () => {
+            stopCameraScan();
+        });
+
+        setInterval(() => {
+            refreshFromApi().catch(() => {
+                // best-effort polling
+            });
+        }, 2500);
+    })();
+</script>
 </body></html>

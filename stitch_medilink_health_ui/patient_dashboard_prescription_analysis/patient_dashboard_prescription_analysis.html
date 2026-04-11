@@ -102,13 +102,24 @@
 </div>
 </div>
 <div class="flex items-center gap-4">
-<button class="p-2 hover:bg-slate-100 rounded-full transition-colors relative">
+<button id="patient-notification-btn" class="p-2 hover:bg-slate-100 rounded-full transition-colors relative">
 <span class="material-symbols-outlined text-slate-600">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+<span id="patient-notification-dot" class="hidden absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
 </button>
 <div id="top-patient-initials" class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white font-bold uppercase overflow-hidden bg-cover bg-center text-xs">--</div>
 </div>
 </nav>
+<div id="patient-notification-panel" class="hidden fixed top-16 right-6 z-50 w-96 max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+<div class="px-4 py-3 border-b border-slate-100 flex items-center justify-between">
+<h3 class="text-sm font-bold">Notifications</h3>
+<button id="patient-notification-close" class="text-slate-400 hover:text-slate-700">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div id="patient-notification-list" class="max-h-80 overflow-y-auto p-3 space-y-2">
+<p class="text-xs text-slate-500">No notifications yet.</p>
+</div>
+</div>
 <!-- SideNavBar -->
 <aside class="h-screen w-64 fixed left-0 top-0 pt-16 flex flex-col border-r border-slate-100 bg-slate-50 z-40 hidden md:flex">
 <div class="px-6 py-8">
@@ -139,26 +150,32 @@
 </nav>
 </div>
 <div class="mt-auto p-6">
-<button class="w-full py-3 px-4 bg-gradient-to-r from-primary to-primary-container text-white rounded-lg font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-200">
+<div class="space-y-3">
+<button id="new-consultation-btn" class="w-full py-3 px-4 bg-gradient-to-r from-primary to-primary-container text-white rounded-lg font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-200">
 <span class="material-symbols-outlined text-sm">add</span>
                 New Consultation
             </button>
+<button id="new-prescription-btn" class="w-full py-3 px-4 bg-secondary-container text-on-secondary-container rounded-lg font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" style='font-variation-settings: "FILL" 1;'>medical_services</span>
+                New Prescription
+            </button>
+</div>
 </div>
 </aside>
 <!-- Main Content -->
 <main class="md:ml-64 pt-20 px-6 pb-12">
 <!-- New Prescription Notification Alert -->
-<div class="mb-6 bg-blue-50 border-l-4 border-primary p-4 rounded-r-xl shadow-sm flex items-center justify-between animate-pulse-once">
+<div id="prescription-alert" class="mb-6 bg-blue-50 border-l-4 border-primary p-4 rounded-r-xl shadow-sm flex items-center justify-between animate-pulse-once hidden">
 <div class="flex items-center gap-3">
 <div class="bg-primary text-white p-2 rounded-full">
 <span class="material-symbols-outlined text-sm" style='font-variation-settings: "FILL" 1;'>medical_services</span>
 </div>
 <div>
 <p class="text-sm font-bold text-blue-900">New Prescription</p>
-<p class="text-xs text-blue-700">Dr. Sanctuary added Loratadine 10mg</p>
+<p id="prescription-alert-message" class="text-xs text-blue-700">Dr. Sanctuary added Loratadine 10mg</p>
 </div>
 </div>
-<button class="text-blue-400 hover:text-blue-600">
+<button id="dismiss-prescription-alert" class="text-blue-400 hover:text-blue-600">
 <span class="material-symbols-outlined text-sm">close</span>
 </button>
 </div>
@@ -168,17 +185,17 @@
 <div class="lg:col-span-8 bg-gradient-to-br from-blue-700 to-blue-900 rounded-2xl p-8 text-white relative overflow-hidden flex flex-col justify-between min-h-[240px]">
 <div class="z-10">
 <h1 id="welcome-name" class="text-3xl font-bold mb-2">Welcome back...</h1>
-<p class="text-blue-100 max-w-md">Your health metrics look stable today. You have a follow-up appointment in 3 days with Dr. Sarah Chen.</p>
+<p id="welcome-subtitle" class="text-blue-100 max-w-md">Your health metrics look stable today. You have a follow-up appointment in 3 days with Dr. Sarah Chen.</p>
 </div>
 <div class="z-10 flex gap-4 mt-6">
 <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 flex-1">
 <p class="text-xs text-blue-200 font-label mb-1">Blood Pressure</p>
-<p class="text-xl font-bold font-headline">120/80 <span class="text-xs font-normal">mmHg</span></p>
+<p class="text-xl font-bold font-headline"><span id="vital-bp">120/80</span> <span class="text-xs font-normal">mmHg</span></p>
 </div>
 <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 flex-1">
 <p class="text-xs text-blue-200 font-label mb-1">Heart Rate</p>
 <div class="flex items-baseline gap-2">
-<p class="text-xl font-bold font-headline">72 <span class="text-xs font-normal">bpm</span></p>
+<p class="text-xl font-bold font-headline"><span id="vital-hr">72</span> <span class="text-xs font-normal">bpm</span></p>
 <span class="material-symbols-outlined text-secondary-fixed text-xs" style='font-variation-settings: "FILL" 1;'>favorite</span>
 </div>
 </div>
@@ -205,76 +222,19 @@
 <!-- Medical History Timeline -->
 <section class="bg-white rounded-2xl p-6 custom-shadow border border-slate-50">
 <h2 class="text-lg font-bold font-headline mb-6">Medical History Timeline</h2>
-<div class="relative pl-8 space-y-8">
-<div class="absolute left-[3px] top-2 bottom-2 w-1 bg-primary-fixed rounded-full"></div>
-<div class="relative">
-<div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-blue-50"></div>
-<div>
-<p class="text-xs font-bold text-primary mb-1">MARCH 12, 2024</p>
-<h3 class="font-bold text-on-surface">Annual Physical Examination</h3>
-<p class="text-sm text-on-surface-variant mt-1 leading-relaxed">Overall health is excellent. Recommended increasing Vitamin D intake during winter months. All vitals within normal range.</p>
-</div>
-</div>
-<div class="relative">
-<div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-slate-300 ring-4 ring-slate-50"></div>
-<div>
-<p class="text-xs font-bold text-slate-400 mb-1">JANUARY 05, 2024</p>
-<h3 class="font-bold text-on-surface">Seasonal Influenza Vaccination</h3>
-<p class="text-sm text-on-surface-variant mt-1 leading-relaxed">Routine booster administered by Dr. Sanctuary. No adverse reactions reported during observation.</p>
-</div>
-</div>
-<div class="relative">
-<div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-slate-300 ring-4 ring-slate-50"></div>
-<div>
-<p class="text-xs font-bold text-slate-400 mb-1">NOVEMBER 18, 2023</p>
-<h3 class="font-bold text-on-surface">Dermatology Consult</h3>
-<p class="text-sm text-on-surface-variant mt-1 leading-relaxed">Minor eczema flare-up treated with topical corticosteroids. Condition resolved in 7 days.</p>
-</div>
-</div>
-</div>
+<div id="timeline-container" class="relative pl-8 space-y-8"></div>
 </section>
 <!-- Grid: Diagnoses and Medications -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <!-- Recent Diagnoses -->
 <div class="bg-white rounded-2xl p-6 custom-shadow border border-slate-50">
 <h3 class="text-base font-bold font-headline mb-4">Recent Diagnoses</h3>
-<div class="space-y-3">
-<div class="p-3 bg-surface-container-low rounded-xl">
-<p class="text-xs font-bold text-blue-700">ICD-10: J30.1</p>
-<p class="font-semibold">Allergic Rhinitis</p>
-<p class="text-xs text-slate-500 mt-1 italic">Confirmed March 2024</p>
-</div>
-<div class="p-3 bg-surface-container-low rounded-xl">
-<p class="text-xs font-bold text-blue-700">ICD-10: E67.3</p>
-<p class="font-semibold">Hypervitaminosis D</p>
-<p class="text-xs text-slate-500 mt-1 italic">Monitoring Since Nov 2023</p>
-</div>
-</div>
+<div id="diagnoses-container" class="space-y-3"></div>
 </div>
 <!-- Active Medications -->
 <div class="bg-white rounded-2xl p-6 custom-shadow border border-slate-50">
 <h3 class="text-base font-bold font-headline mb-4">Active Medications</h3>
-<div class="space-y-4">
-<div class="flex items-start gap-3">
-<div class="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed-variant">
-<span class="material-symbols-outlined">pill</span>
-</div>
-<div>
-<p class="font-bold text-sm">Loratadine 10mg</p>
-<p class="text-xs text-slate-500">1 tablet daily (Morning)</p>
-<span class="inline-block mt-1 px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full">Refill Available</span>
-</div>
-</div>
-<div class="flex items-start gap-3">
-<div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-700">
-<span class="material-symbols-outlined">vaccines</span>
-</div>
-<div>
-<p class="font-bold text-sm">Vitamin D3 2000IU</p>
-<p class="text-xs text-slate-500">1 softgel daily (Evening)</p>
-</div>
-</div>
-</div>
+<div id="medications-container" class="space-y-4"></div>
 </div>
 </div>
 </div>
@@ -403,6 +363,177 @@
                 }
 
                 const data = await response.json();
+                let dashboardState = null;
+
+                const escapeHtml = (value) => String(value || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+
+                const formatDate = (dateText) => {
+                    const parsed = new Date(dateText);
+                    if (Number.isNaN(parsed.getTime())) return String(dateText || '').toUpperCase();
+                    return parsed.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: '2-digit'
+                    }).toUpperCase();
+                };
+
+                const api = async (path, options = {}) => {
+                    const res = await fetch(path, {
+                        ...options,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                            ...(options.headers || {})
+                        }
+                    });
+                    if (!res.ok) {
+                        const text = await res.text();
+                        throw new Error(text || `Request failed: ${res.status}`);
+                    }
+                    return res.json();
+                };
+                let currentPatientId = null;
+
+                const defaultState = {
+                    vitals: { bp: '120/80', hr: '72' },
+                    followUp: { days: 3, doctor: 'Dr. Sarah Chen' },
+                    notification: {
+                        visible: true,
+                        message: 'Dr. Sanctuary added Loratadine 10mg'
+                    },
+                    timeline: [
+                        {
+                            date: '2024-03-12',
+                            title: 'Annual Physical Examination',
+                            notes: 'Overall health is excellent. Recommended increasing Vitamin D intake during winter months. All vitals within normal range.'
+                        },
+                        {
+                            date: '2024-01-05',
+                            title: 'Seasonal Influenza Vaccination',
+                            notes: 'Routine booster administered by Dr. Sanctuary. No adverse reactions reported during observation.'
+                        },
+                        {
+                            date: '2023-11-18',
+                            title: 'Dermatology Consult',
+                            notes: 'Minor eczema flare-up treated with topical corticosteroids. Condition resolved in 7 days.'
+                        }
+                    ],
+                    diagnoses: [
+                        { code: 'J30.1', name: 'Allergic Rhinitis', status: 'Confirmed March 2024' },
+                        { code: 'E67.3', name: 'Hypervitaminosis D', status: 'Monitoring Since Nov 2023' }
+                    ],
+                    medications: [
+                        { icon: 'pill', name: 'Loratadine 10mg', schedule: '1 tablet daily (Morning)', tag: 'Refill Available' },
+                        { icon: 'vaccines', name: 'Vitamin D3 2000IU', schedule: '1 softgel daily (Evening)', tag: '' }
+                    ]
+                };
+
+                const panelEl = document.getElementById('patient-notification-panel');
+                const listEl = document.getElementById('patient-notification-list');
+                const bellDotEl = document.getElementById('patient-notification-dot');
+
+                const renderNotifications = async () => {
+                    if (!currentPatientId) return;
+                    const notifications = await api('/api/patient/notifications');
+                    const pending = (notifications || []).filter((n) => n.status === 'pending');
+
+                    if (pending.length === 0) {
+                        bellDotEl.classList.add('hidden');
+                        listEl.innerHTML = '<p class="text-xs text-slate-500">No pending notifications.</p>';
+                        return;
+                    }
+
+                    bellDotEl.classList.remove('hidden');
+                    listEl.innerHTML = pending.map((item) => `
+                        <div class="p-3 border border-slate-200 rounded-xl bg-slate-50">
+                            <p class="text-xs font-bold text-slate-800">${escapeHtml(item.doctor || 'Doctor')} requested access</p>
+                            <p class="text-[11px] text-slate-600 mt-1">${escapeHtml(item.label || 'Permission request')}</p>
+                            <div class="flex gap-2 mt-3">
+                                <button data-request-id="${escapeHtml(item.id)}" data-decision="accept" class="px-3 py-1.5 rounded-lg bg-primary text-white text-[11px] font-bold">Accept</button>
+                                <button data-request-id="${escapeHtml(item.id)}" data-decision="reject" class="px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 text-[11px] font-bold">Reject</button>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    listEl.querySelectorAll('button[data-request-id]').forEach((btn) => {
+                        btn.addEventListener('click', () => {
+                            const requestId = btn.getAttribute('data-request-id');
+                            const decision = btn.getAttribute('data-decision');
+                            api(`/api/patient/notifications/${encodeURIComponent(requestId)}/resolve`, {
+                                method: 'POST',
+                                body: JSON.stringify({ decision })
+                            })
+                                .then(() => renderNotifications())
+                                .catch((error) => window.alert(error.message));
+                        });
+                    });
+                };
+
+                const renderDashboardState = () => {
+                    if (!dashboardState) return;
+
+                    document.getElementById('vital-bp').textContent = dashboardState.vitals.bp;
+                    document.getElementById('vital-hr').textContent = dashboardState.vitals.hr;
+                    document.getElementById('welcome-subtitle').textContent = `Your health metrics look stable today. You have a follow-up appointment in ${dashboardState.followUp.days} days with ${dashboardState.followUp.doctor}.`;
+
+                    const alertEl = document.getElementById('prescription-alert');
+                    const alertMsgEl = document.getElementById('prescription-alert-message');
+                    if (dashboardState.notification.visible) {
+                        alertEl.classList.remove('hidden');
+                        alertMsgEl.textContent = dashboardState.notification.message;
+                    } else {
+                        alertEl.classList.add('hidden');
+                    }
+
+                    const timelineContainer = document.getElementById('timeline-container');
+                    timelineContainer.innerHTML = `<div class="absolute left-[3px] top-2 bottom-2 w-1 bg-primary-fixed rounded-full"></div>${dashboardState.timeline
+                        .map((item, index) => `
+                        <div class="relative">
+                            <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full ${index === 0 ? 'bg-primary ring-4 ring-blue-50' : 'bg-slate-300 ring-4 ring-slate-50'}"></div>
+                            <div>
+                                <p class="text-xs font-bold ${index === 0 ? 'text-primary' : 'text-slate-400'} mb-1">${escapeHtml(formatDate(item.date))}</p>
+                                <h3 class="font-bold text-on-surface">${escapeHtml(item.title)}</h3>
+                                <p class="text-sm text-on-surface-variant mt-1 leading-relaxed">${escapeHtml(item.notes)}</p>
+                            </div>
+                        </div>
+                    `).join('')}`;
+
+                    const diagnosesContainer = document.getElementById('diagnoses-container');
+                    diagnosesContainer.innerHTML = dashboardState.diagnoses.map((diag) => `
+                        <div class="p-3 bg-surface-container-low rounded-xl">
+                            <p class="text-xs font-bold text-blue-700">ICD-10: ${escapeHtml(diag.code)}</p>
+                            <p class="font-semibold">${escapeHtml(diag.name)}</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">${escapeHtml(diag.status)}</p>
+                        </div>
+                    `).join('');
+
+                    const medsContainer = document.getElementById('medications-container');
+                    medsContainer.innerHTML = dashboardState.medications.map((med) => `
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed-variant">
+                                <span class="material-symbols-outlined">${escapeHtml(med.icon || 'pill')}</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">${escapeHtml(med.name)}</p>
+                                <p class="text-xs text-slate-500">${escapeHtml(med.schedule)}</p>
+                                ${med.tag ? `<span class="inline-block mt-1 px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full">${escapeHtml(med.tag)}</span>` : ''}
+                            </div>
+                        </div>
+                    `).join('');
+                };
+
+                const persistState = async () => {
+                    dashboardState = await api('/api/patient/clinical-state', {
+                        method: 'PUT',
+                        body: JSON.stringify(dashboardState)
+                    });
+                    renderDashboardState();
+                };
                 
                 // Update Identifiers
                 document.getElementById('sb-patient-name').textContent = data.full_name;
@@ -410,6 +541,7 @@
                 document.getElementById('welcome-name').textContent = `Welcome back, ${data.full_name.split(' ')[0]}`;
                 document.getElementById('qr-patient-id').textContent = `ID: ${data.blockchain_id}`;
                 localStorage.setItem('medilink_patient_id', data.blockchain_id);
+                currentPatientId = data.blockchain_id;
 
                 // Extract Initials
                 const nameParts = data.full_name.trim().split(' ');
@@ -447,6 +579,70 @@
                 document.getElementById('em-donor').textContent = data.organ_donor || 'No';
                 document.getElementById('em-contact-name').textContent = data.emergency_contact_name || 'Not provided';
                 document.getElementById('em-contact-phone').textContent = data.emergency_contact_phone || 'Not provided';
+
+                const fromApi = await api('/api/patient/clinical-state');
+                dashboardState = fromApi || defaultState;
+                renderDashboardState();
+                await renderNotifications();
+
+                document.getElementById('patient-notification-btn').addEventListener('click', () => {
+                    panelEl.classList.toggle('hidden');
+                    if (!panelEl.classList.contains('hidden')) {
+                        renderNotifications().catch((error) => console.error(error));
+                    }
+                });
+
+                document.getElementById('patient-notification-close').addEventListener('click', () => {
+                    panelEl.classList.add('hidden');
+                });
+
+                document.getElementById('dismiss-prescription-alert').addEventListener('click', () => {
+                    dashboardState.notification.visible = false;
+                    persistState().catch((error) => window.alert(error.message));
+                });
+
+                document.getElementById('new-consultation-btn').addEventListener('click', () => {
+                    const title = window.prompt('Consultation title', 'Follow-up Consultation');
+                    if (!title) return;
+                    const notes = window.prompt('Consultation notes', 'Patient reviewed and advised follow-up monitoring.') || 'Consultation completed.';
+                    const date = new Date().toISOString().slice(0, 10);
+                    dashboardState.timeline.unshift({ date, title: title.trim(), notes: notes.trim() });
+                    dashboardState.followUp.days = 3;
+                    dashboardState.followUp.doctor = 'Dr. Sanctuary';
+                    dashboardState.timeline = dashboardState.timeline.slice(0, 8);
+                    persistState().catch((error) => window.alert(error.message));
+                });
+
+                document.getElementById('new-prescription-btn').addEventListener('click', () => {
+                    const medicine = window.prompt('Medicine name', 'Loratadine 10mg');
+                    if (!medicine) return;
+                    const schedule = window.prompt('Dosage / schedule', '1 tablet daily (Morning)') || 'As directed';
+                    dashboardState.medications.unshift({
+                        icon: 'pill',
+                        name: medicine.trim(),
+                        schedule: schedule.trim(),
+                        tag: 'Refill Available'
+                    });
+                    dashboardState.medications = dashboardState.medications.slice(0, 6);
+                    dashboardState.notification.visible = true;
+                    dashboardState.notification.message = `Dr. Sanctuary added ${medicine.trim()}`;
+                    persistState().catch((error) => window.alert(error.message));
+                });
+
+                setInterval(async () => {
+                    try {
+                        const latest = await api('/api/patient/clinical-state');
+                        const oldDigest = JSON.stringify(dashboardState);
+                        const newDigest = JSON.stringify(latest);
+                        if (oldDigest !== newDigest) {
+                            dashboardState = latest;
+                            renderDashboardState();
+                        }
+                        await renderNotifications();
+                    } catch {
+                        // best-effort polling
+                    }
+                }, 2500);
 
             } catch (err) {
                 console.error("Failed to load patient dashboard", err);

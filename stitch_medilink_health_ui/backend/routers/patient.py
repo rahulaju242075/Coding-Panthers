@@ -7,6 +7,16 @@ import shutil
 
 from database import get_db
 import models
+from realtime_store import (
+    ensure_patient_state,
+    get_clinical_state,
+    set_clinical_state,
+    add_timeline_entry,
+    add_prescription,
+    get_notifications,
+    resolve_notification,
+    get_permissions,
+)
 
 router = APIRouter(prefix="/api/patient", tags=["patient"])
 security = HTTPBearer()
@@ -92,3 +102,147 @@ async def upload_avatar(
     db.commit()
     
     return {"message": "Avatar uploaded", "url": picture_url}
+
+
+@router.get("/clinical-state")
+def patient_get_clinical_state(
+    current_user: models.User = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db),
+):
+    role_value = current_user.role
+    normalized_role = role_value.value if isinstance(role_value, models.UserRole) else str(role_value)
+    if normalized_role != models.UserRole.PATIENT.value:
+        raise HTTPException(status_code=403, detail="Not authorized as patient")
+
+    profile = current_user.patient_profile
+    if not profile:
+        raise HTTPException(status_code=404, detail="Patient profile not found")
+
+    ensure_patient_state(profile.blockchain_id)
+    return get_clinical_state(profile.blockchain_id)
+
+
+@router.put("/clinical-state")
+def patient_set_clinical_state(
+    payload: dict,
+    current_user: models.User = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db),
+):
+    role_value = current_user.role
+    normalized_role = role_value.value if isinstance(role_value, models.UserRole) else str(role_value)
+    if normalized_role != models.UserRole.PATIENT.value:
+        raise HTTPException(status_code=403, detail="Not authorized as patient")
+
+    profile = current_user.patient_profile
+    if not profile:
+        raise HTTPException(status_code=404, detail="Patient profile not found")
+
+    return set_clinical_state(profile.blockchain_id, payload)
+
+
+@router.post("/clinical-state/timeline")
+def patient_add_timeline(
+    payload: dict,
+    current_user: models.User = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db),
+):
+    role_value = current_user.role
+    normalized_role = role_value.value if isinstance(role_value, models.UserRole) else str(role_value)
+    if normalized_role != models.UserRole.PATIENT.value:
+        raise HTTPException(status_code=403, detail="Not authorized as patient")
+
+    profile = current_user.patient_profile
+    if not profile:
+        raise HTTPException(status_code=404, detail="Patient profile not found")
+
+    title = str(payload.get("title", "Consultation Update")).strip() or "Consultation Update"
+    notes = str(payload.get("notes", "")).strip()
+    if not notes:
+        raise HTTPException(status_code=400, detail="Timeline notes are required")
+    date_value = str(payload.get("date", "")).strip() or None
+    return add_timeline_entry(profile.blockchain_id, title, notes, date_value)
+
+
+@router.post("/clinical-state/prescription")
+def patient_add_prescription(
+    payload: dict,
+    current_user: models.User = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db),
+):
+    role_value = current_user.role
+    normalized_role = role_value.value if isinstance(role_value, models.UserRole) else str(role_value)
+    if normalized_role != models.UserRole.PATIENT.value:
+        raise HTTPException(status_code=403, detail="Not authorized as patient")
+
+    profile = current_user.patient_profile
+    if not profile:
+        raise HTTPException(status_code=404, detail="Patient profile not found")
+
+    name = str(payload.get("name", "")).strip()
+    schedule = str(payload.get("schedule", "As directed")).strip() or "As directed"
+    if not name:
+        raise HTTPException(status_code=400, detail="Prescription name is required")
+
+    return add_prescription(profile.blockchain_id, name, schedule, "Patient")
+
+
+@router.get("/notifications")
+def patient_get_notifications(
+    current_user: models.User = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db),
+):
+    role_value = current_user.role
+    normalized_role = role_value.value if isinstance(role_value, models.UserRole) else str(role_value)
+    if normalized_role != models.UserRole.PATIENT.value:
+        raise HTTPException(status_code=403, detail="Not authorized as patient")
+
+    profile = current_user.patient_profile
+    if not profile:
+        raise HTTPException(status_code=404, detail="Patient profile not found")
+
+    ensure_patient_state(profile.blockchain_id)
+    return get_notifications(profile.blockchain_id)
+
+
+@router.post("/notifications/{request_id}/resolve")
+def patient_resolve_notification(
+    request_id: str,
+    payload: dict,
+    current_user: models.User = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db),
+):
+    role_value = current_user.role
+    normalized_role = role_value.value if isinstance(role_value, models.UserRole) else str(role_value)
+    if normalized_role != models.UserRole.PATIENT.value:
+        raise HTTPException(status_code=403, detail="Not authorized as patient")
+
+    profile = current_user.patient_profile
+    if not profile:
+        raise HTTPException(status_code=404, detail="Patient profile not found")
+
+    decision = str(payload.get("decision", "")).strip().lower()
+    if decision not in {"accept", "reject"}:
+        raise HTTPException(status_code=400, detail="decision must be accept or reject")
+
+    resolved = resolve_notification(profile.blockchain_id, request_id, decision)
+    if resolved is None:
+        raise HTTPException(status_code=404, detail="Notification request not found")
+    return resolved
+
+
+@router.get("/permissions")
+def patient_get_permissions(
+    current_user: models.User = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db),
+):
+    role_value = current_user.role
+    normalized_role = role_value.value if isinstance(role_value, models.UserRole) else str(role_value)
+    if normalized_role != models.UserRole.PATIENT.value:
+        raise HTTPException(status_code=403, detail="Not authorized as patient")
+
+    profile = current_user.patient_profile
+    if not profile:
+        raise HTTPException(status_code=404, detail="Patient profile not found")
+
+    ensure_patient_state(profile.blockchain_id)
+    return get_permissions(profile.blockchain_id)
