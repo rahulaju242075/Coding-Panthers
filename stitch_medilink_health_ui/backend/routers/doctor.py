@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 import jwt
 import os
 import datetime
+from pathlib import Path
+from uuid import uuid4
 
 from database import get_db
 import models
@@ -18,6 +20,7 @@ from realtime_store import (
     add_diagnosis,
     add_prescription,
     add_report,
+    update_vitals,
 )
 
 router = APIRouter(prefix="/api/doctor", tags=["doctor"])
@@ -227,3 +230,79 @@ def doctor_add_lab_report(
     size_text = str(payload.get("size", "1.9 MB")).strip() or "1.9 MB"
     when_text = str(payload.get("when", "Uploaded Now")).strip() or "Uploaded Now"
     return add_report(blockchain_id, file_name, size_text, when_text)
+
+
+@router.post("/clinical-state/{blockchain_id}/report-upload")
+async def doctor_upload_lab_report(
+    blockchain_id: str,
+    file: UploadFile = File(...),
+    current_user: models.User = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db),
+):
+    if current_user.role != models.UserRole.DOCTOR:
+        raise HTTPException(status_code=403, detail="Not authorized as doctor")
+    _get_patient_blockchain_or_404(blockchain_id, db)
+
+    original_name = (file.filename or "").strip()
+    if not original_name:
+        raise HTTPException(status_code=400, detail="Report filename is required")
+
+    file_ext = Path(original_name).suffix.lower()
+    allowed = {".pdf", ".dcm", ".dicom", ".jpg", ".jpeg", ".png"}
+    if file_ext not in allowed:
+        raise HTTPException(status_code=400, detail="Only PDF, DICOM, JPG, JPEG, PNG are allowed")
+
+    content = await file.read()
+    if not content:
+        raise HTTPException(status_code=400, detail="Uploaded file is empty")
+    if len(content) > 25 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File exceeds 25MB limit")
+
+    reports_dir = Path("uploads") / "reports"
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    safe_name = f"{blockchain_id}_{uuid4().hex}{file_ext}"
+    disk_path = reports_dir / safe_name
+    with open(disk_path, "wb") as f:
+        f.write(content)
+
+    mb = len(content) / (1024 * 1024)
+    size_text = f"{mb:.1f} MB"
+    when_text = "Uploaded Now"
+    file_url = f"/api/files/reports/{safe_name}"
+    state = add_report(blockchain_id, original_name, size_text, when_text, file_url)
+    return {"message": "Report uploaded successfully", "report_url": file_url, "state": state}
+
+
+@router.post("/clinical-state/{blockchain_id}/vitals")
+def doctor_update_vitals(
+    blockchain_id: str,
+    payload: dict,
+    current_user: models.User = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db),
+):
+    if current_user.role != models.UserRole.DOCTOR:
+        raise HTTPException(status_code=403, detail="Not authorized as doctor")
+    _get_patient_blockchain_or_404(blockchain_id, db)
+
+    bp = str(payload.get("bp", "")).strip() or "120/80"
+    hr_raw = str(payload.get("hr", "")).strip() or "72"
+    rhythm = str(payload.get("rhythm", "")).strip()
+
+    try:
+        hr_int = int(hr_raw)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Heart rate must be a number")
+
+    if hr_int < 30 or hr_int > 240:
+        raise HTTPException(status_code=400, detail="Heart rate must be between 30 and 240")
+
+    if not rhythm:
+        if hr_int < 60:
+            rhythm = "Bradycardia Trend"
+        elif hr_int > 100:
+            rhythm = "Tachycardia Trend"
+        else:
+            rhythm = "Normal Sinus Rhythm"
+
+    state = update_vitals(blockchain_id, bp, str(hr_int), rhythm)
+    return state

@@ -6,10 +6,11 @@ import os
 
 from database import engine, Base
 import models
-from routers import auth, patient, doctor
+from routers import auth, patient, doctor, pharmacy
 
 # Ensure uploads folder exists
 os.makedirs("uploads/profiles", exist_ok=True)
+os.makedirs("uploads/reports", exist_ok=True)
 
 # Create Database tables
 Base.metadata.create_all(bind=engine)
@@ -27,6 +28,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(patient.router)
 app.include_router(doctor.router)
+app.include_router(pharmacy.router)
 
 app.mount("/api/files", StaticFiles(directory="uploads"), name="uploads")
 

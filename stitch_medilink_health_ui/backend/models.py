@@ -109,3 +109,23 @@ class PatientAccessRequest(Base):
     label = Column(String, nullable=False)
     created_at = Column(String, nullable=False)
     resolved_at = Column(String, nullable=True)
+
+
+class PharmacyDemandRequest(Base):
+    __tablename__ = "pharmacy_demand_requests"
+
+    id = Column(Integer, primary_key=True, index=True)
+    request_id = Column(String, unique=True, index=True, nullable=False)
+    patient_blockchain_id = Column(String, index=True, nullable=False)
+    patient_name = Column(String, nullable=False)
+    pharmacy_user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    pharmacy_store_name = Column(String, nullable=False)
+    medicine_name = Column(String, nullable=False)
+    quantity = Column(String, nullable=False)
+    notes = Column(String, nullable=True)
+    status = Column(String, default="pending")  # pending | accepted | rejected
+    created_at = Column(String, nullable=False)
+    resolved_at = Column(String, nullable=True)
+    response_message = Column(String, nullable=True)
+
+    pharmacy = relationship("User", foreign_keys=[pharmacy_user_id])

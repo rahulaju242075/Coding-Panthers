@@ -290,47 +290,37 @@
 <!-- Nearby Pharmacies -->
 <div class="bg-white rounded-2xl p-6 custom-shadow border border-slate-50">
 <h3 class="text-base font-bold font-headline mb-4">Nearby Pharmacies</h3>
-<div class="space-y-4">
-<div class="flex items-start gap-4">
-<div class="bg-blue-50 p-2 rounded-lg text-blue-700">
-<span class="material-symbols-outlined">location_on</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between">
-<p class="text-sm font-bold">HealthMart Pharmacy</p>
-<span class="text-[10px] font-bold text-slate-400">0.4 miles</span>
-</div>
-<p class="text-xs text-slate-500 mt-1">128 Medical Center Dr.</p>
-<div class="flex items-center gap-1.5 mt-2 bg-secondary-container/30 px-2 py-1 rounded-md w-fit">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
-<p class="text-[10px] text-on-secondary-container font-black uppercase">Stock Confirmed - Ready for Pickup</p>
-</div>
-<div class="flex items-center gap-1 mt-1 text-[10px] text-slate-400 font-semibold">
-                                    Open until 9:00 PM
-                                </div>
-</div>
-</div>
-<div class="flex items-start gap-4 opacity-70">
-<div class="bg-slate-100 p-2 rounded-lg text-slate-500">
-<span class="material-symbols-outlined">location_on</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between">
-<p class="text-sm font-bold">CVS Health Hub</p>
-<span class="text-[10px] font-bold text-slate-400">1.2 miles</span>
-</div>
-<p class="text-xs text-slate-500 mt-1">450 West Oak St.</p>
-<div class="flex items-center gap-1 mt-1 text-[10px] text-slate-400 font-semibold">
-<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span> Closed • Opens 8AM
-                                </div>
-</div>
-</div>
-</div>
+<div id="nearby-pharmacies-list" class="space-y-4"></div>
 <button class="w-full mt-4 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50">View Map</button>
 </div>
 </div>
 </div>
 </main>
+<div id="pharmacy-request-modal" class="hidden fixed inset-0 z-[70] bg-black/50 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-lg p-6 shadow-2xl">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold">Request Medicine</h3>
+            <button id="close-pharmacy-modal" class="text-slate-500 hover:text-slate-800">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <p id="selected-pharmacy-name" class="text-sm font-semibold text-slate-700 mb-4">Select a pharmacy</p>
+        <div class="space-y-3">
+            <input id="request-medicine-name" type="text" class="w-full rounded-lg border-slate-300" placeholder="Medicine name" />
+            <input id="request-quantity" type="text" class="w-full rounded-lg border-slate-300" placeholder="Quantity or pack size" value="1" />
+            <textarea id="request-notes" class="w-full rounded-lg border-slate-300 h-24" placeholder="Add refill details, dosage, or urgency notes"></textarea>
+            <button id="send-pharmacy-request" class="w-full py-3 bg-primary text-white rounded-lg font-bold text-sm">Send to Pharmacy</button>
+        </div>
+    </div>
+</div>
+<div class="md:ml-64 px-6 pb-12">
+    <div class="max-w-5xl mx-auto mt-6 bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+        <h3 class="text-base font-bold font-headline mb-4">Pharmacy Request Updates</h3>
+        <div id="pharmacy-request-updates" class="space-y-3 text-sm text-slate-600">
+            <p class="text-slate-500">No pharmacy requests yet.</p>
+        </div>
+    </div>
+</div>
 <!-- Footer -->
 <footer class="md:ml-64 bg-white py-12 px-6 border-t border-slate-100 flex flex-col items-center justify-center space-y-4">
 <div class="flex flex-wrap justify-center gap-6">
@@ -436,6 +426,14 @@
                 const panelEl = document.getElementById('patient-notification-panel');
                 const listEl = document.getElementById('patient-notification-list');
                 const bellDotEl = document.getElementById('patient-notification-dot');
+                const nearbyPharmaciesListEl = document.getElementById('nearby-pharmacies-list');
+                const pharmacyModalEl = document.getElementById('pharmacy-request-modal');
+                const pharmacyModalNameEl = document.getElementById('selected-pharmacy-name');
+                const pharmacyUpdatesEl = document.getElementById('pharmacy-request-updates');
+                const sendPharmacyRequestBtn = document.getElementById('send-pharmacy-request');
+                const closePharmacyModalBtn = document.getElementById('close-pharmacy-modal');
+
+                let selectedPharmacy = null;
 
                 const renderNotifications = async () => {
                     if (!currentPatientId) return;
@@ -472,6 +470,86 @@
                                 .catch((error) => window.alert(error.message));
                         });
                     });
+                };
+
+                const renderPharmacyUpdates = async () => {
+                    if (!currentPatientId) return;
+                    const requests = await api('/api/patient/pharmacy-requests');
+                    if (!requests.length) {
+                        pharmacyUpdatesEl.innerHTML = '<p class="text-slate-500">No pharmacy requests yet.</p>';
+                        return;
+                    }
+
+                    pharmacyUpdatesEl.innerHTML = requests.map((request) => {
+                        const statusLabel = request.status === 'accepted'
+                            ? `Accepted • ${request.responseMessage || 'Ready for pickup'}`
+                            : request.status === 'rejected'
+                                ? `Denied • ${request.responseMessage || 'Out of stock'}`
+                                : 'Pending pharmacy response';
+                        return `
+                            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                                <div class="flex items-center justify-between gap-3">
+                                    <div>
+                                        <p class="font-bold text-slate-800">${escapeHtml(request.pharmacyStoreName || 'Pharmacy')}</p>
+                                        <p class="text-xs text-slate-500">${escapeHtml(request.medicineName || 'Medicine')} • ${escapeHtml(request.quantity || '1')}</p>
+                                    </div>
+                                    <span class="text-[10px] font-bold uppercase ${request.status === 'accepted' ? 'text-secondary' : request.status === 'rejected' ? 'text-error' : 'text-primary'}">${escapeHtml(request.status)}</span>
+                                </div>
+                                <p class="text-xs mt-2 ${request.status === 'accepted' ? 'text-secondary' : request.status === 'rejected' ? 'text-error' : 'text-slate-600'}">${escapeHtml(statusLabel)}</p>
+                            </div>
+                        `;
+                    }).join('');
+                };
+
+                const openPharmacyModal = (pharmacy) => {
+                    selectedPharmacy = pharmacy;
+                    pharmacyModalNameEl.textContent = pharmacy ? `${pharmacy.storeName} • ${pharmacy.email}` : 'Select a pharmacy';
+                    pharmacyModalEl.classList.remove('hidden');
+                    pharmacyModalEl.classList.add('flex');
+                };
+
+                const closePharmacyModal = () => {
+                    pharmacyModalEl.classList.add('hidden');
+                    pharmacyModalEl.classList.remove('flex');
+                    selectedPharmacy = null;
+                };
+
+                const renderPharmacies = (pharmacies) => {
+                    if (!pharmacies.length) {
+                        nearbyPharmaciesListEl.innerHTML = '<p class="text-slate-500 text-sm">No registered pharmacies found.</p>';
+                        return;
+                    }
+
+                    nearbyPharmaciesListEl.innerHTML = pharmacies.map((pharmacy, index) => `
+                        <button data-pharmacy-id="${escapeHtml(pharmacy.userId)}" class="w-full text-left flex items-start gap-4 p-4 rounded-2xl border ${index === 0 ? 'border-secondary bg-secondary-container/20' : 'border-slate-100 bg-white'} hover:shadow-sm transition-all">
+                            <div class="${index === 0 ? 'bg-secondary-container text-on-secondary-container' : 'bg-slate-100 text-slate-500'} p-2 rounded-lg">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between gap-4">
+                                    <p class="text-sm font-bold text-slate-800">${escapeHtml(pharmacy.storeName || 'Pharmacy')}</p>
+                                    <span class="text-[10px] font-bold text-slate-400">${index === 0 ? 'Open now' : 'Nearby'}</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Registered pharmacy • ${escapeHtml(pharmacy.verificationStatus || 'pending')}</p>
+                                <div class="flex items-center gap-1.5 mt-2 ${index === 0 ? 'bg-secondary-container/30' : 'bg-slate-100'} px-2 py-1 rounded-md w-fit">
+                                    <span class="w-1.5 h-1.5 rounded-full ${index === 0 ? 'bg-secondary animate-pulse' : 'bg-slate-300'}"></span>
+                                    <p class="text-[10px] ${index === 0 ? 'text-on-secondary-container' : 'text-slate-500'} font-black uppercase">Click to request medicine</p>
+                                </div>
+                            </div>
+                        </button>
+                    `).join('');
+
+                    nearbyPharmaciesListEl.querySelectorAll('button[data-pharmacy-id]').forEach((button) => {
+                        button.addEventListener('click', () => {
+                            const pharmacy = pharmacies.find((item) => String(item.userId) === String(button.getAttribute('data-pharmacy-id')));
+                            openPharmacyModal(pharmacy);
+                        });
+                    });
+                };
+
+                const loadPharmacies = async () => {
+                    const pharmacies = await api('/api/patient/pharmacies');
+                    renderPharmacies(pharmacies || []);
                 };
 
                 const renderDashboardState = () => {
@@ -584,6 +662,8 @@
                 dashboardState = fromApi || defaultState;
                 renderDashboardState();
                 await renderNotifications();
+                await loadPharmacies();
+                await renderPharmacyUpdates();
 
                 document.getElementById('patient-notification-btn').addEventListener('click', () => {
                     panelEl.classList.toggle('hidden');
@@ -629,6 +709,41 @@
                     persistState().catch((error) => window.alert(error.message));
                 });
 
+                closePharmacyModalBtn.addEventListener('click', closePharmacyModal);
+                sendPharmacyRequestBtn.addEventListener('click', async () => {
+                    try {
+                        if (!selectedPharmacy) {
+                            window.alert('Select a pharmacy first.');
+                            return;
+                        }
+                        const medicine = (document.getElementById('request-medicine-name').value || '').trim();
+                        const quantity = (document.getElementById('request-quantity').value || '').trim() || '1';
+                        const notes = (document.getElementById('request-notes').value || '').trim();
+                        if (!medicine) {
+                            window.alert('Enter a medicine name.');
+                            return;
+                        }
+                        await api('/api/patient/pharmacy-request', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                pharmacy_user_id: selectedPharmacy.userId,
+                                medicine_name: medicine,
+                                quantity,
+                                notes,
+                            })
+                        });
+                        pharmacyModalEl.classList.add('hidden');
+                        pharmacyModalEl.classList.remove('flex');
+                        document.getElementById('request-medicine-name').value = '';
+                        document.getElementById('request-quantity').value = '1';
+                        document.getElementById('request-notes').value = '';
+                        await renderPharmacyUpdates();
+                        window.alert('Medicine request sent to the pharmacy.');
+                    } catch (error) {
+                        window.alert(error.message);
+                    }
+                });
+
                 setInterval(async () => {
                     try {
                         const latest = await api('/api/patient/clinical-state');
@@ -639,6 +754,7 @@
                             renderDashboardState();
                         }
                         await renderNotifications();
+                        await renderPharmacyUpdates();
                     } catch {
                         // best-effort polling
                     }

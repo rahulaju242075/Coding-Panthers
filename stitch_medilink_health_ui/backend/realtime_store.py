@@ -11,7 +11,7 @@ import models
 
 def _default_state() -> Dict[str, Any]:
     return {
-        "vitals": {"bp": "120/80", "hr": "72"},
+        "vitals": {"bp": "120/80", "hr": "72", "rhythm": "Normal Sinus Rhythm"},
         "followUp": {"days": 3, "doctor": "Dr. Sarah Chen"},
         "notification": {
             "visible": True,
@@ -179,15 +179,38 @@ def add_prescription(blockchain_id: str, name: str, schedule: str, doctor_name: 
         db.close()
 
 
-def add_report(blockchain_id: str, file_name: str, size_text: str = "1.9 MB", when_text: str = "Uploaded Now") -> Dict[str, Any]:
+def add_report(
+    blockchain_id: str,
+    file_name: str,
+    size_text: str = "1.9 MB",
+    when_text: str = "Uploaded Now",
+    url: str = "",
+) -> Dict[str, Any]:
     ensure_patient_state(blockchain_id)
     db = SessionLocal()
     try:
         entity = db.query(models.PatientClinicalState).filter(models.PatientClinicalState.blockchain_id == blockchain_id).first()
         state = _load_state(entity)
         state.setdefault("reports", [])
-        state["reports"].insert(0, {"file": file_name, "size": size_text, "when": when_text})
+        state["reports"].insert(0, {"file": file_name, "size": size_text, "when": when_text, "url": url})
         state["reports"] = state["reports"][:20]
+        _save_state(db, blockchain_id, state)
+        db.commit()
+        return deepcopy(state)
+    finally:
+        db.close()
+
+
+def update_vitals(blockchain_id: str, bp: str, hr: str, rhythm: str) -> Dict[str, Any]:
+    ensure_patient_state(blockchain_id)
+    db = SessionLocal()
+    try:
+        entity = db.query(models.PatientClinicalState).filter(models.PatientClinicalState.blockchain_id == blockchain_id).first()
+        state = _load_state(entity)
+        state.setdefault("vitals", {})
+        state["vitals"]["bp"] = bp
+        state["vitals"]["hr"] = hr
+        state["vitals"]["rhythm"] = rhythm
         _save_state(db, blockchain_id, state)
         db.commit()
         return deepcopy(state)
@@ -301,5 +324,151 @@ def resolve_notification(blockchain_id: str, request_id: str, decision: str) -> 
             "createdAt": target.created_at,
             "resolvedAt": target.resolved_at,
         }
+    finally:
+        db.close()
+
+
+def create_pharmacy_demand_request(
+    patient_blockchain_id: str,
+    patient_name: str,
+    pharmacy_user_id: int,
+    pharmacy_store_name: str,
+    medicine_name: str,
+    quantity: str,
+    notes: str,
+) -> Dict[str, Any]:
+    db = SessionLocal()
+    try:
+        request_id = f"{int(datetime.utcnow().timestamp() * 1000)}_pharmacy"
+        row = models.PharmacyDemandRequest(
+            request_id=request_id,
+            patient_blockchain_id=patient_blockchain_id,
+            patient_name=patient_name,
+            pharmacy_user_id=pharmacy_user_id,
+            pharmacy_store_name=pharmacy_store_name,
+            medicine_name=medicine_name,
+            quantity=quantity,
+            notes=notes,
+            status="pending",
+            created_at=datetime.utcnow().isoformat(),
+            resolved_at=None,
+            response_message=None,
+        )
+        db.add(row)
+        db.commit()
+        return {
+            "id": request_id,
+            "patientBlockChainId": patient_blockchain_id,
+            "patientName": patient_name,
+            "pharmacyUserId": pharmacy_user_id,
+            "pharmacyStoreName": pharmacy_store_name,
+            "medicineName": medicine_name,
+            "quantity": quantity,
+            "notes": notes,
+            "status": "pending",
+            "createdAt": row.created_at,
+            "resolvedAt": None,
+            "responseMessage": None,
+        }
+    finally:
+        db.close()
+
+
+def list_pharmacy_demand_requests(pharmacy_user_id: int) -> List[Dict[str, Any]]:
+    db = SessionLocal()
+    try:
+        rows = db.query(models.PharmacyDemandRequest).filter(
+            models.PharmacyDemandRequest.pharmacy_user_id == pharmacy_user_id
+        ).order_by(models.PharmacyDemandRequest.id.desc()).all()
+        return [
+            {
+                "id": row.request_id,
+                "patientBlockChainId": row.patient_blockchain_id,
+                "patientName": row.patient_name,
+                "pharmacyUserId": row.pharmacy_user_id,
+                "pharmacyStoreName": row.pharmacy_store_name,
+                "medicineName": row.medicine_name,
+                "quantity": row.quantity,
+                "notes": row.notes or "",
+                "status": row.status,
+                "createdAt": row.created_at,
+                "resolvedAt": row.resolved_at,
+                "responseMessage": row.response_message or "",
+            }
+            for row in rows
+        ]
+    finally:
+        db.close()
+
+
+def resolve_pharmacy_demand_request(request_id: str, decision: str, response_message: str = "") -> Dict[str, Any] | None:
+    db = SessionLocal()
+    try:
+        row = db.query(models.PharmacyDemandRequest).filter(models.PharmacyDemandRequest.request_id == request_id).first()
+        if row is None:
+            return None
+        row.status = "accepted" if decision == "accept" else "rejected"
+        row.resolved_at = datetime.utcnow().isoformat()
+        row.response_message = response_message or ("Ready for pickup" if decision == "accept" else "Out of stock")
+        db.commit()
+        return {
+            "id": row.request_id,
+            "patientBlockChainId": row.patient_blockchain_id,
+            "patientName": row.patient_name,
+            "pharmacyUserId": row.pharmacy_user_id,
+            "pharmacyStoreName": row.pharmacy_store_name,
+            "medicineName": row.medicine_name,
+            "quantity": row.quantity,
+            "notes": row.notes or "",
+            "status": row.status,
+            "createdAt": row.created_at,
+            "resolvedAt": row.resolved_at,
+            "responseMessage": row.response_message or "",
+        }
+    finally:
+        db.close()
+
+
+def list_patient_pharmacy_demand_requests(patient_blockchain_id: str) -> List[Dict[str, Any]]:
+    db = SessionLocal()
+    try:
+        rows = db.query(models.PharmacyDemandRequest).filter(
+            models.PharmacyDemandRequest.patient_blockchain_id == patient_blockchain_id
+        ).order_by(models.PharmacyDemandRequest.id.desc()).all()
+        return [
+            {
+                "id": row.request_id,
+                "patientBlockChainId": row.patient_blockchain_id,
+                "patientName": row.patient_name,
+                "pharmacyUserId": row.pharmacy_user_id,
+                "pharmacyStoreName": row.pharmacy_store_name,
+                "medicineName": row.medicine_name,
+                "quantity": row.quantity,
+                "notes": row.notes or "",
+                "status": row.status,
+                "createdAt": row.created_at,
+                "resolvedAt": row.resolved_at,
+                "responseMessage": row.response_message or "",
+            }
+            for row in rows
+        ]
+    finally:
+        db.close()
+
+
+def list_pharmacies() -> List[Dict[str, Any]]:
+    db = SessionLocal()
+    try:
+        rows = db.query(models.PharmacyProfile, models.User).join(models.User, models.PharmacyProfile.user_id == models.User.id).all()
+        return [
+            {
+                "userId": user.id,
+                "email": user.email,
+                "storeName": profile.store_name,
+                "license": profile.drug_license_number,
+                "verificationStatus": profile.verification_status,
+            }
+            for profile, user in rows
+        ]
     finally:
         db.close()

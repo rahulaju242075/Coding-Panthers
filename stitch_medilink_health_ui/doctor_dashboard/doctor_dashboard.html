@@ -147,7 +147,10 @@ DP
 <h1 class="text-3xl font-extrabold font-headline text-on-surface">Clinical Workspace</h1>
 <p class="text-outline font-medium mt-1">Patient: <span id="doctor-patient-heading" class="text-primary font-bold">No patient selected</span></p>
 </div>
-<div class="flex gap-3">
+<div class="flex items-center gap-3 flex-wrap justify-end">
+<button id="clear-patient-btn" class="px-4 py-1.5 bg-surface-container-high text-on-surface-variant rounded-full text-xs font-bold hover:bg-surface-container-highest transition-colors">
+                        Load Another Patient
+                    </button>
 <span class="px-4 py-1.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-xs font-bold flex items-center gap-2">
 <span class="w-2 h-2 rounded-full bg-secondary"></span> Stable Vitals
                     </span>
@@ -247,7 +250,10 @@ DP
 <div class="bg-surface-container-lowest p-8 rounded-xl">
 <h3 class="text-sm font-bold font-headline mb-6 uppercase tracking-wider text-outline">Clinical Notes</h3>
 <textarea id="doctor-clinical-note" class="w-full bg-surface-container-low border-none rounded-xl text-sm p-4 h-32 focus:ring-2 focus:ring-primary-container transition-all" placeholder="Enter clinical observations, patient concerns, and treatment progress...">Prescribed Loratadine; generic alternatives suggested to patient.</textarea>
-<div class="flex justify-end mt-4">
+<div class="flex justify-end gap-2 mt-4">
+<button id="clear-note-btn" class="px-5 py-2 bg-surface-container-low text-on-surface-variant rounded-lg font-bold text-xs hover:bg-surface-container-highest transition-colors">
+                                Clear
+                            </button>
 <button id="save-note-btn" class="px-6 py-2 bg-surface-container-high text-on-primary-fixed-variant rounded-lg font-bold text-xs hover:bg-surface-container-highest transition-colors">
                                 Save Internal Note
                             </button>
@@ -258,7 +264,10 @@ DP
 <div class="col-span-3 space-y-6">
 <!-- Action Forms -->
 <div class="bg-white p-6 rounded-xl border border-outline-variant/10 shadow-sm">
-<h3 class="text-sm font-bold font-headline mb-6 uppercase tracking-wider text-outline">New Entry</h3>
+<div class="flex items-center justify-between mb-6 gap-3">
+<h3 class="text-sm font-bold font-headline uppercase tracking-wider text-outline">New Entry</h3>
+<button id="clear-entry-btn" class="px-3 py-1.5 bg-surface-container-high text-on-surface-variant rounded-lg font-bold text-[10px] hover:bg-surface-container-highest transition-colors">Clear</button>
+</div>
 <div class="space-y-6">
 <!-- Add Diagnosis -->
 <div class="space-y-3">
@@ -292,6 +301,7 @@ DP
 <p class="text-[10px] font-bold text-on-surface">Upload Lab Results</p>
 <p class="text-[9px] text-outline mt-1">PDF, DICOM or JPEG up to 25MB</p>
 </div>
+<input id="report-file-input" class="hidden" type="file" accept=".pdf,.dcm,.dicom,.jpg,.jpeg,.png"/>
 <div id="reports-list" class="mt-6 space-y-3">
 <div class="flex items-center gap-3 p-2 bg-white rounded-lg group">
 <div class="w-8 h-8 rounded bg-error-container/30 flex items-center justify-center">
@@ -316,7 +326,15 @@ DP
 <p class="text-[8px] font-bold text-outline">BPM</p>
 </div>
 </div>
-<p class="text-[10px] font-medium text-on-secondary-container mt-4 bg-secondary-container px-3 py-1 rounded-full">Normal Sinus Rhythm</p>
+<p id="doctor-rhythm-status" class="text-[10px] font-medium text-on-secondary-container mt-4 bg-secondary-container px-3 py-1 rounded-full">Normal Sinus Rhythm</p>
+<p class="text-[9px] text-outline mt-2">BP: <span id="doctor-live-bp" class="font-bold text-on-surface">120/80</span> mmHg</p>
+<div class="w-full mt-4 space-y-2">
+<div class="grid grid-cols-2 gap-2">
+<input id="vitals-bp-input" class="w-full rounded-lg text-xs border-outline-variant" placeholder="BP 120/80" value="120/80" type="text"/>
+<input id="vitals-hr-input" class="w-full rounded-lg text-xs border-outline-variant" placeholder="HR 72" value="72" type="number" min="30" max="240"/>
+</div>
+<button id="update-vitals-btn" class="w-full py-2 rounded-lg bg-primary text-white text-[11px] font-bold hover:opacity-90">Update Live Vitals</button>
+</div>
 </div>
 </div>
 </div>
@@ -391,11 +409,14 @@ DP
         const fullHistoryStatus = document.getElementById('full-history-status');
         const reportsStatus = document.getElementById('reports-status');
         const bpmEl = document.getElementById('doctor-live-bpm');
+        const bpEl = document.getElementById('doctor-live-bp');
+        const rhythmEl = document.getElementById('doctor-rhythm-status');
         const reportsList = document.getElementById('reports-list');
         const scannerStatus = document.getElementById('scanner-status');
         const doctorNameEl = document.getElementById('doctor-sidebar-name');
         const doctorSpecialtyEl = document.getElementById('doctor-sidebar-specialty');
         const doctorTopAvatarEl = document.getElementById('doctor-top-avatar');
+        const reportFileInput = document.getElementById('report-file-input');
 
         let currentPatient = null;
         try {
@@ -415,6 +436,7 @@ DP
         let scannerStream = null;
         let cameraScanRaf = null;
         let scannerBusy = false;
+        let reportUploadBusy = false;
 
         const api = async (path, options = {}) => {
             const response = await fetch(path, {
@@ -464,6 +486,20 @@ DP
             renderPermissions();
             renderHistory();
             renderReports();
+            clearEntryForms();
+            clearClinicalNote();
+        };
+
+        const clearEntryForms = () => {
+            document.getElementById('diagnosis-input').value = '';
+            document.getElementById('prescription-name').value = '';
+            document.getElementById('prescription-dose').value = '';
+            document.getElementById('prescription-frequency').value = '';
+            document.getElementById('report-file-input').value = '';
+        };
+
+        const clearClinicalNote = () => {
+            document.getElementById('doctor-clinical-note').value = '';
         };
 
         const renderHeader = () => {
@@ -511,14 +547,23 @@ DP
                         <p class="text-[10px] font-bold truncate">${item.file || 'Report'}</p>
                         <p class="text-[8px] text-outline">${item.size || ''} • ${item.when || ''}</p>
                     </div>
-                    <button><span class="material-symbols-outlined text-outline text-sm">visibility</span></button>
+                    ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener" class="p-1"><span class="material-symbols-outlined text-outline text-sm">visibility</span></a>` : '<button class="p-1 opacity-40 cursor-not-allowed" disabled><span class="material-symbols-outlined text-outline text-sm">visibility</span></button>'}
                 </div>
             `).join('');
         };
 
         const renderHistory = () => {
-            const state = clinicalState || { timeline: [], vitals: { hr: 72 } };
-            bpmEl.textContent = state.vitals && state.vitals.hr ? String(state.vitals.hr) : '72';
+            const state = clinicalState || { timeline: [], vitals: { hr: 72, bp: '120/80', rhythm: 'Normal Sinus Rhythm' } };
+            const vitals = state.vitals || {};
+            const hrValue = String(vitals.hr || '72');
+            const bpValue = String(vitals.bp || '120/80');
+            const rhythm = String(vitals.rhythm || ((Number(hrValue) >= 60 && Number(hrValue) <= 100) ? 'Normal Sinus Rhythm' : 'Rhythm Alert'));
+            bpmEl.textContent = hrValue;
+            bpEl.textContent = bpValue;
+            rhythmEl.textContent = rhythm;
+
+            document.getElementById('vitals-bp-input').value = bpValue;
+            document.getElementById('vitals-hr-input').value = hrValue;
 
             if (!permissions.historyGranted) {
                 historyContainer.innerHTML = `
@@ -693,6 +738,9 @@ DP
             const success = document.getElementById('prescription-success');
             success.classList.remove('hidden');
             setTimeout(() => success.classList.add('hidden'), 2200);
+            document.getElementById('prescription-name').value = '';
+            document.getElementById('prescription-dose').value = '';
+            document.getElementById('prescription-frequency').value = '';
             await refreshFromApi();
         };
 
@@ -704,28 +752,91 @@ DP
                 method: 'POST',
                 body: JSON.stringify({ title: 'Clinical Note', notes: note })
             });
+            clearClinicalNote();
             await refreshFromApi();
             window.alert('Internal clinical note saved and shared with patient timeline.');
         };
 
         const uploadReport = async () => {
             if (!requireReports()) return;
-            const fileName = window.prompt('Report file name', `Lab_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
-            if (!fileName) return;
-            await api(`/api/doctor/clinical-state/${encodeURIComponent(currentPatient.blockchain_id)}/report`, {
+            if (reportUploadBusy) return;
+            const file = reportFileInput.files && reportFileInput.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            reportUploadBusy = true;
+            try {
+                const response = await fetch(`/api/doctor/clinical-state/${encodeURIComponent(currentPatient.blockchain_id)}/report-upload`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: formData
+                });
+                if (!response.ok) {
+                    const raw = await response.text();
+                    let message = raw;
+                    try {
+                        const parsed = raw ? JSON.parse(raw) : null;
+                        message = (parsed && (parsed.detail || parsed.message)) || raw;
+                    } catch {
+                        // leave raw message
+                    }
+                    throw new Error(message || 'Failed to upload report');
+                }
+            } finally {
+                reportUploadBusy = false;
+            }
+
+            reportFileInput.value = '';
+            await refreshFromApi();
+        };
+
+        const updateLiveVitals = async () => {
+            if (!currentPatient) {
+                window.alert('Select a patient first by scanning a QR code.');
+                return;
+            }
+            const bp = (document.getElementById('vitals-bp-input').value || '').trim() || '120/80';
+            const hr = (document.getElementById('vitals-hr-input').value || '').trim() || '72';
+            await api(`/api/doctor/clinical-state/${encodeURIComponent(currentPatient.blockchain_id)}/vitals`, {
                 method: 'POST',
-                body: JSON.stringify({ file: fileName.trim(), size: '1.9 MB', when: 'Uploaded Now' })
+                body: JSON.stringify({ bp, hr })
             });
             await refreshFromApi();
         };
 
         document.getElementById('launch-scanner-btn').addEventListener('click', () => { onScan(); });
+        document.getElementById('clear-patient-btn').addEventListener('click', () => {
+            currentPatient = null;
+            localStorage.removeItem('medilink_doctor_selected_patient');
+            document.getElementById('doctor-patient-heading').textContent = 'No patient selected';
+            scannerStatus.textContent = 'Select a patient by scanning from camera or uploading QR image.';
+            stopCameraScan();
+            resetPatientWorkspace();
+        });
         document.getElementById('request-history-btn').addEventListener('click', () => { requestPermission('history').catch((e) => window.alert(e.message)); });
         document.getElementById('request-reports-btn').addEventListener('click', () => { requestPermission('reports').catch((e) => window.alert(e.message)); });
         document.getElementById('add-diagnosis-btn').addEventListener('click', () => { addDiagnosis().catch((e) => window.alert(e.message)); });
         document.getElementById('add-plan-btn').addEventListener('click', () => { addPrescription().catch((e) => window.alert(e.message)); });
         document.getElementById('save-note-btn').addEventListener('click', () => { saveInternalNote().catch((e) => window.alert(e.message)); });
-        document.getElementById('upload-lab-btn').addEventListener('click', () => { uploadReport().catch((e) => window.alert(e.message)); });
+        document.getElementById('clear-entry-btn').addEventListener('click', clearEntryForms);
+        document.getElementById('clear-note-btn').addEventListener('click', clearClinicalNote);
+        document.getElementById('upload-lab-btn').addEventListener('click', () => {
+            if (!currentPatient) {
+                window.alert('Select a patient first by scanning a QR code.');
+                return;
+            }
+            if (!permissions.reportsGranted) {
+                window.alert('Patient approval required: Full Reports & Labs access is restricted.');
+                return;
+            }
+            reportFileInput.click();
+        });
+        reportFileInput.addEventListener('change', () => { uploadReport().catch((e) => window.alert(e.message)); });
+        document.getElementById('update-vitals-btn').addEventListener('click', () => { updateLiveVitals().catch((e) => window.alert(e.message)); });
 
         document.getElementById('close-scanner-modal').addEventListener('click', () => {
             document.getElementById('scanner-modal').classList.add('hidden');

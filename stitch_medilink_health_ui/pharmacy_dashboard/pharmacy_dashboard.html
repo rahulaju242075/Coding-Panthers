@@ -111,8 +111,8 @@
 </button>
 <div class="flex items-center gap-3 ml-2">
 <div class="text-right hidden sm:block">
-<p class="text-sm font-bold text-on-surface">Dr. Sanctuary</p>
-<p class="text-xs text-on-surface-variant">General Practitioner</p>
+<p id="pharmacy-store-name" class="text-sm font-bold text-on-surface">Pharmacy</p>
+<p id="pharmacy-meta" class="text-xs text-on-surface-variant">Verified Pharmacy</p>
 </div>
 <img class="w-10 h-10 rounded-full object-cover bg-slate-200" data-alt="close-up portrait of a professional pharmacist in a clean white coat with a friendly expression in a bright modern medical setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkLQ4CeUVSyJ3n2D6LEb9ChUUB50rpHQu8zfr-ChF4XOcVHODChoGeRBH1xyOP0z8RM6pH3MTdd6fd8bhrmVmLJbXLSDRQ93YQhvaTOAVpIwJQGNhhmqGKP4tpDvn0C6uTqycHWf8xWe71NIzxoWEz6cnn0_es-jbhItAi07uJuHwJIUrVZv7VmyghJzhKOBBwFg-4jw4JcBPGhI-KWMbrBgVIKUD_Ci7G2Dt4JSNoCPdzmhmuaAcrONHFIt0S4vGAMbNVKLqZuws"/>
 </div>
@@ -124,22 +124,6 @@
 <a class="flex items-center px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 transition-all rounded-r-full group" href="../pharmacy_dashboard/pharmacy_dashboard.html">
 <span class="material-symbols-outlined mr-3">dashboard</span>
 <span class="text-sm font-semibold">Dashboard</span>
-</a>
-<a class="flex items-center px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 transition-all rounded-r-full group" href="../medicine_intelligence/medicine_intelligence.html">
-<span class="material-symbols-outlined mr-3">description</span>
-<span class="text-sm font-semibold">Medical Records</span>
-</a>
-<a class="flex items-center px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 transition-all rounded-r-full group" href="../telemedicine_consultation/telemedicine_consultation.html">
-<span class="material-symbols-outlined mr-3">calendar_today</span>
-<span class="text-sm font-semibold">Appointments</span>
-</a>
-<a class="flex items-center px-4 py-3 text-blue-700 bg-blue-50 rounded-r-full font-bold transition-all" href="../pharmacy_dashboard/pharmacy_dashboard.html">
-<span class="material-symbols-outlined mr-3" data-weight="fill" style="font-variation-settings: 'FILL' 1;">medical_services</span>
-<span class="text-sm">Pharmacy</span>
-</a>
-<a class="flex items-center px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 transition-all rounded-r-full group" href="../telemedicine_consultation/telemedicine_consultation.html">
-<span class="material-symbols-outlined mr-3">videocam</span>
-<span class="text-sm font-semibold">Telemedicine</span>
 </a>
 <a class="flex items-center px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 transition-all rounded-r-full group" href="../settings/settings.html">
 <span class="material-symbols-outlined mr-3">settings</span>
@@ -206,7 +190,7 @@
 </div>
 </div>
 </td>
-<td class="py-4">$4.50</td>
+<td class="py-4">₹4.50</td>
 <td class="py-4">
 <span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-md text-[10px] font-black uppercase">Stable</span>
 </td>
@@ -233,7 +217,7 @@ Alert Patient
 </div>
 </div>
 </td>
-<td class="py-4">$12.50</td>
+<td class="py-4">₹12.50</td>
 <td class="py-4">
 <span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-md text-[10px] font-black uppercase">Stable</span>
 </td>
@@ -258,7 +242,7 @@ Alert Patient
 </div>
 </div>
 </td>
-<td class="py-4">$8.20</td>
+<td class="py-4">₹8.20</td>
 <td class="py-4">
 <span class="px-2 py-1 bg-error-container text-on-error-container rounded-md text-[10px] font-black uppercase">Critical</span>
 </td>
@@ -283,7 +267,7 @@ Alert Patient
 </div>
 </div>
 </td>
-<td class="py-4">$15.00</td>
+<td class="py-4">₹15.00</td>
 <td class="py-4">
 <span class="px-2 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-md text-[10px] font-black uppercase">Restock</span>
 </td>
@@ -308,7 +292,7 @@ Alert Patient
 </div>
 </div>
 </td>
-<td class="py-4">$6.75</td>
+<td class="py-4">₹6.75</td>
 <td class="py-4">
 <span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-md text-[10px] font-black uppercase">Stable</span>
 </td>
@@ -353,66 +337,9 @@ Alert Patient
 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
 <div class="p-5 bg-surface-container-low border-b border-surface-variant/20 flex justify-between items-center">
 <h2 class="text-sm font-black text-on-surface uppercase tracking-widest">Nearby Demand</h2>
-<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded-full">4 New</span>
+<span id="pharmacy-demand-count" class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded-full">0 New</span>
 </div>
-<div class="divide-y divide-slate-100"><div class="p-5 bg-secondary/5 hover:bg-secondary/10 transition-colors cursor-pointer border-l-4 border-secondary">
-<div class="flex justify-between items-start mb-2">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-secondary text-sm">notifications_active</span>
-</div>
-<div>
-<p class="text-sm font-bold text-on-surface">Demand Alert</p>
-<p class="text-[10px] text-on-surface-variant font-black text-secondary">CHECKING STOCK</p>
-</div>
-</div>
-<span class="text-[10px] font-bold text-outline uppercase">Just Now</span>
-</div>
-<p class="text-xs font-medium text-on-surface-variant mb-3">Req: Generic Loratadine (Refill)</p>
-<div class="flex gap-2">
-<button class="flex-1 py-1.5 bg-primary text-white text-[10px] font-black rounded uppercase hover:bg-primary-container transition-colors">Accept</button>
-<button class="flex-1 py-1.5 bg-surface-container-high text-on-surface-variant text-[10px] font-black rounded uppercase">Deny</button>
-</div>
-</div>
-<div class="p-5 hover:bg-slate-50 transition-colors cursor-pointer">
-<div class="flex justify-between items-start mb-2">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-sm">person</span>
-</div>
-<div>
-<p class="text-sm font-bold text-on-surface">Elena Rodriguez</p>
-<p class="text-[10px] text-on-surface-variant">0.4 miles away</p>
-</div>
-</div>
-<span class="text-[10px] font-bold text-outline uppercase">2m ago</span>
-</div>
-<p class="text-xs font-medium text-on-surface-variant mb-3">Req: Ventolin Inhaler (100mcg/dose)</p>
-<div class="flex gap-2">
-<button class="flex-1 py-1.5 bg-primary text-white text-[10px] font-black rounded uppercase hover:bg-primary-container transition-colors">Accept</button>
-<button class="flex-1 py-1.5 bg-surface-container-high text-on-surface-variant text-[10px] font-black rounded uppercase">Deny</button>
-</div>
-</div>
-<div class="p-5 hover:bg-slate-50 transition-colors cursor-pointer">
-<div class="flex justify-between items-start mb-2">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-secondary text-sm">person</span>
-</div>
-<div>
-<p class="text-sm font-bold text-on-surface">Marcus Thorne</p>
-<p class="text-[10px] text-on-surface-variant">1.2 miles away</p>
-</div>
-</div>
-<span class="text-[10px] font-bold text-outline uppercase">15m ago</span>
-</div>
-<p class="text-xs font-medium text-on-surface-variant mb-3">Req: Ativan 1mg (Refill #2)</p>
-<div class="flex gap-2">
-<button class="flex-1 py-1.5 bg-primary text-white text-[10px] font-black rounded uppercase hover:bg-primary-container transition-colors">Accept</button>
-<button class="flex-1 py-1.5 bg-surface-container-high text-on-surface-variant text-[10px] font-black rounded uppercase">Deny</button>
-</div>
-</div>
-</div>
+<div id="pharmacy-requests-list" class="divide-y divide-slate-100"></div>
 <button class="w-full py-3 text-xs font-bold text-primary hover:bg-slate-50 transition-colors">View All Requests</button>
 </div>
 <!-- Ratings & Reviews Panel -->
@@ -462,4 +389,97 @@ Alert Patient
 </div>
 <p class="text-xs font-medium text-slate-400">© 2024 MediLink Health. The Clinical Sanctuary.</p>
 </footer>
+<script>
+  (function initPharmacyDashboard() {
+    const token = localStorage.getItem('medilink_token');
+    if (!token) return;
+
+    const api = async (path, options = {}) => {
+      const response = await fetch(path, {
+        ...options,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          ...(options.headers || {})
+        }
+      });
+      if (!response.ok) {
+        const text = await response.text();
+        let detail = text;
+        try {
+          const parsed = text ? JSON.parse(text) : null;
+          detail = (parsed && (parsed.detail || parsed.message)) || text;
+        } catch {}
+        throw new Error(detail || `Request failed: ${response.status}`);
+      }
+      return response.json();
+    };
+
+    const storeNameEl = document.getElementById('pharmacy-store-name');
+    const metaEl = document.getElementById('pharmacy-meta');
+    const countEl = document.getElementById('pharmacy-demand-count');
+    const listEl = document.getElementById('pharmacy-requests-list');
+
+    const renderRequests = (requests) => {
+      const pending = requests.filter((request) => request.status === 'pending');
+      countEl.textContent = `${pending.length} New`;
+      if (!requests.length) {
+        listEl.innerHTML = '<div class="p-5 text-sm text-on-surface-variant">No pharmacy requests yet.</div>';
+        return;
+      }
+
+      listEl.innerHTML = requests.map((request) => `
+        <div class="p-5 ${request.status === 'pending' ? 'bg-secondary/5 hover:bg-secondary/10 border-l-4 border-secondary' : 'hover:bg-slate-50'} transition-colors">
+          <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full ${request.status === 'accepted' ? 'bg-secondary-fixed' : request.status === 'rejected' ? 'bg-error-container' : 'bg-primary-fixed'} flex items-center justify-center">
+                <span class="material-symbols-outlined ${request.status === 'accepted' ? 'text-secondary' : request.status === 'rejected' ? 'text-error' : 'text-primary'} text-sm">person</span>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-on-surface">${request.patientName || 'Patient'}</p>
+                <p class="text-[10px] text-on-surface-variant">${request.pharmacyStoreName || ''}</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold text-outline uppercase">${request.status}</span>
+          </div>
+          <p class="text-xs font-medium text-on-surface-variant mb-3">Req: ${request.medicineName || 'Medicine'} ${request.quantity ? `(${request.quantity})` : ''}${request.notes ? ` • ${request.notes}` : ''}</p>
+          <div class="flex gap-2">
+            <button data-request-id="${request.id}" data-decision="accept" ${request.status !== 'pending' ? 'disabled' : ''} class="flex-1 py-1.5 bg-primary text-white text-[10px] font-black rounded uppercase hover:bg-primary-container transition-colors ${request.status !== 'pending' ? 'opacity-40 cursor-not-allowed hover:bg-primary' : ''}">Accept</button>
+            <button data-request-id="${request.id}" data-decision="reject" ${request.status !== 'pending' ? 'disabled' : ''} class="flex-1 py-1.5 bg-surface-container-high text-on-surface-variant text-[10px] font-black rounded uppercase ${request.status !== 'pending' ? 'opacity-40 cursor-not-allowed' : ''}">Deny</button>
+          </div>
+          ${request.status !== 'pending' ? `<p class="text-[10px] mt-2 text-on-surface-variant">${request.responseMessage || (request.status === 'accepted' ? 'Ready for pickup' : 'Out of stock')}</p>` : ''}
+        </div>
+      `).join('');
+
+      listEl.querySelectorAll('button[data-request-id]').forEach((button) => {
+        button.addEventListener('click', async () => {
+          const requestId = button.getAttribute('data-request-id');
+          const decision = button.getAttribute('data-decision');
+          try {
+            await api(`/api/pharmacy/requests/${encodeURIComponent(requestId)}/resolve`, {
+              method: 'POST',
+              body: JSON.stringify({ decision, response_message: decision === 'accept' ? 'Ready for pickup' : 'Out of stock' })
+            });
+            await refresh();
+          } catch (error) {
+            window.alert(error.message);
+          }
+        });
+      });
+    };
+
+    const refresh = async () => {
+      const me = await api('/api/pharmacy/me');
+      storeNameEl.textContent = me.store_name || 'Pharmacy';
+      metaEl.textContent = `${me.verification_status || 'pending'} • ${me.email || ''}`;
+      const requests = await api('/api/pharmacy/requests');
+      renderRequests(requests || []);
+    };
+
+    refresh().catch((error) => console.error(error));
+    setInterval(() => {
+      refresh().catch(() => {});
+    }, 3000);
+  })();
+</script>
 </body></html>
